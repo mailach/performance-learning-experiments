@@ -28,7 +28,7 @@ def __extract_features_schema2015(root)-> Tuple[dict[int, str], Sequence[Sequenc
 
     features = {}
 
-    for element in root:
+    for element in root.findall("element"):
         id = int(element.attrib["id"])
         features[id] = element.attrib["name"]
         if element.attrib["optional"] == "false" and not len(element.find("parentElement")):
