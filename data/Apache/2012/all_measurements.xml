@@ -1,0 +1,770 @@
+<results>
+  <row>
+    <data columname="Configuration">Base,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,</data>
+    <data columname="Measured Value">2100</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2310</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1260</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,AccessLog,InMemory,</data>
+    <data columname="Measured Value">2100</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1980</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,InMemory,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,InMemory,</data>
+    <data columname="Measured Value">2160</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,AccessLog,InMemory,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1890</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2160</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1860</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">1470</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">2640</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1380</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2430</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">2340</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">1830</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2190</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1260</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">2190</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">2100</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2070</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1860</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Handle,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,AccessLog,Handle,</data>
+    <data columname="Measured Value">1050</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1260</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1050</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,AccessLog,Handle,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1050</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1350</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,AccessLog,Handle,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1260</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,Handle,</data>
+    <data columname="Measured Value">1290</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">1950</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,AccessLog,Handle,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1320</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1380</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">1350</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1740</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1170</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,Handle,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,AccessLog,Handle,</data>
+    <data columname="Measured Value">930</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">870</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">930</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">900</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,Handle,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,</data>
+    <data columname="Measured Value">1320</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1320</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1170</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,AccessLog,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1500</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,Handle,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,AccessLog,Handle,</data>
+    <data columname="Measured Value">930</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,</data>
+    <data columname="Measured Value">2220</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">870</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,Handle,</data>
+    <data columname="Measured Value">1170</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,AccessLog,Handle,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1170</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1470</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1050</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,Handle,</data>
+    <data columname="Measured Value">1050</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">930</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,ExtendedStatus,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,Handle,</data>
+    <data columname="Measured Value">1170</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">870</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,Handle,</data>
+    <data columname="Measured Value">870</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,</data>
+    <data columname="Measured Value">2040</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,ExtendedStatus,</data>
+    <data columname="Measured Value">2130</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,</data>
+    <data columname="Measured Value">1350</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">1170</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,</data>
+    <data columname="Measured Value">2370</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">2190</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,AccessLog,</data>
+    <data columname="Measured Value">1170</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,AccessLog,</data>
+    <data columname="Measured Value">1980</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">2040</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,ExtendedStatus,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1830</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1890</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,</data>
+    <data columname="Measured Value">1950</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,ExtendedStatus,</data>
+    <data columname="Measured Value">900</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,ExtendedStatus,</data>
+    <data columname="Measured Value">1830</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,AccessLog,</data>
+    <data columname="Measured Value">900</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">840</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,AccessLog,</data>
+    <data columname="Measured Value">1710</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,ExtendedStatus,</data>
+    <data columname="Measured Value">1920</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1620</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,</data>
+    <data columname="Measured Value">1050</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,</data>
+    <data columname="Measured Value">2130</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,AccessLog,</data>
+    <data columname="Measured Value">930</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,AccessLog,</data>
+    <data columname="Measured Value">1890</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,ExtendedStatus,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">900</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,ExtendedStatus,</data>
+    <data columname="Measured Value">2010</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1770</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,AccessLog,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,</data>
+    <data columname="Measured Value">1950</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">930</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">1890</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,</data>
+    <data columname="Measured Value">1080</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">990</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,</data>
+    <data columname="Measured Value">2220</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,ExtendedStatus,</data>
+    <data columname="Measured Value">2070</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">900</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">1770</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,</data>
+    <data columname="Measured Value">1920</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">840</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">900</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1680</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,EnableSendfile,FollowSymLinks,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1800</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,InMemory,</data>
+    <data columname="Measured Value">1410</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,InMemory,</data>
+    <data columname="Measured Value">2490</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1290</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2250</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1260</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,AccessLog,</data>
+    <data columname="Measured Value">1770</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,AccessLog,InMemory,</data>
+    <data columname="Measured Value">2130</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1980</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">1410</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">2400</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1320</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">2190</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1380</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2430</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,AccessLog,ExtendedStatus,</data>
+    <data columname="Measured Value">1680</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2100</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,InMemory,</data>
+    <data columname="Measured Value">1110</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,InMemory,</data>
+    <data columname="Measured Value">2280</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2160</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">1140</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1050</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,InMemory,</data>
+    <data columname="Measured Value">2280</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">2190</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,FollowSymLinks,</data>
+    <data columname="Measured Value">1200</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1980</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">1020</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,AccessLog,InMemory,</data>
+    <data columname="Measured Value">2070</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">930</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1860</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,HostnameLookups,KeepAlive,FollowSymLinks,AccessLog,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1920</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,InMemory,</data>
+    <data columname="Measured Value">1410</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,KeepAlive,EnableSendfile,InMemory,</data>
+    <data columname="Measured Value">2460</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,EnableSendfile,ExtendedStatus,InMemory,</data>
+    <data columname="Measured Value">1320</data>
+  </row>
+</results>

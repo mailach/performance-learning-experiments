@@ -1,0 +1,420 @@
+<plm name="BerkeleyDbC" canReuseInstance="true">
+  <element id="1" name="HAVE_CRYPTO" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="3" name="HAVE_HASH" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="4" name="HAVE_REPLICATION" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="5" name="HAVE_VERIFY" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="6" name="HAVE_SEQUENCE" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="7" name="HAVE_STATISTICS" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="8" name="DIAGNOSTIC" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="9" name="PAGESIZE" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>10</id>
+      </child>
+      <child optional="false">
+        <id>11</id>
+      </child>
+      <child optional="false">
+        <id>12</id>
+      </child>
+      <child optional="false">
+        <id>13</id>
+      </child>
+      <child optional="false">
+        <id>14</id>
+      </child>
+    </childElements>
+    <order />
+  </element>
+  <element id="10" name="PS1K" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>9</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>11</id>
+          <name>PS4k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>12</id>
+          <name>PS8k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>13</id>
+          <name>PS16k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>14</id>
+          <name>PS32k</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="11" name="PS4K" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>9</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>10</id>
+          <name>PS1k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>14</id>
+          <name>PS32k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>13</id>
+          <name>PS16k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>12</id>
+          <name>PS8k</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="12" name="PS8K" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>9</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>10</id>
+          <name>PS1k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>11</id>
+          <name>PS4k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>13</id>
+          <name>PS16k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>14</id>
+          <name>PS32k</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="13" name="PS16K" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>9</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>10</id>
+          <name>PS1k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>11</id>
+          <name>PS4k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>12</id>
+          <name>PS8k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>14</id>
+          <name>PS32k</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="14" name="PS32K" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>9</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>10</id>
+          <name>PS1k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>11</id>
+          <name>PS4k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>12</id>
+          <name>PS8k</name>
+        </constraint_element>
+        <constraint_element>
+          <id>13</id>
+          <name>PS16k</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="15" name="CACHESIZE" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>16</id>
+      </child>
+      <child optional="false">
+        <id>17</id>
+      </child>
+      <child optional="false">
+        <id>18</id>
+      </child>
+      <child optional="false">
+        <id>19</id>
+      </child>
+    </childElements>
+    <order />
+  </element>
+  <element id="16" name="CS32MB" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>15</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>17</id>
+          <name>CS16MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>18</id>
+          <name>CS64MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>19</id>
+          <name>CS512MB</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="17" name="CS16MB" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>15</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>16</id>
+          <name>CS32MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>19</id>
+          <name>CS512MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>18</id>
+          <name>CS64MB</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="18" name="CS64MB" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>15</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>16</id>
+          <name>CS32MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>17</id>
+          <name>CS16MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>19</id>
+          <name>CS512MB</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+  <element id="19" name="CS512MB" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>15</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>16</id>
+          <name>CS32MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>17</id>
+          <name>CS16MB</name>
+        </constraint_element>
+        <constraint_element>
+          <id>18</id>
+          <name>CS64MB</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+  </element>
+</plm>

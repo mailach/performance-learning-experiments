@@ -1,0 +1,142 @@
+<plm name="Apache" canReuseInstance="true">
+  <element id="2" name="Base" type="feature" optional="false" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>Base</generationParameter>
+  </element>
+  <element id="3" name="HostnameLookups" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>HostnameLookups</generationParameter>
+  </element>
+  <element id="4" name="KeepAlive" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>KeepAlive</generationParameter>
+  </element>
+  <element id="5" name="EnableSendfile" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>EnableSendfile</generationParameter>
+  </element>
+  <element id="6" name="FollowSymLinks" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>FollowSymLinks</generationParameter>
+  </element>
+  <element id="7" name="AccessLog" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>AccessLog</generationParameter>
+  </element>
+  <element id="8" name="ExtendedStatus" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>ExtendedStatus</generationParameter>
+  </element>
+  <element id="9" name="InMemory" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes">
+        <constraint_element>
+          <id>10</id>
+          <name>Handle</name>
+        </constraint_element>
+      </constraint>
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>InMemory</generationParameter>
+  </element>
+  <element id="10" name="Handle" type="feature" optional="true" dynamic="false">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>Handle</generationParameter>
+  </element>
+</plm>

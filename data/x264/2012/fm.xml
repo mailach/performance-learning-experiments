@@ -1,0 +1,304 @@
+<plm canReuseInstance="true" name="H264">
+	<element dynamic="false" id="2" name="no_asm" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="3" name="no_8x8dct" optional="true" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="4" name="no_cabac" optional="true" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="5" name="no_deblock" optional="true" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="6" name="no_fast_pskip" optional="true" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="7" name="no_mbtree" optional="true" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="8" name="no_mixed_refs" optional="true" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="9" name="no_weightb" optional="true" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="10" name="rc_lookahead" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements>
+			<child optional="false">
+				<id>11</id>
+			</child>
+			<child optional="false">
+				<id>12</id>
+			</child>
+			<child optional="false">
+				<id>13</id>
+			</child>
+		</childElements>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="11" name="rc_lookahead_20" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<parentElement>
+			<id>10</id>
+		</parentElement>
+		<constraints>
+			<constraint type="alternative">
+				<constraint_element>
+					<id>12</id>
+					<name>rc_lookahead_40</name>
+				</constraint_element>
+				<constraint_element>
+					<id>13</id>
+					<name>rc_lookahead_60</name>
+				</constraint_element>
+			</constraint>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="12" name="rc_lookahead_40" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<parentElement>
+			<id>10</id>
+		</parentElement>
+		<constraints>
+			<constraint type="alternative">
+				<constraint_element>
+					<id>11</id>
+					<name>rc_lookahead_20</name>
+				</constraint_element>
+				<constraint_element>
+					<id>13</id>
+					<name>rc_lookahead_60</name>
+				</constraint_element>
+			</constraint>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="13" name="rc_lookahead_60" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<parentElement>
+			<id>10</id>
+		</parentElement>
+		<constraints>
+			<constraint type="alternative">
+				<constraint_element>
+					<id>11</id>
+					<name>rc_lookahead_20</name>
+				</constraint_element>
+				<constraint_element>
+					<id>12</id>
+					<name>rc_lookahead_40</name>
+				</constraint_element>
+			</constraint>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="14" name="ref" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<constraints>
+			<constraint type="alternative"/>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements>
+			<child optional="false">
+				<id>15</id>
+			</child>
+			<child optional="false">
+				<id>16</id>
+			</child>
+			<child optional="false">
+				<id>17</id>
+			</child>
+		</childElements>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="15" name="ref_1" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<parentElement>
+			<id>14</id>
+		</parentElement>
+		<constraints>
+			<constraint type="alternative">
+				<constraint_element>
+					<id>16</id>
+					<name>ref_5</name>
+				</constraint_element>
+				<constraint_element>
+					<id>17</id>
+					<name>ref_9</name>
+				</constraint_element>
+			</constraint>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="16" name="ref_5" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<parentElement>
+			<id>14</id>
+		</parentElement>
+		<constraints>
+			<constraint type="alternative">
+				<constraint_element>
+					<id>15</id>
+					<name>ref_1</name>
+				</constraint_element>
+				<constraint_element>
+					<id>17</id>
+					<name>ref_9</name>
+				</constraint_element>
+			</constraint>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<element dynamic="false" id="17" name="ref_9" optional="false" type="feature">
+		<path_absolut/>
+		<path_relativ/>
+		<parentElement>
+			<id>14</id>
+		</parentElement>
+		<constraints>
+			<constraint type="alternative">
+				<constraint_element>
+					<id>15</id>
+					<name>ref_1</name>
+				</constraint_element>
+				<constraint_element>
+					<id>16</id>
+					<name>ref_5</name>
+				</constraint_element>
+			</constraint>
+			<constraint type="commulative"/>
+			<constraint type="requires"/>
+			<constraint type="excludes"/>
+		</constraints>
+		<childElements/>
+		<order/>
+		<classes/>
+	</element>
+	<properties/>
+	<furtherConstraints/>
+</plm>

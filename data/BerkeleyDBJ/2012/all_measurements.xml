@@ -1,0 +1,722 @@
+<results>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3451</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3138</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3314</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3398</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">3269</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">3333</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5231</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5289</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5235</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5304</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">5241</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">5338</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3269</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3139</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3264</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3153</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3161</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3512</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5228</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5328</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5220</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5310</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5309</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5328</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14638</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14761</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14562</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14786</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14580</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14905</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4714</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4881</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4768</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4879</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4787</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,OldIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4903</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3182</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3232</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3299</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3428</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3268</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3412</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3089</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3605</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">3271</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">3341</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">3053</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">3429</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5194</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5350</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5463</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5468</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5231</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5432</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5308</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5515</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">5263</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">5316</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">5435</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">5494</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5207</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5365</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5295</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5486</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5256</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">5449</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5328</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">5510</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">5235</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">5387</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">5421</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">5502</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3249</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3065</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3177</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3235</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3263</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3143</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,</data>
+    <data columname="Measured Value">3085</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Statistics,</data>
+    <data columname="Measured Value">3058</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">3216</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,</data>
+    <data columname="Measured Value">3336</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">3347</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,Statistics,</data>
+    <data columname="Measured Value">3517</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5216</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5361</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5356</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5462</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5233</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5343</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5390</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5548</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5274</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5419</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5314</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5508</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">2986</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3155</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3171</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3325</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3157</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">2960</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3154</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3424</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3195</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3258</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3155</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3457</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3165</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3106</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3161</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3303</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3178</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3127</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3185</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3167</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3532</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3238</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">3358</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">3230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5186</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5354</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5342</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5499</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5230</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5465</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5314</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5457</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5241</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5339</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,</data>
+    <data columname="Measured Value">5420</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Severe,Statistics,</data>
+    <data columname="Measured Value">5467</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14685</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">16342</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14744</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">16479</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14594</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14694</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">16351</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">16440</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14785</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">16399</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14656</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">16448</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14653</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14852</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">16427</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">16446</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14627</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14710</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">16401</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">16531</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">14667</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">16392</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">14727</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S1MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">16442</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4705</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4894</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4951</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">5045</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4759</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4920</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4915</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">5048</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4668</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4897</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4957</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,SingleWriteNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">5091</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4669</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4898</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4907</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">5044</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4698</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4943</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4913</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">5090</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4792</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">4880</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,</data>
+    <data columname="Measured Value">4953</data>
+  </row>
+  <row>
+    <data columname="Configuration">Base,Persistence,IO,NewIO,NIOBase,NIOType,ChunkedNIO,DirectNIO,LogSize,S100MiB,Checksum,BTreeFeatures,INCompressor,IEvictor,Evictor,Critical_Eviction,Verifier,ITracing,Tracing,TracingLevel,Finest,Statistics,</data>
+    <data columname="Measured Value">5062</data>
+  </row>
+</results>

@@ -1,0 +1,918 @@
+<plm name="SQLite" canReuseInstance="true">
+  <element id="1" name="OperatingSystemCharacteristics" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="true">
+        <id>5</id>
+      </child>
+      <child optional="true">
+        <id>6</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="5" name="SQLITE_SECURE_DELETE" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>1</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_SECURE_DELETE</generationParameter>
+  </element>
+  <element id="6" name="ChooseSQLITE_TEMP_STORE" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>1</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>7</id>
+      </child>
+      <child optional="false">
+        <id>8</id>
+      </child>
+      <child optional="false">
+        <id>9</id>
+      </child>
+      <child optional="false">
+        <id>10</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="7" name="SQLITE_TEMP_STOREzero" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>6</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>8</id>
+          <name>SQLITE_TEMP_STOREone</name>
+        </constraint_element>
+        <constraint_element>
+          <id>9</id>
+          <name>SQLITE_TEMP_STOREtwo</name>
+        </constraint_element>
+        <constraint_element>
+          <id>10</id>
+          <name>SQLITE_TEMP_STOREthree</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_TEMP_STORE 0</generationParameter>
+  </element>
+  <element id="8" name="SQLITE_TEMP_STOREone" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>6</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>7</id>
+          <name>SQLITE_TEMP_STOREzero</name>
+        </constraint_element>
+        <constraint_element>
+          <id>10</id>
+          <name>SQLITE_TEMP_STOREthree</name>
+        </constraint_element>
+        <constraint_element>
+          <id>9</id>
+          <name>SQLITE_TEMP_STOREtwo</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_TEMP_STORE 1</generationParameter>
+  </element>
+  <element id="9" name="SQLITE_TEMP_STOREtwo" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>6</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>7</id>
+          <name>SQLITE_TEMP_STOREzero</name>
+        </constraint_element>
+        <constraint_element>
+          <id>8</id>
+          <name>SQLITE_TEMP_STOREone</name>
+        </constraint_element>
+        <constraint_element>
+          <id>10</id>
+          <name>SQLITE_TEMP_STOREthree</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_TEMP_STORE 2</generationParameter>
+  </element>
+  <element id="10" name="SQLITE_TEMP_STOREthree" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>6</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>7</id>
+          <name>SQLITE_TEMP_STOREzero</name>
+        </constraint_element>
+        <constraint_element>
+          <id>8</id>
+          <name>SQLITE_TEMP_STOREone</name>
+        </constraint_element>
+        <constraint_element>
+          <id>9</id>
+          <name>SQLITE_TEMP_STOREtwo</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_TEMP_STORE 3</generationParameter>
+  </element>
+  <element id="11" name="EnableFeatures" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="true">
+        <id>12</id>
+      </child>
+      <child optional="true">
+        <id>22</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="12" name="SQLITE_ENABLE_ATOMIC_WRITE" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>11</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_ENABLE_ATOMIC_WRITE</generationParameter>
+  </element>
+  <element id="22" name="SQLITE_ENABLE_STAT2" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>11</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_ENABLE_STAT2</generationParameter>
+  </element>
+  <element id="27" name="DisableFeatures" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="true">
+        <id>28</id>
+      </child>
+      <child optional="true">
+        <id>29</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="28" name="SQLITE_DISABLE_LFS" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>27</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DISABLE_LFS</generationParameter>
+  </element>
+  <element id="29" name="SQLITE_DISABLE_DIRSYNC" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>27</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DISABLE_DIRSYNC</generationParameter>
+  </element>
+  <element id="30" name="OmitFeatures" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="true">
+        <id>36</id>
+      </child>
+      <child optional="true">
+        <id>39</id>
+      </child>
+      <child optional="true">
+        <id>41</id>
+      </child>
+      <child optional="true">
+        <id>60</id>
+      </child>
+      <child optional="true">
+        <id>63</id>
+      </child>
+      <child optional="true">
+        <id>65</id>
+      </child>
+      <child optional="true">
+        <id>69</id>
+      </child>
+      <child optional="true">
+        <id>73</id>
+      </child>
+      <child optional="true">
+        <id>86</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="36" name="SQLITE_OMIT_AUTOMATIC_INDEX" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_AUTOMATIC_INDEX</generationParameter>
+  </element>
+  <element id="39" name="SQLITE_OMIT_BETWEEN_OPTIMIZATION" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_BETWEEN_OPTIMIZATION</generationParameter>
+  </element>
+  <element id="41" name="SQLITE_OMIT_BTREECOUNT" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_BTREECOUNT</generationParameter>
+  </element>
+  <element id="60" name="SQLITE_OMIT_LIKE_OPTIMIZATION" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_LIKE_OPTIMIZATION</generationParameter>
+  </element>
+  <element id="63" name="SQLITE_OMIT_LOOKASIDE" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_LOOKASIDE</generationParameter>
+  </element>
+  <element id="65" name="SQLITE_OMIT_OR_OPTIMIZATION" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_OR_OPTIMIZATION</generationParameter>
+  </element>
+  <element id="69" name="SQLITE_OMIT_QUICKBALANCE" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_QUICKBALANCE</generationParameter>
+  </element>
+  <element id="73" name="SQLITE_OMIT_SHARED_CACHE" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_SHARED_CACHE</generationParameter>
+  </element>
+  <element id="86" name="SQLITE_OMIT_XFER_OPT" type="feature" optional="true" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>30</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_OMIT_XFER_OPT</generationParameter>
+  </element>
+  <element id="89" name="Options" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement />
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>92</id>
+      </child>
+      <child optional="false">
+        <id>93</id>
+      </child>
+      <child optional="false">
+        <id>97</id>
+      </child>
+      <child optional="false">
+        <id>100</id>
+      </child>
+    </childElements>
+    <order />
+    <description>Defining Program Options</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="90" name="AutoVacuumOff" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>92</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>91</id>
+          <name>AutoVacuumOn</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>The "none" setting means that auto-vacuum is disabled. When auto-vacuum is disabled and data is deleted data from a database, the database file remains the same size. Unused database file pages are added to a "freelist" and reused for subsequent inserts. So no database file space is lost. However, the database file does not shrink.</description>
+    <generationParameter>SQLITE_DEFAULT_AUTOVACUUM 0</generationParameter>
+  </element>
+  <element id="91" name="AutoVacuumOn" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>92</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>90</id>
+          <name>AutoVacuumOff</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>When the auto-vacuum mode is 1 or "full", the freelist pages are moved to the end of the database file and the database file is truncated to remove the freelist pages at every transaction commit.</description>
+    <generationParameter>SQLITE_DEFAULT_AUTOVACUUM 1</generationParameter>
+  </element>
+  <element id="92" name="SetAutoVacuum" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>89</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>90</id>
+      </child>
+      <child optional="false">
+        <id>91</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="93" name="SetCacheSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>89</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>94</id>
+      </child>
+      <child optional="false">
+        <id>95</id>
+      </child>
+      <child optional="false">
+        <id>96</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="94" name="StandardCacheSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>93</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>95</id>
+          <name>LowerCacheSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>96</id>
+          <name>HigherCacheSize</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_CACHE_SIZE 2000</generationParameter>
+  </element>
+  <element id="95" name="LowerCacheSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>93</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>94</id>
+          <name>StandardCacheSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>96</id>
+          <name>HigherCacheSize</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_CACHE_SIZE 1000</generationParameter>
+  </element>
+  <element id="96" name="HigherCacheSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>93</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>94</id>
+          <name>StandardCacheSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>95</id>
+          <name>LowerCacheSize</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_CACHE_SIZE 4000</generationParameter>
+  </element>
+  <element id="97" name="LockingMode" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>89</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>98</id>
+      </child>
+      <child optional="false">
+        <id>99</id>
+      </child>
+    </childElements>
+    <order />
+    <description>no description</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="98" name="ExclusiveLock" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>97</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>99</id>
+          <name>NormalLockingMode</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_LOCKING_MODE 1</generationParameter>
+  </element>
+  <element id="99" name="NormalLockingMode" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>97</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>98</id>
+          <name>ExclusiveLock</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_LOCKING_MODE 0</generationParameter>
+  </element>
+  <element id="100" name="PageSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>89</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative" />
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements>
+      <child optional="false">
+        <id>101</id>
+      </child>
+      <child optional="false">
+        <id>102</id>
+      </child>
+      <child optional="false">
+        <id>103</id>
+      </child>
+      <child optional="false">
+        <id>104</id>
+      </child>
+    </childElements>
+    <order />
+    <description>This macro is used to set the default page-size used when a database is created. The value assigned must be a power of 2. The default value is 1024.</description>
+    <generationParameter>noOutput</generationParameter>
+  </element>
+  <element id="101" name="StandardPageSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>100</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>104</id>
+          <name>HighestPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>102</id>
+          <name>LowerPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>103</id>
+          <name>HigherPageSize</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_PAGE_SIZE 1024</generationParameter>
+  </element>
+  <element id="102" name="LowerPageSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>100</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>104</id>
+          <name>HighestPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>103</id>
+          <name>HigherPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>101</id>
+          <name>StandardPageSize</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_PAGE_SIZE 512</generationParameter>
+  </element>
+  <element id="103" name="HigherPageSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>100</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>104</id>
+          <name>HighestPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>102</id>
+          <name>LowerPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>101</id>
+          <name>StandardPageSize</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_PAGE_SIZE 2048</generationParameter>
+  </element>
+  <element id="104" name="HighestPageSize" type="feature" optional="false" dynamic="true">
+    <path_absolut />
+    <path_relativ />
+    <parentElement>
+      <id>100</id>
+    </parentElement>
+    <constraints>
+      <constraint type="alternative">
+        <constraint_element>
+          <id>101</id>
+          <name>StandardPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>102</id>
+          <name>LowerPageSize</name>
+        </constraint_element>
+        <constraint_element>
+          <id>103</id>
+          <name>HigherPageSize</name>
+        </constraint_element>
+      </constraint>
+      <constraint type="commulative" />
+      <constraint type="requires" />
+      <constraint type="excludes" />
+    </constraints>
+    <childElements />
+    <order />
+    <description>no description</description>
+    <generationParameter>SQLITE_DEFAULT_PAGE_SIZE 8096</generationParameter>
+  </element>
+</plm>
