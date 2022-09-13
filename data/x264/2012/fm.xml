@@ -2,6 +2,7 @@
 	<element dynamic="false" id="2" name="no_asm" optional="false" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -15,6 +16,7 @@
 	<element dynamic="false" id="3" name="no_8x8dct" optional="true" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -28,6 +30,7 @@
 	<element dynamic="false" id="4" name="no_cabac" optional="true" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -41,6 +44,7 @@
 	<element dynamic="false" id="5" name="no_deblock" optional="true" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -54,6 +58,7 @@
 	<element dynamic="false" id="6" name="no_fast_pskip" optional="true" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -67,6 +72,7 @@
 	<element dynamic="false" id="7" name="no_mbtree" optional="true" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -80,6 +86,7 @@
 	<element dynamic="false" id="8" name="no_mixed_refs" optional="true" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -93,6 +100,7 @@
 	<element dynamic="false" id="9" name="no_weightb" optional="true" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -106,6 +114,7 @@
 	<element dynamic="false" id="10" name="rc_lookahead" optional="false" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>
@@ -204,6 +213,7 @@
 	<element dynamic="false" id="14" name="ref" optional="false" type="feature">
 		<path_absolut/>
 		<path_relativ/>
+		<parentElement />
 		<constraints>
 			<constraint type="alternative"/>
 			<constraint type="commulative"/>

@@ -27,7 +27,6 @@ def __extract_features_schema2015(root)-> Tuple[dict[int, str], Sequence[Sequenc
     clauses = []
 
     features = {}
-
     for element in root.findall("element"):
         id = int(element.attrib["id"])
         features[id] = element.attrib["name"]

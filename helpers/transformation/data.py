@@ -32,8 +32,13 @@ def xml_measurements_to_onehot(input_file: str, dimacs_file: str, output_file: s
 
     df = ET.parse(input_file).getroot()
     for row in df:
-        config = [f.strip() for f in row.find(f'.//data[@columname="Configuration"]').text.split(",") if f != ""]
-        one_hot.append(_one_hot_encode(config, features.values(), row.find(f'.//data[@columname="Measured Value"]').text))
+        try: 
+            config = [f.strip() for f in row.find(f'.//data[@columname="Configuration"]').text.split(",") if f.strip() != ""]
+            one_hot.append(_one_hot_encode(config, features.values(), row.find(f'.//data[@columname="Measured Value"]').text))
+        except Exception as e:
+            print(row[0].attrib, row[0].text)
+            print(row[1].attrib, row[1].text)
+            raise e
 
 
     pd.DataFrame(one_hot).to_csv(output_file, sep="\t")

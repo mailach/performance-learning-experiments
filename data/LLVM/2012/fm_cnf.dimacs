@@ -1,0 +1,12 @@
+c 2 Base
+c 3 HostnameLookups
+c 4 KeepAlive
+c 5 EnableSendfile
+c 6 FollowSymLinks
+c 7 AccessLog
+c 8 ExtendedStatus
+c 9 InMemory
+c 10 Handle
+p cnf 9 2
+2 0
+-9 -10 0

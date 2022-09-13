@@ -1,0 +1,67 @@
+c 1 OperatingSystemCharacteristics
+c 5 SQLITE_SECURE_DELETE
+c 6 ChooseSQLITE_TEMP_STORE
+c 7 SQLITE_TEMP_STOREzero
+c 8 SQLITE_TEMP_STOREone
+c 9 SQLITE_TEMP_STOREtwo
+c 10 SQLITE_TEMP_STOREthree
+c 11 EnableFeatures
+c 12 SQLITE_ENABLE_ATOMIC_WRITE
+c 22 SQLITE_ENABLE_STAT2
+c 27 DisableFeatures
+c 28 SQLITE_DISABLE_LFS
+c 29 SQLITE_DISABLE_DIRSYNC
+c 30 OmitFeatures
+c 36 SQLITE_OMIT_AUTOMATIC_INDEX
+c 39 SQLITE_OMIT_BETWEEN_OPTIMIZATION
+c 41 SQLITE_OMIT_BTREECOUNT
+c 60 SQLITE_OMIT_LIKE_OPTIMIZATION
+c 63 SQLITE_OMIT_LOOKASIDE
+c 65 SQLITE_OMIT_OR_OPTIMIZATION
+c 69 SQLITE_OMIT_QUICKBALANCE
+c 73 SQLITE_OMIT_SHARED_CACHE
+c 86 SQLITE_OMIT_XFER_OPT
+c 89 Options
+c 90 AutoVacuumOff
+c 91 AutoVacuumOn
+c 92 SetAutoVacuum
+c 93 SetCacheSize
+c 94 StandardCacheSize
+c 95 LowerCacheSize
+c 96 HigherCacheSize
+c 97 LockingMode
+c 98 ExclusiveLock
+c 99 NormalLockingMode
+c 100 PageSize
+c 101 StandardPageSize
+c 102 LowerPageSize
+c 103 HigherPageSize
+c 104 HighestPageSize
+p cnf 39 27
+1 0
+7 8 9 10 0
+-8 -7 0
+-9 -7 0
+-10 -7 0
+-9 -8 0
+-10 -8 0
+-10 -9 0
+11 0
+27 0
+30 0
+89 0
+90 91 0
+-91 -90 0
+94 95 96 0
+-95 -94 0
+-96 -94 0
+-96 -95 0
+98 99 0
+-99 -98 0
+101 102 103 104 0
+-104 -101 0
+-102 -101 0
+-103 -101 0
+-104 -102 0
+-104 -103 0
+-103 -102 0
