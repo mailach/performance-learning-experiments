@@ -1,3 +1,4 @@
+from operator import index
 import xml.etree.ElementTree as ET
 from typing import Sequence
 import pandas as pd
@@ -41,7 +42,7 @@ def xml_measurements_to_onehot(input_file: str, dimacs_file: str, output_file: s
             raise e
 
 
-    pd.DataFrame(one_hot).to_csv(output_file, sep="\t")
+    pd.DataFrame(one_hot).to_csv(output_file, sep="\t", index=False)
 
 
             
