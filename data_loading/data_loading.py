@@ -9,6 +9,8 @@ import click
 from utils.fm import fm_xml_to_dimacs
 from utils.data import xml_measurements_to_onehot
 
+logging.basicConfig(level=logging.INFO)
+
 
 def _log_metadata(metadata: dict, year: int) -> None:
     mlflow.log_param("system", metadata["system"])
