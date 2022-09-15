@@ -1,3 +1,10 @@
+# Specific ignores for vscode
+.vscode
+
+# Specific ignores for mlflow
+mlruns/
+
+
 # Specific ignores for working with data from other papers
 archive/
 test.ipynb
