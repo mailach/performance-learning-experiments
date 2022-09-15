@@ -9,6 +9,9 @@ import click
 from utils.fm import fm_xml_to_dimacs
 from utils.data import xml_measurements_to_onehot
 
+mlflow.set_experiment("data_loading")
+
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -26,22 +29,6 @@ def _log_metadata(metadata: dict, year: int) -> None:
             mlflow.log_param("all_measured", m["all_measured"])
 
 
-def _transform_featuremodel(path: str, system: str, year: str) -> None:
-    fm_xml_to_dimacs(
-        os.path.join(path, system, year, "fm.xml"),
-        os.path.join(path, system, year, "fm_cnf.dimacs"),
-        "shema2015",
-    )
-
-
-def _transform_featuremodel(path: str, system: str, year: str) -> None:
-    xml_measurements_to_onehot(
-        os.path.join(path, system, year, "all_measurements.xml"),
-        os.path.join(path, system, year, "fm_cnf.dimacs"),
-        os.path.join(path, system, year, "measurements.tsv"),
-    )
-
-
 @click.command(help="Takes local csv and saves it for later use as artifact")
 @click.option("--path", default=None)
 @click.option("--system", default=None)
@@ -49,10 +36,18 @@ def _transform_featuremodel(path: str, system: str, year: str) -> None:
 def load_system(path: str, system: str, year: int) -> None:
 
     logging.info("Transform featuremodel in xml to dimacs (cnf)")
-    _transform_featuremodel(path, system, year)
+    fm_xml_to_dimacs(
+        os.path.join(path, system, year, "fm.xml"),
+        os.path.join(path, system, year, "fm_cnf.dimacs"),
+        "shema2015",
+    )
 
     logging.info("Transform xml measurements to one-hot-encoded")
-    _transform_featuremodel(path, system, year)
+    xml_measurements_to_onehot(
+        os.path.join(path, system, year, "all_measurements.xml"),
+        os.path.join(path, system, year, "fm_cnf.dimacs"),
+        os.path.join(path, system, year, "measurements.tsv"),
+    )
 
     logging.info("Loading metadata...")
     with mlflow.start_run():
