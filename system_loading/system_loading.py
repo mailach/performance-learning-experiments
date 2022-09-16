@@ -62,8 +62,14 @@ def load_system(path: str, system: str, year: int) -> None:
         logging.info("Log metadata as parameters...")
         _log_metadata(metadata, int(year))
 
-        logging.info("Uploading data file to ")
-        mlflow.log_artifact(os.path.join(path, system, year))
+        logging.info(f"Uploading data file to {os.environ['MLFLOW_TRACKING_URI']}")
+        mlflow.log_artifact(
+            os.path.join(path, system, year) + "/measurements.tsv", "data"
+        )
+
+        mlflow.log_artifact(
+            os.path.join(path, system, year) + "/all_measurements.xml", "data"
+        )
 
 
 if __name__ == "__main__":
