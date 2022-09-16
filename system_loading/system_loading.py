@@ -9,10 +9,14 @@ import click
 from utils.fm import fm_xml_to_dimacs
 from utils.data import xml_measurements_to_onehot
 
-mlflow.set_experiment("data_loading")
+mlflow.set_experiment("systems")
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="Loading systems: %(levelname)s %(asctime)s %(message)s",
+    datefmt="%m/%d/%Y %I:%M:%S %p",
+)
 
 
 def _log_metadata(metadata: dict, year: int) -> None:
@@ -35,19 +39,12 @@ def _log_metadata(metadata: dict, year: int) -> None:
 @click.option("--year", default=None)
 def load_system(path: str, system: str, year: int) -> None:
 
+    data_dir = os.path.join(path, system, year)
     logging.info("Transform featuremodel in xml to dimacs (cnf)")
-    fm_xml_to_dimacs(
-        os.path.join(path, system, year, "fm.xml"),
-        os.path.join(path, system, year, "fm_cnf.dimacs"),
-        "shema2015",
-    )
+    fm_xml_to_dimacs(data_dir, "shema2015")
 
     logging.info("Transform xml measurements to one-hot-encoded")
-    xml_measurements_to_onehot(
-        os.path.join(path, system, year, "all_measurements.xml"),
-        os.path.join(path, system, year, "fm_cnf.dimacs"),
-        os.path.join(path, system, year, "measurements.tsv"),
-    )
+    xml_measurements_to_onehot(data_dir)
 
     logging.info("Loading metadata...")
     with mlflow.start_run():
@@ -63,13 +60,7 @@ def load_system(path: str, system: str, year: int) -> None:
         _log_metadata(metadata, int(year))
 
         logging.info(f"Uploading data file to {os.environ['MLFLOW_TRACKING_URI']}")
-        mlflow.log_artifact(
-            os.path.join(path, system, year) + "/measurements.tsv", "data"
-        )
-
-        mlflow.log_artifact(
-            os.path.join(path, system, year) + "/all_measurements.xml", "data"
-        )
+        mlflow.log_artifact(os.path.join(path, system, year), "data")
 
 
 if __name__ == "__main__":

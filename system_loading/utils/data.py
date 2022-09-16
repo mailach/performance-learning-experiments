@@ -1,12 +1,13 @@
-from operator import index
+import json
+import os
 import xml.etree.ElementTree as ET
 from typing import Sequence
 import pandas as pd
 
 
-def features_from_dimacs(dimacs_file: str) -> dict[int, str]:
+def features_from_dimacs(path: str) -> dict[int, str]:
 
-    with open(dimacs_file, "r") as f:
+    with open(os.path.join(path, "fm_cnf.dimacs"), "r") as f:
         features = {
             int(line.split()[1]): line.split()[2].strip()
             for line in f.readlines()
@@ -25,20 +26,18 @@ def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> 
 
 
 def _one_hot_encode(config: Sequence[str], features: Sequence[str], value: str):
-    _check_feature_existence(config, features)
-    oh = {feature: 1 if feature in config else 0 for feature in features}
+    _check_feature_existence(config, features.values())
+    oh = {key: 1 if feature in config else 0 for key, feature in features.items()}
     oh["measured_value"] = value
 
     return oh
 
 
-def xml_measurements_to_onehot(
-    input_file: str, dimacs_file: str, output_file: str, shema: str = None
-) -> None:
-    features = features_from_dimacs(dimacs_file)
+def xml_measurements_to_onehot(path: str) -> None:
+    features = features_from_dimacs(path)
     one_hot = []
 
-    df = ET.parse(input_file).getroot()
+    df = ET.parse(os.path.join(path, "all_measurements.xml")).getroot()
     for row in df:
         try:
             config = [
@@ -51,7 +50,7 @@ def xml_measurements_to_onehot(
             one_hot.append(
                 _one_hot_encode(
                     config,
-                    features.values(),
+                    features,
                     row.find(f'.//data[@columname="Measured Value"]').text,
                 )
             )
@@ -60,4 +59,9 @@ def xml_measurements_to_onehot(
             print(row[1].attrib, row[1].text)
             raise e
 
-    pd.DataFrame(one_hot).to_csv(output_file, sep="\t", index=False)
+    with open(os.path.join(path, "measurements.json"), "w") as f:
+        json.dump(one_hot, f)
+    with open(os.path.join(path, "features.json"), "w") as f:
+        json.dump(features, f)
+
+    # pd.DataFrame(one_hot).to_csv(output_file, sep="\t", index=False)
