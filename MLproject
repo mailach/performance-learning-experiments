@@ -1,0 +1,23 @@
+name: performance-influence-modeling
+
+conda_env: conda.yaml
+
+entry_points:
+  system_loading:
+    parameters:
+      path: path
+      system: system
+      year: year
+    command: "python system_loading/system_loading.py --path={path} --system={system} --year={year}"
+
+  sampling:
+    parameters:
+      system_path: path
+      n: n_samples
+      method: sampling_method
+    command: "python sampling/sampling.py --system_path={path} --n={n_samples} --method={method}"
+
+  main:
+    parameters:
+      test: test
+    command: "python main.py --test={test}"
