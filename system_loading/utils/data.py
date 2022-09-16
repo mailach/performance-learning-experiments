@@ -28,7 +28,7 @@ def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> 
 def _one_hot_encode(config: Sequence[str], features: Sequence[str], value: str):
     _check_feature_existence(config, features.values())
     oh = {key: 1 if feature in config else 0 for key, feature in features.items()}
-    oh["measured_value"] = value
+    oh["measured_value"] = float(value.replace(",", "."))
 
     return oh
 

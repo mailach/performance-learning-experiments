@@ -9,7 +9,7 @@ import tempfile
 from typing import Sequence
 
 
-mlflow.set_experiment("test")
+mlflow.set_experiment("sampling")
 
 
 logging.basicConfig(
@@ -27,7 +27,9 @@ def _true_random(configs: Sequence, n: int) -> Sequence:
         )
         raise Exception("Valueerror for samplesize.")
 
-    return random.sample(configs, n)
+    sampled = [configs.pop(random.randrange(len(configs))) for _ in range(n)]
+
+    return sampled, configs
 
 
 @click.command(help="Sample from feature model or list of configurations.")
@@ -46,17 +48,25 @@ def sample(n: int, system_path: str, method: str):
             )
             with open(os.path.join(system_path, "measurements.json"), "r") as f:
                 configurations = json.load(f)
-            sampled_configs = _true_random(configurations, int(n))
+            sampled_configs, remaining_configs = _true_random(configurations, int(n))
         else:
             logging.error("Sampling method not implemented yet.")
             raise NotImplementedError
 
-        configs_file = os.path.join(tempfile.mkdtemp(), "sampled_configurations.json")
-        with open(configs_file, "w") as f:
+        cache_dir = tempfile.mkdtemp()
+        logging.info(f"Save sample to cache at {cache_dir}")
+        sampled_configs_file = os.path.join(cache_dir, "sampled_configurations.json")
+        with open(sampled_configs_file, "w") as f:
             json.dump(sampled_configs, f)
 
+        logging.info(f"Save remaining configurations to cache at {cache_dir}")
+        remain_configs_file = os.path.join(cache_dir, "remaining_configurations.json")
+        with open(remain_configs_file, "w") as f:
+            json.dump(remaining_configs, f)
+
         mlflow.log_param("n_sample", n)
-        mlflow.log_artifact(configs_file, "sampled_configurations")
+        mlflow.log_artifact(sampled_configs_file, "sampled_configurations")
+        mlflow.log_artifact(remain_configs_file, "remaining_configurations")
 
 
 if __name__ == "__main__":
