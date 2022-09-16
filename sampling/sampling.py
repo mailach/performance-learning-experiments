@@ -9,13 +9,13 @@ import tempfile
 from typing import Sequence
 
 
-mlflow.set_experiment("sampling")
+mlflow.set_experiment("test")
 
 
 logging.basicConfig(
     level=logging.INFO,
-    format="Loading systems: %(levelname)s %(asctime)s %(message)s",
-    datefmt="%m/%d/%Y %I:%M:%S %p",
+    format="%(asctime)s %(levelname)s Sampling:  %(message)s",
+    datefmt="%m/%d/%Y %I:%M:%S",
 )
 
 
@@ -30,9 +30,7 @@ def _true_random(configs: Sequence, n: int) -> Sequence:
     return random.sample(configs, n)
 
 
-@click.command(
-    help="Sample from feature model or list of configurations for true random."
-)
+@click.command(help="Sample from feature model or list of configurations.")
 @click.option("--n", default=None)
 @click.option("--system_path", default=None)
 @click.option("--method", default=None)
@@ -42,7 +40,7 @@ def sample(n: int, system_path: str, method: str):
 
     with mlflow.start_run():
         if method == "true_random":
-            logging.info("Sampling strategy is 'true random'.")
+            logging.info("Sampling using 'true random'.")
             logging.warning(
                 "Only use this method when all valid configurations are available."
             )
