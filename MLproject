@@ -1,7 +1,4 @@
 name: performance-influence-modeling
-
-conda_env: conda.yaml
-
 entry_points:
   system_loading:
     parameters:
