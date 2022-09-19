@@ -7,3 +7,8 @@ export $(grep -v '^#' .env | xargs)
 ```
 
 
+Run multistep workflow in root dir
+
+```sh
+mlflow run . -P test=x
+```
