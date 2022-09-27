@@ -34,9 +34,9 @@ def _true_random(configs: Sequence, n: int) -> Sequence:
 
 @click.command(help="Sample from feature model or list of configurations.")
 @click.option("--n", default=10, type=int)
-@click.option("--system_path", default="data/Apache/2012")
+@click.option("--data_dir", default="")
 @click.option("--method", default="true_random")
-def sample(n: int, system_path: str, method: str):
+def sample(n: int, data_dir: str, method: str):
 
     logging.info("Start sampling from configuration space.")
 
@@ -46,7 +46,7 @@ def sample(n: int, system_path: str, method: str):
             logging.warning(
                 "Only use this method when all valid configurations are available."
             )
-            with open(os.path.join(system_path, "measurements.json"), "r") as f:
+            with open(os.path.join(data_dir, "measurements.json"), "r") as f:
                 configurations = json.load(f)
             sampled_configs, remaining_configs = _true_random(configurations, int(n))
         else:

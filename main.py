@@ -30,6 +30,7 @@ def _same_run(run: Run, params: dict[str:any]):
     same_parameter = [
         True if run.data.params.get(param) == str(params[param]) else False
         for param in params.keys()
+        if param != "cache_dir"
     ]
 
     return True if all(same_parameter) else False
@@ -44,7 +45,7 @@ def _get_run_if_exists(
         return (
             run.run_id
             if _same_run(client.get_run(run.run_id), parameters)
-            and run.status != "FAILED"
+            and run.status == "FINISHED"
             else False
         )
 
@@ -58,6 +59,7 @@ def _load_or_run(
         logging.info(
             f"Found existing run for entrypoint {entrypoint}. Caching artifacts..."
         )
+        print(run_id)
         return download_artifacts(run_id=run_id)
     else:
         logging.info(f"Start new run for entrypoint {entrypoint}.")
@@ -87,8 +89,8 @@ def workflow(test: str, data: str):
         cache = _load_or_run(
             "sampling",
             {
-                "system_path": "data/Apache/2012",
-                "n": 12,
+                "data_dir": "data/Apache/2012",
+                "n": 11,
                 "method": "true_random",
             },
             git_commit,
