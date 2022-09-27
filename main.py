@@ -73,9 +73,9 @@ def _load_or_run(
 
 
 @click.command()
-@click.option("--test", default=" ")
-@click.option("--data", default=None)
-def workflow(test: str, data: str):
+@click.option("--sampling_method", default="true_random")
+@click.option("--sampling_n", default=5, type=int)
+def workflow(sampling_n: int, sampling_method: str):
     # Note: The entrypoint names are defined in MLproject. The artifact directories
     # are documented by each step's .py file.
     with mlflow.start_run() as active_run:
@@ -85,13 +85,14 @@ def workflow(test: str, data: str):
         git_commit = active_run.data.tags.get(mlflow_tags.MLFLOW_GIT_COMMIT)
 
         client = MlflowClient()
+        cache_dir = "data/Apache/2012"  # tempfile
 
         cache = _load_or_run(
             "sampling",
             {
-                "data_dir": "data/Apache/2012",
-                "n": 11,
-                "method": "true_random",
+                "data_dir": cache_dir,
+                "n": sampling_n,
+                "method": sampling_method,
             },
             git_commit,
             client,

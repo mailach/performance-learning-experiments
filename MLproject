@@ -16,5 +16,6 @@ entry_points:
 
   main:
     parameters:
-      test: test
-    command: "python main.py --test={test}"
+      sampling_method: { type: str, default: true_random }
+      sampling_n: { type: int, default: 10 }
+    command: "python main.py --sampling_n={sampling_n} --sampling_method={sampling_method}"
