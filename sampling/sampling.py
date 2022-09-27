@@ -33,9 +33,9 @@ def _true_random(configs: Sequence, n: int) -> Sequence:
 
 
 @click.command(help="Sample from feature model or list of configurations.")
-@click.option("--n", default=None)
-@click.option("--system_path", default=None)
-@click.option("--method", default=None)
+@click.option("--n", default=10, type=int)
+@click.option("--system_path", default="data/Apache/2012")
+@click.option("--method", default="true_random")
 def sample(n: int, system_path: str, method: str):
 
     logging.info("Start sampling from configuration space.")
@@ -64,7 +64,7 @@ def sample(n: int, system_path: str, method: str):
         with open(remain_configs_file, "w") as f:
             json.dump(remaining_configs, f)
 
-        mlflow.log_param("n_sample", n)
+        # mlflow.log_param("n_sample", n)
         mlflow.log_artifact(sampled_configs_file, "sampled_configurations")
         mlflow.log_artifact(remain_configs_file, "remaining_configurations")
 

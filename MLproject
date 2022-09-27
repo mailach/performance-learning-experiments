@@ -9,10 +9,10 @@ entry_points:
 
   sampling:
     parameters:
-      system_path: path
-      n: n_samples
-      method: sampling_method
-    command: "python sampling/sampling.py --system_path={path} --n={n_samples} --method={method}"
+      system_path: system_path
+      n: n
+      method: method
+    command: "python sampling/sampling.py --system_path={system_path} --n={n} --method={method}"
 
   main:
     parameters:
