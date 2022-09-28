@@ -13,12 +13,6 @@ from sklearn import tree
 from utils.models import cart
 from utils.metrics import prediction_fault_rate
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s Learning:  %(message)s",
-    datefmt="%m/%d/%Y %I:%M:%S",
-)
-
 
 # minbucket = minimum sample size for any leaf = min_samples_leaf
 # minsplit = minimum sample size of a segment before it is used to further split = min_samples_split

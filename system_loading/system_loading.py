@@ -12,11 +12,7 @@ from utils.data import xml_measurements_to_onehot
 mlflow.set_experiment("systems")
 
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s System loading:  %(message)s",
-    datefmt="%m/%d/%Y %I:%M:%S",
-)
+
 
 
 def _log_metadata(metadata: dict, year: int) -> None:

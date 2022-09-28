@@ -12,12 +12,6 @@ from typing import Sequence
 mlflow.set_experiment("sampling")
 
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s Sampling:  %(message)s",
-    datefmt="%m/%d/%Y %I:%M:%S",
-)
-
 
 def _true_random(configs: Sequence, n: int) -> Sequence:
 

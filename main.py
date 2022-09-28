@@ -1,7 +1,10 @@
 import click
 import os
 import tempfile
+
 import logging
+import rich
+from rich.logging import RichHandler
 
 import mlflow
 from mlflow.tracking import MlflowClient
@@ -15,6 +18,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)s Sampling:  %(message)s",
     datefmt="%m/%d/%Y %I:%M:%S",
+    handlers=[RichHandler()],
 )
 
 
