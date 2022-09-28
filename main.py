@@ -19,9 +19,7 @@ logging.basicConfig(
 
 
 def _find_or_create_exp_id(entrypoint, client):
-    exp_id = [
-        exp.experiment_id for exp in client.list_experiments() if exp.name == entrypoint
-    ]
+    exp_id = mlflow.search_experiments(filter_string=f"name = '{entrypoint}'")
     return exp_id[0] if exp_id else client.create_experiment(entrypoint)
 
 
@@ -35,19 +33,18 @@ def _same_run(run: Run, params: dict[str:any]):
 
     return True if all(same_parameter) else False
 
+def _generate_filter_string(params: dict[str, any]):
+    clauses = ["parameter." + param + " = '" + str(value) + "'" for param, value in params.items() if param != "data_dir"] 
+    query = " AND ".join(clauses) + " AND attribute.status = 'FINISHED'"
+    return query
 
 def _get_run_if_exists(
     entrypoint: str, parameters: dict[str, any], git_commit: str, client: MlflowClient
 ):
-    exp_id = _find_or_create_exp_id(entrypoint, client)
-    runs = client.list_run_infos(exp_id)
-    for run in runs:
-        return (
-            run.run_id
-            if _same_run(client.get_run(run.run_id), parameters)
-            and run.status == "FINISHED"
-            else False
-        )
+    filter_string = _generate_filter_string(parameters)
+    runs = mlflow.search_runs(experiment_names=[entrypoint], filter_string=filter_string)
+    return runs["run_id"][0] if not runs.empty else False
+
 
 
 def _load_or_run(
@@ -59,7 +56,6 @@ def _load_or_run(
         logging.info(
             f"Found existing run for entrypoint {entrypoint}. Caching artifacts..."
         )
-        print(run_id)
         return download_artifacts(run_id=run_id)
     else:
         logging.info(f"Start new run for entrypoint {entrypoint}.")

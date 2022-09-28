@@ -6,7 +6,6 @@ Load .env file
 export $(grep -v '^#' .env | xargs)
 ```
 
-
 Run multistep workflow in root dir
 
 ```sh
