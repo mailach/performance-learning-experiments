@@ -12,7 +12,7 @@ entry_points:
       data_dir: data_dir
       n: n
       method: method
-    command: "python sampling/sampling.py --data_dir={data_dir} --n={n} --method={method}"
+    command: "python sampling.py --data_dir={data_dir} --n={n} --method={method}"
 
   main:
     parameters:

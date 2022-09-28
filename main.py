@@ -3,7 +3,6 @@ import os
 import tempfile
 
 import logging
-import rich
 from rich.logging import RichHandler
 
 import mlflow
@@ -11,50 +10,21 @@ from mlflow.tracking import MlflowClient
 from mlflow.utils import mlflow_tags
 from mlflow.entities import Run, Experiment
 from mlflow.artifacts import download_artifacts
-from mlflow.utils.logging_utils import eprint
+
+from utils.runs import get_run_if_exists
 
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s %(levelname)s Sampling:  %(message)s",
-    datefmt="%m/%d/%Y %I:%M:%S",
+    format="MAIN    %(message)s",
     handlers=[RichHandler()],
 )
-
-
-def _find_or_create_exp_id(entrypoint, client):
-    exp_id = mlflow.search_experiments(filter_string=f"name = '{entrypoint}'")
-    return exp_id[0] if exp_id else client.create_experiment(entrypoint)
-
-
-def _same_run(run: Run, params: dict[str:any]):
-
-    same_parameter = [
-        True if run.data.params.get(param) == str(params[param]) else False
-        for param in params.keys()
-        if param != "cache_dir"
-    ]
-
-    return True if all(same_parameter) else False
-
-def _generate_filter_string(params: dict[str, any]):
-    clauses = ["parameter." + param + " = '" + str(value) + "'" for param, value in params.items() if param != "data_dir"] 
-    query = " AND ".join(clauses) + " AND attribute.status = 'FINISHED'"
-    return query
-
-def _get_run_if_exists(
-    entrypoint: str, parameters: dict[str, any], git_commit: str, client: MlflowClient
-):
-    filter_string = _generate_filter_string(parameters)
-    runs = mlflow.search_runs(experiment_names=[entrypoint], filter_string=filter_string)
-    return runs["run_id"][0] if not runs.empty else False
-
 
 
 def _load_or_run(
     entrypoint: str, params: dict[str:any], git_commit: str, client: MlflowClient
 ):
-    run_id = _get_run_if_exists(entrypoint, params, git_commit, client)
+    run_id = get_run_if_exists(entrypoint, params, git_commit, client)
 
     if run_id:
         logging.info(
@@ -76,8 +46,11 @@ def _load_or_run(
 @click.option("--sampling_method", default="true_random")
 @click.option("--sampling_n", default=5, type=int)
 def workflow(sampling_n: int, sampling_method: str):
+    mlflow.set_tracking_uri("http://localhost:5000")
+    mlflow.set_experiment("runs")
     # Note: The entrypoint names are defined in MLproject. The artifact directories
     # are documented by each step's .py file.
+    logging.info("Start execution of workflow")
     with mlflow.start_run() as active_run:
 
         logging.info("Generate cache directory")

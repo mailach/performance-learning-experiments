@@ -4,13 +4,21 @@ import json
 import os
 import mlflow
 import click
-import tempfile
+
+import logging
+from rich.logging import RichHandler
 
 from typing import Sequence
 
+from utils.caching import CacheHandler
+
 
 mlflow.set_experiment("sampling")
-
+logging.basicConfig(
+    level=logging.INFO,
+    format="SAMPLING    %(message)s",
+    handlers=[RichHandler()],
+)
 
 
 def _true_random(configs: Sequence, n: int) -> Sequence:
@@ -34,7 +42,10 @@ def sample(n: int, data_dir: str, method: str):
 
     logging.info("Start sampling from configuration space.")
 
-    with mlflow.start_run():
+    with mlflow.start_run() as run:
+
+        cache = CacheHandler(run.info.run_id)
+
         if method == "true_random":
             logging.info("Sampling using 'true random'.")
             logging.warning(
@@ -43,24 +54,22 @@ def sample(n: int, data_dir: str, method: str):
             with open(os.path.join(data_dir, "measurements.json"), "r") as f:
                 configurations = json.load(f)
             sampled_configs, remaining_configs = _true_random(configurations, int(n))
+
         else:
             logging.error("Sampling method not implemented yet.")
             raise NotImplementedError
 
-        cache_dir = tempfile.mkdtemp()
-        logging.info(f"Save sample to cache at {cache_dir}")
-        sampled_configs_file = os.path.join(cache_dir, "sampled_configurations.json")
-        with open(sampled_configs_file, "w") as f:
-            json.dump(sampled_configs, f)
+        # Generate cache dir and save sampled configurations
+        logging.info(f"Save sample to cache")
+        cache.save(sampled_configs, "sampled_configurations.json")
+        logging.info(f"Save remaining configurations to cache.")
+        cache.save(remaining_configs, "remaining_configurations.json")
 
-        logging.info(f"Save remaining configurations to cache at {cache_dir}")
-        remain_configs_file = os.path.join(cache_dir, "remaining_configurations.json")
-        with open(remain_configs_file, "w") as f:
-            json.dump(remaining_configs, f)
+        # log cache as parameter
 
         # mlflow.log_param("n_sample", n)
-        mlflow.log_artifact(sampled_configs_file, "sampled_configurations")
-        mlflow.log_artifact(remain_configs_file, "remaining_configurations")
+        mlflow.log_artifact(cache.cache_dir, "artficacts")
+        # mlflow.log_artifact(remain_configs_file, "remaining_configurations")
 
 
 if __name__ == "__main__":
