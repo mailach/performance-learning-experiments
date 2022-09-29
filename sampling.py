@@ -35,24 +35,24 @@ def _true_random(configs: Sequence, n: int) -> Sequence:
 
 
 @click.command(help="Sample from feature model or list of configurations.")
-@click.option("--n", default=10, type=int)
-@click.option("--data_dir", default="")
+@click.option("--system_run_id", default="")
 @click.option("--method", default="true_random")
-def sample(n: int, data_dir: str, method: str):
+@click.option("--n", default=10, type=int)
+def sample(n: int, method: str, system_run_id: str):
 
     logging.info("Start sampling from configuration space.")
 
     with mlflow.start_run() as run:
 
-        cache = CacheHandler(run.info.run_id)
+        sampling_cache = CacheHandler(run.info.run_id)
+        system_cache = CacheHandler(system_run_id)
 
         if method == "true_random":
             logging.info("Sampling using 'true random'.")
             logging.warning(
                 "Only use this method when all valid configurations are available."
             )
-            with open(os.path.join(data_dir, "measurements.json"), "r") as f:
-                configurations = json.load(f)
+            configurations = system_cache.load("measurements.json")
             sampled_configs, remaining_configs = _true_random(configurations, int(n))
 
         else:
@@ -60,15 +60,16 @@ def sample(n: int, data_dir: str, method: str):
             raise NotImplementedError
 
         # Generate cache dir and save sampled configurations
-        logging.info(f"Save sample to cache")
-        cache.save(sampled_configs, "sampled_configurations.json")
-        logging.info(f"Save remaining configurations to cache.")
-        cache.save(remaining_configs, "remaining_configurations.json")
+        logging.info(f"Save sampled configurations to cache")
+        sampling_cache.save(
+            {
+                "sampled_configurations.json": sampled_configs,
+                "remaining_configurations.json": remaining_configs,
+            }
+        )
 
         # log cache as parameter
-
-        # mlflow.log_param("n_sample", n)
-        mlflow.log_artifact(cache.cache_dir, "artficacts")
+        mlflow.log_artifact(sampling_cache.cache_dir, "artficacts")
         # mlflow.log_artifact(remain_configs_file, "remaining_configurations")
 
 
