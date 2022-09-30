@@ -92,13 +92,11 @@ def _generate_dimacs(features: dict[int, str], clauses: Sequence[Sequence[int]])
     return "\n".join(lines)
 
 
-def fm_xml_to_dimacs(path: str, shema_identifier: str) -> None:
+class fm_handler:
+    def __init__(self, data_dir: str, shema: str):
+        self.xml = ET.parse(os.path.join(data_dir, "fm.xml"))
+        self.features, self.clauses = _extract_features(self.xml, shema)
+        self.dimacs = _generate_dimacs(self.features, self.clauses)
 
-    tree = ET.parse(os.path.join(path, "fm.xml"))
-    root = tree.getroot()
-
-    features, clauses = _extract_features(root, shema_identifier)
-    dimacs = _generate_dimacs(features, clauses)
-
-    with open(os.path.join(path, "fm_cnf.dimacs"), "w") as f:
-        f.write(dimacs)
+    def get_properties(self):
+        return {"fm.xml": self.xml, "fm.dimacs": self.dimacs}

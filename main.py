@@ -12,6 +12,7 @@ from mlflow.entities import Run, Experiment
 from mlflow.artifacts import download_artifacts
 
 from utils.runs import get_run_if_exists
+from utils.exceptions import handle_exception
 
 
 logging.basicConfig(
@@ -21,6 +22,7 @@ logging.basicConfig(
 )
 
 
+@handle_exception("Not able to load or run entrypoint.")
 def _load_or_run(
     entrypoint: str, params: dict[str:any], git_commit: str, client: MlflowClient
 ):
