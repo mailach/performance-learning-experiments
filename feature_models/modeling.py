@@ -92,7 +92,7 @@ def _generate_dimacs(features: dict[int, str], clauses: Sequence[Sequence[int]])
     return "\n".join(lines)
 
 
-class fm_handler:
+class Fm_handler:
     def __init__(self, data_dir: str, shema: str):
         self.xml = ET.parse(os.path.join(data_dir, "fm.xml"))
         self.features, self.clauses = _extract_features(self.xml, shema)

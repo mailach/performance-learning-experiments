@@ -1,20 +1,6 @@
-import json
 import os
 import xml.etree.ElementTree as ET
 from typing import Sequence
-import pandas as pd
-
-
-def features_from_dimacs(path: str) -> dict[int, str]:
-
-    with open(os.path.join(path, "fm_cnf.dimacs"), "r") as f:
-        features = {
-            int(line.split()[1]): line.split()[2].strip()
-            for line in f.readlines()
-            if line[0] == "c"
-        }
-
-    return features
 
 
 def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> None:
@@ -33,11 +19,13 @@ def _one_hot_encode(config: Sequence[str], features: Sequence[str], value: str):
     return oh
 
 
-def xml_measurements_to_onehot(path: str) -> None:
-    features = features_from_dimacs(path)
+def _xml_measurements_to_onehot(
+    data_tree: ET, features: dict[int, str]
+) -> Sequence[dict[str, int]]:
+
     one_hot = []
 
-    df = ET.parse(os.path.join(path, "all_measurements.xml")).getroot()
+    df = data_tree.getroot()
     for row in df:
         try:
             config = [
@@ -59,9 +47,10 @@ def xml_measurements_to_onehot(path: str) -> None:
             print(row[1].attrib, row[1].text)
             raise e
 
-    with open(os.path.join(path, "measurements.json"), "w") as f:
-        json.dump(one_hot, f)
-    with open(os.path.join(path, "features.json"), "w") as f:
-        json.dump(features, f)
+    return one_hot
 
-    # pd.DataFrame(one_hot).to_csv(output_file, sep="\t", index=False)
+
+class Measurement_handler:
+    def __init__(self, data_dir: str, features: dict[int, str]):
+        self.xml = ET.parse(os.path.join(data_dir, "all_measurements.xml"))
+        self.one_hot = _xml_measurements_to_onehot(self.xml, features)
