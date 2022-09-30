@@ -34,9 +34,8 @@ def _generate_filter_string(params: dict[str, any]):
     return query
 
 
-def get_run_if_exists(
-    entrypoint: str, parameters: dict[str, any], git_commit: str, client: MlflowClient
-):
+def get_run_if_exists(entrypoint: str, parameters: dict[str, any]):
+
     filter_string = _generate_filter_string(parameters)
     runs = mlflow.search_runs(
         experiment_names=[entrypoint], filter_string=filter_string

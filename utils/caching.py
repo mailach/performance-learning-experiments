@@ -15,8 +15,9 @@ class CacheHandler:
         self._temp_dir = tempfile.gettempdir()
         self.cache_dir = os.path.join(self._temp_dir, run_id)
 
-        os.mkdir(self.cache_dir)
-        logging.info(f"Successfully created cache directory for run {run_id}")
+        if not os.path.exists(self.cache_dir):
+            os.mkdir(self.cache_dir)
+            logging.info(f"Successfully created cache directory for run {run_id}")
 
     @handle_exception("Unable to save artifact to cache.")
     def _save_artifact(self, file: str, artifact: any) -> None:
