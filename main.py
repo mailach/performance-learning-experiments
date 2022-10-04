@@ -23,9 +23,12 @@ logging.basicConfig(
 
 def _run_or_load(entrypoint: str, params: dict[str, str], use_cache: bool = True) -> str:
     run_id = get_run_if_exists(entrypoint, params) if use_cache else False
+
     if run_id:
+        logging.info(f"Use existing run {run_id} for entrypoint {entrypoint}")
         _load_and_cache(entrypoint, run_id)
     else:
+        logging.info(f"Start new run for entrypoint {entrypoint}")
         run_id = mlflow.run(
             ".",
             entry_point=entrypoint,
@@ -77,7 +80,6 @@ def workflow(param_file: str):
         params["sampling"]["system_run_id"] = _load_system(
             params["system"], param_file)
         # mlflow.log_params(params["parameter"])
-        logging.info(f"System run id: {params['sampling']}")
         sampling_run_id = _run_or_load("sampling", params["sampling"])
 
 
