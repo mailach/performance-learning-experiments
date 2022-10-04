@@ -1,15 +1,18 @@
 system:
-  run_id: False
-  system: Apache
-  year: 2012
-  domain: Webserver
-  authors: Guo et al.
-  target: performance
-  n_features_bin: 9
-  all_measured: True
-  n_valid_configs: 192
-  link: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
-  data_dir: data/Apache/2012
+  parameter:
+    system: Apache
+    year: 2012
+    domain: Webserver
+    authors: Guo et al.
+    target: performance
+    n_features_bin: 9
+    all_measured: True
+    n_valid_configs: 192
+    link: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
+  local:
+    run_id: 5f741717cb254f15a3199659ed6c0dca
+    data_dir: data/Apache/2012
+    shema: "shema2015"
 sampling:
   method: true_random
   n: 12

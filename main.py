@@ -51,34 +51,38 @@ def _load_and_cache(
     return download_artifacts(run_id=run_id)
 
 
+def _load_system(params: dict[str, str], param_file: str) -> str:
+    logging.info("System loading...")
+
+    if not params["local"]["run_id"]:
+        mlflow.run(
+            ".",
+            entry_point="system_loading",
+            parameters={"param_file": param_file},
+            experiment_name="system",
+        )
+        mlflow.log_params(params["parameter"])
+    else:
+        dir = _load_and_cache("system", run_id=params["local"]["run_id"])
+        print("Run exists and cached: " + dir)
+
+
+
 @click.command()
 @click.option("--param_file", default="run.yaml")
 # @click.option("--sampling_method", default="true_random")
 # @click.option("--sampling_n", default=5, type=int)
 def workflow(param_file: str):
+    logging.info("Loading parameters...")
     with open(param_file, "r") as f:
         parameters = yaml.safe_load(f)
 
-    mlflow.set_tracking_uri("http://localhost:5000")
-    mlflow.set_experiment("runs")
+    
     # Note: The entrypoint names are defined in MLproject. The artifact directories
     # are documented by each step's .py file.
     logging.info("Start execution of workflow")
     with mlflow.start_run() as active_run:
-
-        logging.info("System loading...")
-
-        system = parameters["system"]
-        if not system["run_id"]:
-            mlflow.run(
-                ".",
-                entry_point="system_loading",
-                parameters=system,
-                experiment_name="system",
-            )
-        else:
-            dir = _load_and_cache("system", run_id=system["run_id"])
-        print(dir)
+        _load_system(parameters["system"], param_file)
 
         # existing_run = get_run_if_exists("system_loading", params)
 

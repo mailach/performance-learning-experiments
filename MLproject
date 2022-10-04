@@ -2,10 +2,8 @@ name: performance-influence-modeling
 entry_points:
   system_loading:
     parameters:
-      path: path
-      system: system
-      year: year
-    command: "python system_loading/system_loading.py --path={path} --system={system} --year={year}"
+      param_file: run.yaml
+    command: "python load_system.py --param_file={param_file}"
 
   sampling:
     parameters:
@@ -16,6 +14,7 @@ entry_points:
 
   main:
     parameters:
-      sampling_method: { type: str, default: true_random }
-      sampling_n: { type: int, default: 10 }
-    command: "python main.py --sampling_n={sampling_n} --sampling_method={sampling_method}"
+      param_file: { type: str, default: run.yaml }
+      # sampling_method: { type: str, default: true_random }
+      # sampling_n: { type: int, default: 10 }
+    command: "python main.py --param_file={param_file}"

@@ -5,6 +5,7 @@ Takes local data and saves it as artifacts
 import logging
 import mlflow
 import click
+import yaml 
 
 import logging
 from rich.logging import RichHandler
@@ -24,39 +25,43 @@ logging.basicConfig(
 @click.command(
     help="Imports feature model data into standard format and saves it as artifacts to MLFlow server."
 )
-@click.option("--data_dir")
-@click.option("--system", default=None)
-@click.option("--domain", default=None)
-@click.option("--year", default=None)
-@click.option("--authors", default=None)
-@click.option("--target", default=None)
-@click.option("--n_features_bin", default=0)
-@click.option("--shema", default="shema2015")
-def load_system(
-    data_dir: str,
-    system: str,
-    domain: str,
-    year: str,
-    authors: str,
-    target: str,
-    n_features_bin: int,
-    shema: str,
-) -> None:
+@click.option("--param_file", default="run.yaml")
+# @click.option("--data_dir")
+# @click.option("--system", default=None)
+# @click.option("--domain", default=None)
+# @click.option("--year", default=None)
+# @click.option("--authors", default=None)
+# @click.option("--target", default=None)
+# @click.option("--n_features_bin", default=0)
+# @click.option("--shema", default="shema2015")
+# def load_system(
+#     data_dir: str,
+#     system: str,
+#     domain: str,
+#     year: str,
+#     authors: str,
+#     target: str,
+#     n_features_bin: int,
+#     shema: str,
+# ) -> None:
     # parameters to be tracked by mlflow
-    params = {
-        param: val
-        for param, val in locals().items()
-        if param not in ["shema", "data_dir"]
-    }
+def load_system(
+    param_file: str,
+) -> None:
+    
+    with open(param_file, "r") as f:
+        run_file = yaml.safe_load(f)
+        params = run_file["system"]["parameter"]
+        local = run_file["system"]["local"]
 
     with mlflow.start_run() as run:
         cache = CacheHandler(run.info.run_id)
 
         logging.info("Load feature model.")
-        fm = Fm_handler(data_dir, shema)
+        fm = Fm_handler(local["data_dir"], local["shema"])
 
         logging.info("Transform xml measurements to one-hot-encoded")
-        mh = Measurement_handler(data_dir, fm.features)
+        mh = Measurement_handler(local["data_dir"], fm.features)
 
         mlflow.log_params(params)
         cache.save(
