@@ -21,28 +21,43 @@ logging.basicConfig(
 )
 
 
+def _run_or_load(entrypoint: str, params: dict[str, str], use_cache: bool = True) -> str:
+    run_id = get_run_if_exists(entrypoint, params) if use_cache else False
+    if run_id:
+        _load_and_cache(entrypoint, run_id)
+    else:
+        run_id = mlflow.run(
+            ".",
+            entry_point=entrypoint,
+            parameters=params,
+            experiment_name=entrypoint,
+
+        )
+
+    return run_id
+
+
 def _load_and_cache(
-    experiment_name: str, params: dict[str, str] = None, run_id: str = None
-):
-    if not run_id:
-        run_id = get_run_if_exists(experiment_name, params)
+    experiment_name: str, run_id: str = None
+) -> None:
 
     cache = CacheHandler(run_id)
+    if not cache.existing_cache:
+        logging.info(f"Load artifacts for run {run_id} to cache")
+        download_artifacts(run_id=run_id, dst_path=cache.cache_dir)
+    else:
+        logging.info(f"Use existing cache for run {run_id}")
 
-    return cache.cache_dir if cache.existing_cache else download_artifacts(run_id=run_id, dst_path=cache.cache_dir)
+
+def _sample(params: dict[str, str]) -> str:
+
+    pass
 
 
 def _load_system(params: dict[str, str], param_file: str) -> str:
-    logging.info("System loading...")
-
+    logging.info(f"Load system {params['parameter']['system']}")
     if not params["local"]["run_id"]:
-        mlflow.run(
-            ".",
-            entry_point="system_loading",
-            parameters={"param_file": param_file},
-            experiment_name="system",
-        )
-        mlflow.log_params(params["parameter"])
+        _run_or_load("systems", {"param_file": param_file}, use_cache=False)
     else:
         dir = _load_and_cache("system", run_id=params["local"]["run_id"])
         return params["local"]["run_id"]
@@ -53,14 +68,15 @@ def _load_system(params: dict[str, str], param_file: str) -> str:
 def workflow(param_file: str):
     logging.info("Loading parameters...")
     with open(param_file, "r") as f:
-        parameters = yaml.safe_load(f)
+        params = yaml.safe_load(f)
 
     # Note: The entrypoint names are defined in MLproject. The artifact directories
     # are documented by each step's .py file.
     logging.info("Start execution of workflow")
     with mlflow.start_run() as active_run:
-
-        system_run_id = _load_system(parameters["system"], param_file)
+        system_run_id = _load_system(params["system"], param_file)
+        # mlflow.log_params(params["parameter"])
+        sampling_run_id = _sample(params["sampling"])
 
 
 if __name__ == "__main__":

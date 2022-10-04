@@ -1,6 +1,6 @@
 name: performance-influence-modeling
 entry_points:
-  system_loading:
+  systems:
     parameters:
       param_file: run.yaml
     command: "python load_system.py --param_file={param_file}"

@@ -1,5 +1,6 @@
 import logging
 import tempfile
+from typing import Literal
 
 import mlflow
 from mlflow.tracking import MlflowClient
@@ -34,7 +35,7 @@ def _generate_filter_string(params: dict[str, any]):
     return query
 
 
-def get_run_if_exists(entrypoint: str, parameters: dict[str, any]):
+def get_run_if_exists(entrypoint: str, parameters: dict[str, any]) -> (str | Literal[False]):
 
     filter_string = _generate_filter_string(parameters)
     runs = mlflow.search_runs(
