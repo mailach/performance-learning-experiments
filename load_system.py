@@ -5,7 +5,7 @@ Takes local data and saves it as artifacts
 import logging
 import mlflow
 import click
-import yaml 
+import yaml
 
 import logging
 from rich.logging import RichHandler
@@ -44,11 +44,11 @@ logging.basicConfig(
 #     n_features_bin: int,
 #     shema: str,
 # ) -> None:
-    # parameters to be tracked by mlflow
+# parameters to be tracked by mlflow
 def load_system(
     param_file: str,
 ) -> None:
-    
+
     with open(param_file, "r") as f:
         run_file = yaml.safe_load(f)
         params = run_file["system"]["parameter"]
@@ -75,7 +75,7 @@ def load_system(
         )
 
         logging.info("Log artifacts and parameters to MLflow")
-        mlflow.log_artifacts(cache.cache_dir, "artifacts")
+        mlflow.log_artifacts(cache.cache_dir, "")
         mlflow.log_params(params)
 
 
