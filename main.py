@@ -73,14 +73,16 @@ def workflow(param_file: str):
     with open(param_file, "r") as f:
         params = yaml.safe_load(f)
 
-    # Note: The entrypoint names are defined in MLproject. The artifact directories
-    # are documented by each step's .py file.
-    logging.info("Start execution of workflow")
+    logging.info("Start execution of workflow as new mlflow run...")
     with mlflow.start_run() as active_run:
-        params["sampling"]["system_run_id"] = _load_system(
-            params["system"], param_file)
-        # mlflow.log_params(params["parameter"])
+
+        system_run_id = _load_system(params["system"], param_file)
+
+        params["sampling"]["system_run_id"] = system_run_id
         sampling_run_id = _run_or_load("sampling", params["sampling"])
+
+        params["learning"]["sampling_run_id"] = sampling_run_id
+        learning_run_id = _run_or_load("learning", params["learning"])
 
 
 if __name__ == "__main__":

@@ -10,8 +10,10 @@ import mlflow.sklearn
 import pandas as pd
 from sklearn import tree
 
-from utils.models import cart
-from utils.metrics import prediction_fault_rate
+from utils.caching import CacheHandler
+
+from learning.models import cart
+from learning.metrics import prediction_fault_rate
 
 
 # minbucket = minimum sample size for any leaf = min_samples_leaf
@@ -40,7 +42,8 @@ def _log_metrics(vals: pd.Series, metric: str) -> None:
 
 def _evaluate(model, test: pd.DataFrame) -> None:
     fr = prediction_fault_rate(
-        test["measured_value"], model.predict(test.drop("measured_value", axis=1))
+        test["measured_value"], model.predict(
+            test.drop("measured_value", axis=1))
     )
     _log_metrics(fr, "fault_rate")
 
@@ -69,23 +72,26 @@ def _model(train: pd.DataFrame, method: str, cart_args: dict[str, int] = {}):
         allow_extra_args=True,
     ),
 )
-@click.option("--sample_path")
+@click.option("--sampling_run_id")
 @click.option("--method")
 @click.option("--min_samples_split", type=int, default=2)
 @click.option("--min_samples_leaf", type=int, default=1)
 def learning(
-    sample_path: str, method: str, min_samples_split: int, min_samples_leaf: int
+    sampling_run_id: str, method: str, min_samples_split: int, min_samples_leaf: int
 ):
-    mlflow.set_experiment(method)
 
     logging.info("Start learning from sampled configurations.")
-    with open(os.path.join(sample_path, "sampled_configurations.json"), "r") as f:
-        train = pd.DataFrame(json.load(f))
 
-    with open(os.path.join(sample_path, "remaining_configurations.json"), "r") as f:
-        test = pd.DataFrame(json.load(f))
+    sampling_cache = CacheHandler(sampling_run_id)
 
-    with mlflow.start_run():
+    train = pd.DataFrame(sampling_cache.retrieve(
+        "sampled_configurations.json"))
+
+    test = pd.DataFrame(sampling_cache.retrieve(
+        "remaining_configurations.json"))
+
+    with mlflow.start_run() as run:
+        model_cache = CacheHandler(run.info.run_id)
         model = _model(
             train,
             method,

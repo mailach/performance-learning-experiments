@@ -12,6 +12,14 @@ entry_points:
       method: method
     command: "python sampling.py --system_run_id={system_run_id} --n={n} --method={method}"
 
+  learning:
+    parameters:
+      sampling_run_id: sampling_run_id
+      method: method
+      min_samples_split: { type: int, default: 2 }
+      min_samples_leaf: { type: ing, default: 1 }
+    command: "python learning.py --sampling_run_id={sampling_run_id} --method={method} --min_samples_split={min_samples_split} --min_samples_leaf={min_samples_leaf}"
+
   main:
     parameters:
       param_file: { type: str, default: run.yaml }
