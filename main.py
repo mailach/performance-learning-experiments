@@ -32,7 +32,7 @@ def _run_or_load(entrypoint: str, params: dict[str, str], use_cache: bool = True
             parameters=params,
             experiment_name=entrypoint,
 
-        )
+        ).run_id
 
     return run_id
 
@@ -57,7 +57,7 @@ def _sample(params: dict[str, str]) -> str:
 def _load_system(params: dict[str, str], param_file: str) -> str:
     logging.info(f"Load system {params['parameter']['system']}")
     if not params["local"]["run_id"]:
-        _run_or_load("systems", {"param_file": param_file}, use_cache=False)
+        return _run_or_load("systems", {"param_file": param_file}, use_cache=False)
     else:
         dir = _load_and_cache("system", run_id=params["local"]["run_id"])
         return params["local"]["run_id"]
@@ -74,9 +74,11 @@ def workflow(param_file: str):
     # are documented by each step's .py file.
     logging.info("Start execution of workflow")
     with mlflow.start_run() as active_run:
-        system_run_id = _load_system(params["system"], param_file)
+        params["sampling"]["system_run_id"] = _load_system(
+            params["system"], param_file)
         # mlflow.log_params(params["parameter"])
-        sampling_run_id = _sample(params["sampling"])
+        logging.info(f"System run id: {params['sampling']}")
+        sampling_run_id = _run_or_load("sampling", params["sampling"])
 
 
 if __name__ == "__main__":

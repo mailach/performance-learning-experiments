@@ -46,13 +46,18 @@ def sample(n: int, method: str, system_run_id: str):
 
         sampling_cache = CacheHandler(run.info.run_id)
         system_cache = CacheHandler(system_run_id)
+        logging.info(
+            f"Initialized cache for system at {system_cache.cache_dir}")
+        logging.info(
+            f"Initialized cache for sampling at {sampling_cache.cache_dir}")
 
         if method == "true_random":
             logging.info("Sampling using 'true random'.")
             logging.warning(
                 "Only use this method when all valid configurations are available."
             )
-            configurations = system_cache.load("measurements.json")
+            configurations = system_cache.retrieve("measurements_oh.json")
+            logging.info(f"Loaded configurations {configurations}")
             sampled_configs, remaining_configs = _true_random(
                 configurations, int(n))
 

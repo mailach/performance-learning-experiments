@@ -7,10 +7,10 @@ entry_points:
 
   sampling:
     parameters:
-      data_dir: data_dir
+      system_run_id: system_run_id
       n: n
       method: method
-    command: "python sampling.py --data_dir={data_dir} --n={n} --method={method}"
+    command: "python sampling.py --system_run_id={system_run_id} --n={n} --method={method}"
 
   main:
     parameters:

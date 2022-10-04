@@ -9,7 +9,7 @@ from utils.exceptions import handle_exception
 
 class CacheHandler:
 
-    @handle_exception("Unable to instanciate CachHandler.")
+    @handle_exception("Unable to instanciate CacheHandler.")
     def __init__(self, run_id: str, artifact_path: str = None) -> None:
         self._temp_dir = tempfile.gettempdir()
         self.cache_dir = os.path.join(self._temp_dir, run_id)
@@ -39,20 +39,26 @@ class CacheHandler:
             with open(artifact_file, "w") as f:
                 f.write(artifact)
 
-    @handle_exception("Unable to retrieve artifact from cache.")
-    def _load_artifact(self, file: str) -> any:
-        logging.info(f"Retrieve artifact {file} from cache...")
-        artifact_file = os.path.join(self.cache_dir, file)
-
-        if ".xml" in file:
-            return ET.parse(artifact_file)
-        else:
-            with open(artifact_file, "r") as f:
-                return json.load(f)
-
     def save(self, artifacts: dict[str, any]) -> None:
         for id, artifact in artifacts.items():
             self._save_artifact(id, artifact)
 
-    def retrieve(self, identifiers: list) -> dict[str, any]:
-        return {id: self._load_artifact(id) for id in identifiers}
+    @handle_exception("Unable to retrieve artifact from cache.")
+    def _load_artifact(self, file: str) -> any:
+        logging.info(f"Retrieve artifact {file} from cache...")
+        artifact_file = os.path.join(self.cache_dir, self._artifact_path,
+                                     file) if self._artifact_path else os.path.join(self.cache_dir, file)
+
+        if ".xml" in file:
+            artifact = ET.parse(artifact_file)
+        else:
+            with open(artifact_file, "r") as f:
+                artifact = json.load(f)
+        return artifact
+
+    def retrieve(self, ids: (list | str)) -> any:
+        if isinstance(ids, list):
+            artifact = {id: self._load_artifact(id) for id in ids}
+        else:
+            artifact = self._load_artifact(ids)
+        return artifact
