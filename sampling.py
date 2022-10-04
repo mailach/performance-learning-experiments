@@ -57,7 +57,6 @@ def sample(n: int, method: str, system_run_id: str):
                 "Only use this method when all valid configurations are available."
             )
             configurations = system_cache.retrieve("measurements_oh.json")
-            logging.info(f"Loaded configurations {configurations}")
             sampled_configs, remaining_configs = _true_random(
                 configurations, int(n))
 
