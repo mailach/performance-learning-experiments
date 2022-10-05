@@ -1,6 +1,3 @@
-import logging
-import json
-import os
 import click
 
 
@@ -10,10 +7,21 @@ import mlflow.sklearn
 import pandas as pd
 from sklearn import tree
 
+import logging
+from rich.logging import RichHandler
+
+
 from utils.caching import CacheHandler
 
-from learning.models import cart
+from learning.models import cart, LearnerFactory, Learner
 from learning.metrics import prediction_fault_rate
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="LEARNING    %(message)s",
+    handlers=[RichHandler()],
+)
 
 
 # minbucket = minimum sample size for any leaf = min_samples_leaf
@@ -40,10 +48,9 @@ def _log_metrics(vals: pd.Series, metric: str) -> None:
     )
 
 
-def _evaluate(model, test: pd.DataFrame) -> None:
+def _evaluate(model: Learner, test: pd.DataFrame) -> None:
     fr = prediction_fault_rate(
-        test["measured_value"], model.predict(
-            test.drop("measured_value", axis=1))
+        test["measured_value"], model.predict(test.drop("measured_value", axis=1))
     )
     _log_metrics(fr, "fault_rate")
 
@@ -84,24 +91,24 @@ def learning(
 
     sampling_cache = CacheHandler(sampling_run_id)
 
-    train = pd.DataFrame(sampling_cache.retrieve(
-        "sampled_configurations.json"))
+    train = pd.DataFrame(sampling_cache.retrieve("sampled_configurations.json"))
+    train_Y = train["measured_value"]
+    train_X = train.drop("measured_value", axis=1)
 
-    test = pd.DataFrame(sampling_cache.retrieve(
-        "remaining_configurations.json"))
+    test = pd.DataFrame(sampling_cache.retrieve("remaining_configurations.json"))
 
     with mlflow.start_run() as run:
         model_cache = CacheHandler(run.info.run_id)
-        model = _model(
-            train,
-            method,
+        learner = LearnerFactory(method)
+        learner.set_parameters(
             {
                 "min_samples_split": min_samples_split,
                 "min_samples_leaf": min_samples_leaf,
-            },
+            }
         )
-
-        _evaluate(model, test)
+        learner.fit(train_X, train_Y)
+        logging.info(f"Log model to registry and save to cache {model_cache.cache_dir}")
+        learner.log(model_cache.cache_dir)
 
 
 if __name__ == "__main__":
