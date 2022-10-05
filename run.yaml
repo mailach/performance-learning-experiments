@@ -10,7 +10,7 @@ system:
     n_valid_configs: 192
     link: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
   local:
-    run_id: be4966d0b9b6443fa3e36b247cfe9062
+    run_id: False
     data_dir: data/Apache/2012
     shema: "shema2015"
 sampling:

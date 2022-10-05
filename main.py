@@ -21,7 +21,9 @@ logging.basicConfig(
 )
 
 
-def _run_or_load(entrypoint: str, params: dict[str, str], use_cache: bool = True) -> str:
+def _run_or_load(
+    entrypoint: str, params: dict[str, str], use_cache: bool = True
+) -> str:
     run_id = get_run_if_exists(entrypoint, params) if use_cache else False
 
     if run_id:
@@ -34,15 +36,12 @@ def _run_or_load(entrypoint: str, params: dict[str, str], use_cache: bool = True
             entry_point=entrypoint,
             parameters=params,
             experiment_name=entrypoint,
-
         ).run_id
 
     return run_id
 
 
-def _load_and_cache(
-    experiment_name: str, run_id: str = None
-) -> None:
+def _load_and_cache(experiment_name: str, run_id: str = None) -> None:
 
     cache = CacheHandler(run_id)
     if not cache.existing_cache:
@@ -52,9 +51,9 @@ def _load_and_cache(
         logging.info(f"Use existing cache for run {run_id}")
 
 
-def _sample(params: dict[str, str]) -> str:
-
-    pass
+def _log_params(prefix: str, params: dict[str, str]) -> None:
+    params = {prefix + "_" + key: value for key, value in params.items()}
+    mlflow.log_params(params)
 
 
 def _load_system(params: dict[str, str], param_file: str) -> str:
@@ -66,8 +65,8 @@ def _load_system(params: dict[str, str], param_file: str) -> str:
         return params["local"]["run_id"]
 
 
-@ click.command()
-@ click.option("--param_file", default="run.yaml")
+@click.command()
+@click.option("--param_file", default="run.yaml")
 def workflow(param_file: str):
     logging.info("Loading parameters...")
     with open(param_file, "r") as f:
@@ -75,6 +74,9 @@ def workflow(param_file: str):
 
     logging.info("Start execution of workflow as new mlflow run...")
     with mlflow.start_run() as active_run:
+        _log_params("system", params["system"]["parameter"])
+        _log_params("sampling", params["sampling"])
+        _log_params("learning", params["learning"])
 
         system_run_id = _load_system(params["system"], param_file)
 
@@ -83,6 +85,14 @@ def workflow(param_file: str):
 
         params["learning"]["sampling_run_id"] = sampling_run_id
         learning_run_id = _run_or_load("learning", params["learning"])
+
+        mlflow.log_params(
+            {
+                "system_run_id": system_run_id,
+                "sampling_run_id": sampling_run_id,
+                "learning_run_id": learning_run_id,
+            }
+        )
 
 
 if __name__ == "__main__":
