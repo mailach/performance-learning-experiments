@@ -1,12 +1,6 @@
 import click
 
-
-import mlflow
-import mlflow.sklearn
-from mlflow.artifacts import download_artifacts
-
 import pandas as pd
-from sklearn import tree
 
 import logging
 from rich.logging import RichHandler
