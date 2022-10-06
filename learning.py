@@ -1,4 +1,5 @@
 import click
+import os
 
 
 import mlflow
@@ -35,9 +36,10 @@ logging.basicConfig(
 
 # min_samples_leaf = min_samples_leaf, min_samples_split=min_samples_split
 
-
-# def _prediction_accuracy(Y, Y_hat):
-#    return 1 - _prediction_fault_rate(Y, Y_hat)
+def _predict_on_test(learner: Learner, test: pd.DataFrame):
+    pred = pd.Series(learner.predict(test.drop("measured_value", axis=1)))
+    pred.name = "predicted"
+    return pd.concat([pred, test["measured_value"]], axis=1)
 
 
 @click.command(
@@ -78,9 +80,17 @@ def learning(
             }
         )
         learner.fit(train_X, train_Y)
+
         logging.info(
-            f"Log model to registry and save to cache {model_cache.cache_dir}")
+            f"Log model and save to cache {model_cache.cache_dir}")
+
         learner.log(model_cache.cache_dir)
+
+        logging.info("Predict test set and save to cache.")
+        prediction = _predict_on_test(learner, test)
+        model_cache.save({"predicted.json": prediction.to_dict("records")})
+        mlflow.log_artifact(os.path.join(
+            model_cache.cache_dir, "predicted.json"), "")
 
 
 if __name__ == "__main__":
