@@ -1,7 +1,5 @@
 import logging
 import random
-import json
-import os
 import mlflow
 import click
 
@@ -64,7 +62,6 @@ def sample(n: int, method: str, system_run_id: str):
             logging.error("Sampling method not implemented yet.")
             raise NotImplementedError
 
-        # Generate cache dir and save sampled configurations
         logging.info(f"Save sampled configurations to cache")
         sampling_cache.save(
             {
@@ -73,9 +70,7 @@ def sample(n: int, method: str, system_run_id: str):
             }
         )
 
-        # log cache as parameter
         mlflow.log_artifact(sampling_cache.cache_dir, "artficacts")
-        # mlflow.log_artifact(remain_configs_file, "remaining_configurations")
 
 
 if __name__ == "__main__":

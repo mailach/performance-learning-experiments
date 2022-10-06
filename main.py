@@ -6,11 +6,9 @@ import logging
 from rich.logging import RichHandler
 
 import mlflow
-from mlflow.tracking import MlflowClient
 from mlflow.artifacts import download_artifacts
 
 from utils.runs import get_run_if_exists
-from utils.exceptions import handle_exception
 from utils.caching import CacheHandler
 
 

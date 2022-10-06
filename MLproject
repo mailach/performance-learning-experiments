@@ -30,6 +30,4 @@ entry_points:
   main:
     parameters:
       param_file: { type: str, default: run.yaml }
-      # sampling_method: { type: str, default: true_random }
-      # sampling_n: { type: int, default: 10 }
     command: "python main.py --param_file={param_file}"

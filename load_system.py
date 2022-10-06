@@ -26,25 +26,6 @@ logging.basicConfig(
     help="Imports feature model data into standard format and saves it as artifacts to MLFlow server."
 )
 @click.option("--param_file", default="run.yaml")
-# @click.option("--data_dir")
-# @click.option("--system", default=None)
-# @click.option("--domain", default=None)
-# @click.option("--year", default=None)
-# @click.option("--authors", default=None)
-# @click.option("--target", default=None)
-# @click.option("--n_features_bin", default=0)
-# @click.option("--shema", default="shema2015")
-# def load_system(
-#     data_dir: str,
-#     system: str,
-#     domain: str,
-#     year: str,
-#     authors: str,
-#     target: str,
-#     n_features_bin: int,
-#     shema: str,
-# ) -> None:
-# parameters to be tracked by mlflow
 def load_system(
     param_file: str,
 ) -> None:

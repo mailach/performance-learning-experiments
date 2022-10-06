@@ -14,8 +14,7 @@ from rich.logging import RichHandler
 
 from utils.caching import CacheHandler
 
-from learning.models import cart, LearnerFactory, Learner
-from learning.metrics import prediction_fault_rate
+from learning.models import LearnerFactory, Learner
 
 
 logging.basicConfig(
@@ -70,7 +69,6 @@ def learning(
     logging.info("Start learning from sampled configurations.")
 
     sampling_cache = CacheHandler(sampling_run_id)
-
     train_X, train_Y = _load_data(
         "sampled_configurations.json", sampling_cache)
     test_X, test_Y = _load_data(

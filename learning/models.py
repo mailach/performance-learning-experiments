@@ -105,14 +105,3 @@ def LearnerFactory(method: str) -> Learner:
     }
 
     return learners[method]()
-
-
-def cart(train: pd.DataFrame, cart_args: dict[str, int]):
-    logging.info("Learning using CART.")
-
-    Y = train["measured_value"]
-    X = train.drop("measured_value", axis=1)
-
-    model = DecisionTreeRegressor(**cart_args)
-    model.fit(X, Y)
-    return model
