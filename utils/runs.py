@@ -1,12 +1,22 @@
 import logging
 import tempfile
-from typing import Literal
+from typing import Literal, Sequence
 
 import mlflow
 from mlflow.tracking import MlflowClient
 from mlflow.utils import mlflow_tags
 from mlflow.entities import Run, Experiment
 from mlflow.artifacts import download_artifacts
+
+
+def update_metrics(run_id: str, metric: dict[str, any]):
+    with mlflow.start_run(run_id):
+        mlflow.log_metrics(metric)
+
+
+def update_params(run_id: str, metric: dict[str, any]):
+    with mlflow.start_run(run_id):
+        mlflow.log_params(metric)
 
 
 def _find_or_create_exp_id(entrypoint, client):
@@ -42,3 +52,12 @@ def get_run_if_exists(entrypoint: str, parameters: dict[str, any]) -> (str | Lit
         experiment_names=[entrypoint], filter_string=filter_string
     )
     return runs["run_id"][0] if not runs.empty else False
+
+
+def get_all_runs(entrypoint: str, parameters: dict[str, any]) -> (Sequence[str] | Literal[False]):
+
+    filter_string = _generate_filter_string(parameters)
+    runs = mlflow.search_runs(
+        experiment_names=[entrypoint], filter_string=filter_string
+    )
+    return list(runs["run_id"]) if not runs.empty else False

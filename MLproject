@@ -14,11 +14,18 @@ entry_points:
 
   learning:
     parameters:
+      workflow_id: workflow_id
       sampling_run_id: sampling_run_id
       method: method
       min_samples_split: { type: int, default: 2 }
       min_samples_leaf: { type: ing, default: 1 }
-    command: "python learning.py --sampling_run_id={sampling_run_id} --method={method} --min_samples_split={min_samples_split} --min_samples_leaf={min_samples_leaf}"
+    command: "python learning.py --workflow_id={workflow_id} --sampling_run_id={sampling_run_id} --method={method} --min_samples_split={min_samples_split} --min_samples_leaf={min_samples_leaf}"
+
+  evaluation:
+    parameters:
+      sampling_run_id: sampling_run_id
+      workflow_id: workflow_id
+    command: "python evaluation.py --workflow_id={workflow_id} --sampling_run_id={sampling_run_id}"
 
   main:
     parameters:
