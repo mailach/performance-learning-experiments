@@ -24,7 +24,6 @@ logging.basicConfig(
 )
 
 
-
 def _predict_on_test(learner: Learner, test_X: pd.DataFrame, test_Y: pd.Series):
     pred = pd.Series(learner.predict(test_X))
     pred.name = "predicted"
@@ -36,6 +35,13 @@ def _load_data(data_file: str, cache: CacheHandler):
     Y = data["measured_value"]
     X = data.drop("measured_value", axis=1)
     return X, Y
+
+
+hyperparams = {
+    "svr": ["epsilon", "coef0", "shrinking", "tol"],
+    "rf": ["random_state", "max_features", "n_estimators", "min_samples_leaf"],
+    "cart": ["min_samples_split", "min_samples_leaf"],
+}
 
 
 @click.command(
@@ -50,15 +56,25 @@ def _load_data(data_file: str, cache: CacheHandler):
 @click.option("--workflow_id")
 @click.option("--min_samples_split", type=int, default=2)
 @click.option("--min_samples_leaf", type=int, default=1)
+@click.option("--c", type=float)
+@click.option("--epsilon", type=float)
+@click.option("--shrinking", type=bool)
+@click.option("--shrinking", type=float)
 def learning(
     sampling_run_id: str,
     workflow_id: str,
     method: str,
     min_samples_split: int,
     min_samples_leaf: int,
+    c: float,
+    epsilon: float,
+    shrinking: bool,
+    tol: float,
 ):
 
     logging.info("Start learning from sampled configurations.")
+    params = {k: v for k, v in locals().items() if k in hyperparams[method]}
+    logging.error(locals())
 
     sampling_cache = CacheHandler(sampling_run_id)
     train_X, train_Y = _load_data("sampled_configurations.json", sampling_cache)
@@ -67,12 +83,8 @@ def learning(
     with mlflow.start_run() as run:
         model_cache = CacheHandler(run.info.run_id)
         learner = LearnerFactory(method)
-        learner.set_parameters(
-            {
-                "min_samples_split": min_samples_split,
-                "min_samples_leaf": min_samples_leaf,
-            }
-        )
+        logging.info(f"Use hyperparameter: {params}")
+        learner.set_parameters(params)
         learner.fit(train_X, train_Y)
 
         logging.info(f"Log model and save to cache {model_cache.cache_dir}")

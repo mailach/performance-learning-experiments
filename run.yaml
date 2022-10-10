@@ -17,7 +17,7 @@ sampling:
   method: true_random
   n: 12
 learning:
-  method: rf
+  method: svr
   cart:
     min_samples_split: 2
     min_samples_leaf: 1
@@ -26,3 +26,8 @@ learning:
     max_features: 1.0
     n_estimators: 150
     min_samples_leaf: 1
+  svr:
+    c: 1.0
+    epsilon: 0.1
+    shrinking: True
+    tol: 0.001

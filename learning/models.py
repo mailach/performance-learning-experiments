@@ -10,6 +10,7 @@ from abc import ABC, abstractmethod
 from sklearn import tree
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.svm import SVR
 
 from matplotlib import pyplot as plt
 
@@ -109,9 +110,32 @@ class RFLearner(Learner):
         self.model = mlflow.sklearn.load_model(cache_dir)
 
 
-class SvmLearner(Learner):
-    def __init__():
-        raise NotImplementedError
+# c
+# epsilon
+# coef0
+# shrinking
+# tol
+class SvrLearner(Learner):
+    def set_parameters(self, params: dict[str, any]) -> None:
+        self.model = SVR(**params)
+
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+
+    def predict(self, X: pd.DataFrame) -> pd.Series:
+        return self.model.predict(X)
+
+    def log(self, cache_dir) -> None:
+        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        mlflow.sklearn.log_model(
+            sk_model=self.model,
+            artifact_path="",
+            registered_model_name="SVR",
+        )
+        mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
+
+    def load(self, cache_dir: str) -> None:
+        self.model = mlflow.sklearn.load_model(cache_dir)
 
 
 class KrrLearner(Learner):
@@ -135,7 +159,7 @@ def LearnerFactory(method: str) -> Learner:
         "cart": CARTLearner,
         "rf": RFLearner,
         "mr": MrLearner,
-        "svm": SvmLearner,
+        "svr": SvrLearner,
         "krr": KrrLearner,
         "knn": KnnLearner,
     }
