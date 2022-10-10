@@ -17,6 +17,12 @@ sampling:
   method: true_random
   n: 12
 learning:
-  method: cart
-  min_samples_split: 2
-  min_samples_leaf: 1
+  method: rf
+  cart:
+    min_samples_split: 2
+    min_samples_leaf: 1
+  rf:
+    random_state: 1
+    max_features: 1.0
+    n_estimators: 150
+    min_samples_leaf: 1

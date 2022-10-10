@@ -32,6 +32,18 @@ class Learner(ABC):
         pass
 
 
+# minbucket = minimum sample size for any leaf = min_samples_leaf
+# minsplit = minimum sample size of a segment before it is used to further split = min_samples_split
+# |S| = size of input sample, my is 100
+
+# if |S| <= 100 -> minbucket = floor(|s|/10 + 1/2) & minsplit = 2 * minbucket
+# else: minsplit = floor(|s|/10 + 1/2) and minbucket = floor(minsplit/2)
+# minimum minbucket = 2
+# minimum minsplit = 4
+
+# min_samples_leaf = min_samples_leaf, min_samples_split=min_samples_split
+
+
 class CARTLearner(Learner):
     def set_parameters(self, params: dict[str, any]) -> None:
         self.model = DecisionTreeRegressor(**params)
@@ -58,13 +70,20 @@ class CARTLearner(Learner):
 
     def _visualize(self, cache_dir) -> None:
         fig = plt.figure(figsize=(25, 20))
-        tree.plot_tree(self.model,
-                       feature_names=self.feature_names,
-                       # class_names=iris.target_names,
-                       filled=True)
+        tree.plot_tree(
+            self.model,
+            feature_names=self.feature_names,
+            # class_names=iris.target_names,
+            filled=True,
+        )
 
-        mlflow.log_figure(
-            figure=fig, artifact_file="decistion_tree.png")
+        mlflow.log_figure(figure=fig, artifact_file="decistion_tree.png")
+
+
+# min samples leaf The minimal number of configurations required in each leaf node.
+# random state The seed that is used in the random number generator.
+# n estimators The number of trees in the forest.
+# max features The number of features to consider when looking for the best split:
 
 
 class RFLearner(Learner):

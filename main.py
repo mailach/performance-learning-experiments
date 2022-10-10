@@ -72,21 +72,27 @@ def workflow(param_file: str):
 
     logging.info("Start execution of workflow as new mlflow run...")
     with mlflow.start_run() as active_run:
+
+        learning_params = {"method": params["learning"]["method"]}
+        learning_params.update(params["learning"][learning_params["method"]])
+
         _log_params("system", params["system"]["parameter"])
         _log_params("sampling", params["sampling"])
-        _log_params("learning", params["learning"])
+        _log_params("learning", learning_params)
 
         system_run_id = _load_system(params["system"], param_file)
 
         params["sampling"]["system_run_id"] = system_run_id
         sampling_run_id = _run_or_load("sampling", params["sampling"])
 
-        params["learning"]["sampling_run_id"] = sampling_run_id
-        params["learning"]["workflow_id"] = active_run.info.run_id
-        learning_run_id = _run_or_load("learning", params["learning"])
+        learning_params["sampling_run_id"] = sampling_run_id
+        learning_params["workflow_id"] = active_run.info.run_id
+        learning_run_id = _run_or_load("learning", learning_params)
 
-        evaluation_run_id = _run_or_load("evaluation", {
-                                         "workflow_id": active_run.info.run_id, "sampling_run_id": sampling_run_id})
+        evaluation_run_id = _run_or_load(
+            "evaluation",
+            {"workflow_id": active_run.info.run_id, "sampling_run_id": sampling_run_id},
+        )
 
         mlflow.log_params(
             {
