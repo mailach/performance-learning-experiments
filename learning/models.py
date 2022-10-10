@@ -1,4 +1,5 @@
 import logging
+import os
 
 import pandas as pd
 import mlflow
@@ -6,8 +7,11 @@ import mlflow
 
 from abc import ABC, abstractmethod
 
+from sklearn import tree
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
+
+from matplotlib import pyplot as plt
 
 
 class Learner(ABC):
@@ -34,6 +38,7 @@ class CARTLearner(Learner):
 
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
         self.model.fit(X, Y)
+        self.feature_names = X.columns
 
     def predict(self, X: pd.DataFrame) -> pd.Series:
         return self.model.predict(X)
@@ -45,9 +50,21 @@ class CARTLearner(Learner):
             registered_model_name="CART",
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
+        logging.info("Visualize tree")
+        self._visualize(cache_dir)
 
     def load(self, cache_dir: str) -> None:
         self.model = mlflow.sklearn.load_model(cache_dir)
+
+    def _visualize(self, cache_dir) -> None:
+        fig = plt.figure(figsize=(25, 20))
+        tree.plot_tree(self.model,
+                       feature_names=self.feature_names,
+                       # class_names=iris.target_names,
+                       filled=True)
+
+        mlflow.log_figure(
+            figure=fig, artifact_file="decistion_tree.png")
 
 
 class RFLearner(Learner):

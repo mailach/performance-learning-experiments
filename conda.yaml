@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
+  - matplotlib=3.5.2
   - pip
   - pip:
       - scikit-learn==1.1.1
