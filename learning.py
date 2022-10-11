@@ -55,7 +55,6 @@ hyperparams = {
 )
 @click.option("--sampling_run_id")
 @click.option("--method")
-@click.option("--workflow_id")
 @click.option("--min_samples_split", type=int, default=2)
 @click.option("--min_samples_leaf", type=int, default=1)
 @click.option("--c", type=float)

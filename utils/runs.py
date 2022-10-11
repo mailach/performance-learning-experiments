@@ -45,7 +45,9 @@ def _generate_filter_string(params: dict[str, any]):
     return query
 
 
-def get_run_if_exists(entrypoint: str, parameters: dict[str, any]) -> (str | Literal[False]):
+def get_run_if_exists(
+    entrypoint: str, parameters: dict[str, any]
+) -> (str | Literal[False]):
 
     filter_string = _generate_filter_string(parameters)
     runs = mlflow.search_runs(
@@ -54,7 +56,20 @@ def get_run_if_exists(entrypoint: str, parameters: dict[str, any]) -> (str | Lit
     return runs["run_id"][0] if not runs.empty else False
 
 
-def get_all_runs(entrypoint: str, parameters: dict[str, any]) -> (Sequence[str] | Literal[False]):
+def get_all_runs(
+    entrypoint: str, parameters: dict[str, any]
+) -> (Sequence[str] | Literal[False]):
+
+    filter_string = _generate_filter_string(parameters)
+    runs = mlflow.search_runs(
+        experiment_names=[entrypoint], filter_string=filter_string
+    )
+    return list(runs["run_id"]) if not runs.empty else False
+
+
+def get_runs_by_tag(
+    entrypoint: str, tags: dict[str, any]
+) -> (Sequence[str] | Literal[False]):
 
     filter_string = _generate_filter_string(parameters)
     runs = mlflow.search_runs(

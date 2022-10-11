@@ -92,12 +92,11 @@ def workflow(param_file: str):
         sampling_run_id = _run_or_load("sampling", params["sampling"])
 
         learning_params["sampling_run_id"] = sampling_run_id
-        learning_params["workflow_id"] = active_run.info.run_id
         learning_run_id = _run_or_load("learning", learning_params)
 
         evaluation_run_id = _run_or_load(
             "evaluation",
-            {"workflow_id": active_run.info.run_id, "sampling_run_id": sampling_run_id},
+            {"workflow_id": active_run.info.run_id},
         )
 
         mlflow.log_params(

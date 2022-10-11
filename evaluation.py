@@ -1,4 +1,5 @@
 import click
+import mlflow
 
 import pandas as pd
 
@@ -27,25 +28,31 @@ def _evaluate(run_id: str) -> None:
     return fr
 
 
-@ click.command(
+@click.command(
     help="Evaluate one or multiple models from prior learning runs.",
     context_settings=dict(
         ignore_unknown_options=True,
         allow_extra_args=True,
     ),
-
-
 )
-@ click.option("--workflow_id")
+@click.option("--workflow_id")
 def evaluate(workflow_id: str):
 
-    learner_runs = get_all_runs("learning", {"workflow_id": workflow_id})
-    logging.info(f"Evaluate prediction from runs {learner_runs}")
+    learner_runs = mlflow.search_runs(
+        experiment_names=["learning"],
+        filter_string=f"tags.mlflow.parentRunId='{workflow_id}' AND attribute.status = 'FINISHED'",
+    )
+    if learner_runs.empty:
+        logging.error("No runs for evaluation found.")
+        raise Exception
+    else:
+        logging.info(f"Evaluate prediction from runs {learner_runs['run_id']}")
 
-    metrics = [{"id": run_id, "metrics": _evaluate(run_id)}
-               for run_id in learner_runs]
-    best = sorted(
-        metrics, key=lambda d: d['metrics']['mean_fault_rate'])[0]
+    metrics = [
+        {"id": run_id, "metrics": _evaluate(run_id)}
+        for run_id in learner_runs["run_id"]
+    ]
+    best = sorted(metrics, key=lambda d: d["metrics"]["mean_fault_rate"])[0]
 
     logging.info(f"Evaluated trained models. Best run: {best}")
 
