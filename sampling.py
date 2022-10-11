@@ -9,6 +9,7 @@ from rich.logging import RichHandler
 from typing import Sequence
 
 from utils.caching import CacheHandler
+from sampling.binary import SamplerFactory
 
 
 mlflow.set_experiment("sampling")
@@ -19,19 +20,6 @@ logging.basicConfig(
 )
 
 
-def _true_random(configs: Sequence, n: int) -> Sequence:
-
-    if len(configs) < n:
-        logging.error(
-            f"Desired sample size n={n} is smaller than number of available configurations n={len(configs)}. "
-        )
-        raise Exception("Valueerror for samplesize.")
-
-    sampled = [configs.pop(random.randrange(len(configs))) for _ in range(n)]
-
-    return sampled, configs
-
-
 @click.command(help="Sample from feature model or list of configurations.")
 @click.option("--system_run_id", default="")
 @click.option("--method", default="true_random")
@@ -40,14 +28,12 @@ def sample(n: int, method: str, system_run_id: str):
 
     logging.info("Start sampling from configuration space.")
 
+    sampler = SamplerFactory(method)
+
     with mlflow.start_run() as run:
 
         sampling_cache = CacheHandler(run.info.run_id)
         system_cache = CacheHandler(system_run_id)
-        logging.info(
-            f"Initialized cache for system at {system_cache.cache_dir}")
-        logging.info(
-            f"Initialized cache for sampling at {sampling_cache.cache_dir}")
 
         if method == "true_random":
             logging.info("Sampling using 'true random'.")
@@ -55,8 +41,8 @@ def sample(n: int, method: str, system_run_id: str):
                 "Only use this method when all valid configurations are available."
             )
             configurations = system_cache.retrieve("measurements_oh.json")
-            sampled_configs, remaining_configs = _true_random(
-                configurations, int(n))
+            sampler.load_fm(all_configs=configurations)
+            sampled_configs, remaining_configs = sampler.sample(int(n))
 
         else:
             logging.error("Sampling method not implemented yet.")
@@ -70,7 +56,7 @@ def sample(n: int, method: str, system_run_id: str):
             }
         )
 
-        mlflow.log_artifact(sampling_cache.cache_dir, "artficacts")
+        mlflow.log_artifact(sampling_cache.cache_dir, "")
 
 
 if __name__ == "__main__":
