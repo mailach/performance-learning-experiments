@@ -11,6 +11,8 @@ from sklearn import tree
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.kernel_ridge import KernelRidge
 
 from matplotlib import pyplot as plt
 
@@ -138,14 +140,60 @@ class SvrLearner(Learner):
         self.model = mlflow.sklearn.load_model(cache_dir)
 
 
+# alpha Parameter that aims at reducing the variance of the predictions.
+# kernel Defines the kind of kernel being considered (e.g., linear).
+# degree The degree of the polynomial kernel.
+# gamma
+
+
 class KrrLearner(Learner):
-    def __init__():
-        raise NotImplementedError
+    def set_parameters(self, params: dict[str, any]) -> None:
+        self.model = KernelRidge(**params)
+
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+
+    def predict(self, X: pd.DataFrame) -> pd.Series:
+        return self.model.predict(X)
+
+    def log(self, cache_dir) -> None:
+        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        mlflow.sklearn.log_model(
+            sk_model=self.model,
+            artifact_path="",
+            registered_model_name="KRR",
+        )
+        mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
+
+    def load(self, cache_dir: str) -> None:
+        self.model = mlflow.sklearn.load_model(cache_dir)
 
 
+# n_neighbors Number of configurations considered in a prediction.
+# weights Weights of the neighbor configurations.
+# algorithm Algorithm used to compute the neighbors.
+# p
 class KnnLearner(Learner):
-    def __init__():
-        raise NotImplementedError
+    def set_parameters(self, params: dict[str, any]) -> None:
+        self.model = KNeighborsRegressor(**params)
+
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+
+    def predict(self, X: pd.DataFrame) -> pd.Series:
+        return self.model.predict(X)
+
+    def log(self, cache_dir) -> None:
+        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        mlflow.sklearn.log_model(
+            sk_model=self.model,
+            artifact_path="",
+            registered_model_name="KNN",
+        )
+        mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
+
+    def load(self, cache_dir: str) -> None:
+        self.model = mlflow.sklearn.load_model(cache_dir)
 
 
 class MrLearner(Learner):

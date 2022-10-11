@@ -74,7 +74,13 @@ def workflow(param_file: str):
     with mlflow.start_run() as active_run:
 
         learning_params = {"method": params["learning"]["method"]}
-        learning_params.update(params["learning"][learning_params["method"]])
+        learning_params.update(
+            {
+                k: v
+                for k, v in params["learning"][learning_params["method"]].items()
+                if v
+            }
+        )
 
         _log_params("system", params["system"]["parameter"])
         _log_params("sampling", params["sampling"])

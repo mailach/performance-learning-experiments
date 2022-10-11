@@ -17,7 +17,7 @@ sampling:
   method: true_random
   n: 12
 learning:
-  method: svr
+  method: krr
   cart:
     min_samples_split: 2
     min_samples_leaf: 1
@@ -31,3 +31,13 @@ learning:
     epsilon: 0.1
     shrinking: True
     tol: 0.001
+  knn:
+    n_neighbors: 5
+    weights: "uniform"
+    algorithm: "auto"
+    p: 2
+  krr:
+    alpha: 1.0
+    kernel: "linear"
+    degree: 3
+    gamma: null

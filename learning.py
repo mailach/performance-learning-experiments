@@ -41,6 +41,8 @@ hyperparams = {
     "svr": ["epsilon", "coef0", "shrinking", "tol"],
     "rf": ["random_state", "max_features", "n_estimators", "min_samples_leaf"],
     "cart": ["min_samples_split", "min_samples_leaf"],
+    "knn": ["n_neighbors", "weights", "algorithm", "p"],
+    "krr": ["alpha", "kernel", "degree", "gamma"],
 }
 
 
@@ -59,22 +61,18 @@ hyperparams = {
 @click.option("--c", type=float)
 @click.option("--epsilon", type=float)
 @click.option("--shrinking", type=bool)
-@click.option("--shrinking", type=float)
-def learning(
-    sampling_run_id: str,
-    workflow_id: str,
-    method: str,
-    min_samples_split: int,
-    min_samples_leaf: int,
-    c: float,
-    epsilon: float,
-    shrinking: bool,
-    tol: float,
-):
-
+@click.option("--tol", type=float)
+@click.option("--n_neighbors", type=int)
+@click.option("--weigths", type=str)
+@click.option("--algorithm", type=str)
+@click.option("--p", type=int)
+@click.option("--kernel", type=str)
+@click.option("--degree", type=float)
+@click.option("--gamma", type=float, default=None)
+@click.option("--alpha", type=float)
+def learning(sampling_run_id: str, method: str, **kwargs):
     logging.info("Start learning from sampled configurations.")
-    params = {k: v for k, v in locals().items() if k in hyperparams[method]}
-    logging.error(locals())
+    params = {k: v for k, v in kwargs.items() if k in hyperparams[method]}
 
     sampling_cache = CacheHandler(sampling_run_id)
     train_X, train_Y = _load_data("sampled_configurations.json", sampling_cache)
