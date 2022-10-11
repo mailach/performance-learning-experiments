@@ -79,9 +79,9 @@ def learning(sampling_run_id: str, method: str, **kwargs):
 
     with mlflow.start_run() as run:
         model_cache = CacheHandler(run.info.run_id)
-        learner = LearnerFactory(method)
         logging.info(f"Use hyperparameter: {params}")
-        learner.set_parameters(params)
+        learner = LearnerFactory(method, params)
+
         learner.fit(train_X, train_Y)
 
         logging.info(f"Log model and save to cache {model_cache.cache_dir}")

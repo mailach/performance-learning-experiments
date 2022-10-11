@@ -19,10 +19,6 @@ from matplotlib import pyplot as plt
 
 class Learner(ABC):
     @abstractmethod
-    def set_parameters(self, params: dict[str, any]):
-        pass
-
-    @abstractmethod
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
         pass
 
@@ -48,7 +44,7 @@ class Learner(ABC):
 
 
 class CARTLearner(Learner):
-    def set_parameters(self, params: dict[str, any]) -> None:
+    def __init__(self, params: dict[str, any]) -> None:
         self.model = DecisionTreeRegressor(**params)
 
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
@@ -90,7 +86,7 @@ class CARTLearner(Learner):
 
 
 class RFLearner(Learner):
-    def set_parameters(self, params: dict[str, any]) -> None:
+    def __init__(self, params: dict[str, any]) -> None:
         self.model = RandomForestRegressor(**params)
 
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
@@ -118,7 +114,7 @@ class RFLearner(Learner):
 # shrinking
 # tol
 class SvrLearner(Learner):
-    def set_parameters(self, params: dict[str, any]) -> None:
+    def __init__(self, params: dict[str, any]) -> None:
         self.model = SVR(**params)
 
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
@@ -147,7 +143,7 @@ class SvrLearner(Learner):
 
 
 class KrrLearner(Learner):
-    def set_parameters(self, params: dict[str, any]) -> None:
+    def __init__(self, params: dict[str, any]) -> None:
         self.model = KernelRidge(**params)
 
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
@@ -174,7 +170,7 @@ class KrrLearner(Learner):
 # algorithm Algorithm used to compute the neighbors.
 # p
 class KnnLearner(Learner):
-    def set_parameters(self, params: dict[str, any]) -> None:
+    def __init__(self, params: dict[str, any]) -> None:
         self.model = KNeighborsRegressor(**params)
 
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
@@ -201,7 +197,7 @@ class MrLearner(Learner):
         raise NotImplementedError
 
 
-def LearnerFactory(method: str) -> Learner:
+def LearnerFactory(method: str, params: dict[str, any]) -> Learner:
 
     learners = {
         "cart": CARTLearner,
@@ -212,4 +208,4 @@ def LearnerFactory(method: str) -> Learner:
         "knn": KnnLearner,
     }
 
-    return learners[method]()
+    return learners[method](params)
