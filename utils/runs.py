@@ -65,14 +65,3 @@ def get_all_runs(
         experiment_names=[entrypoint], filter_string=filter_string
     )
     return list(runs["run_id"]) if not runs.empty else False
-
-
-def get_runs_by_tag(
-    entrypoint: str, tags: dict[str, any]
-) -> (Sequence[str] | Literal[False]):
-
-    filter_string = _generate_filter_string(parameters)
-    runs = mlflow.search_runs(
-        experiment_names=[entrypoint], filter_string=filter_string
-    )
-    return list(runs["run_id"]) if not runs.empty else False
