@@ -51,8 +51,8 @@ def sample(n: int, method: str, system_run_id: str):
         logging.info(f"Save sampled configurations to cache")
         sampling_cache.save(
             {
-                "sampled_configurations.json": sampled_configs,
-                "remaining_configurations.json": remaining_configs,
+                "train.json": sampled_configs,
+                "test.json": remaining_configs,
             }
         )
 

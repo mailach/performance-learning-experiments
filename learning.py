@@ -75,8 +75,8 @@ def learning(sampling_run_id: str, method: str, **kwargs):
     params = {k: v for k, v in kwargs.items() if k in hyperparams[method]}
 
     sampling_cache = CacheHandler(sampling_run_id)
-    train_X, train_Y = _load_data("sampled_configurations.json", sampling_cache)
-    test_X, test_Y = _load_data("remaining_configurations.json", sampling_cache)
+    train_X, train_Y = _load_data("train.json", sampling_cache)
+    test_X, test_Y = _load_data("test.json", sampling_cache)
 
     with mlflow.start_run() as run:
         model_cache = CacheHandler(run.info.run_id)
