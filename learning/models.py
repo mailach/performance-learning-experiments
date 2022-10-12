@@ -14,8 +14,11 @@ from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.linear_model import LinearRegression
+from sklearn.feature_selection import SequentialFeatureSelector
 
 from matplotlib import pyplot as plt
+
+from .feature_selection import ForwardFeatureSelector
 
 
 class Learner(ABC):
@@ -33,16 +36,13 @@ class Learner(ABC):
 
 
 class ScikitLearner(Learner):
-
-    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
-        self.model.fit(X, Y)
-        self.feature_names = X.columns
+    _feature_names = []
 
     def load(self, cache_dir: str) -> None:
         self.model = mlflow.sklearn.load_model(cache_dir)
 
     def predict(self, X: pd.DataFrame) -> pd.Series:
-        return self.model.predict(X)
+        return self.model.predict(X[self._feature_names])
 
     @abstractmethod
     def log(self, cache_dir: str) -> None:
@@ -64,6 +64,10 @@ class ScikitLearner(Learner):
 class CARTLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = DecisionTreeRegressor(**params)
+
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+        self.feature_names = X.columns
 
     def log(self, cache_dir) -> None:
         mlflow.sklearn.log_model(
@@ -97,6 +101,10 @@ class RFLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = RandomForestRegressor(**params)
 
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+        self.feature_names = X.columns
+
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
         mlflow.sklearn.log_model(
@@ -115,6 +123,10 @@ class RFLearner(ScikitLearner):
 class SvrLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = SVR(**params)
+
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+        self.feature_names = X.columns
 
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
@@ -136,6 +148,10 @@ class KrrLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = KernelRidge(**params)
 
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+        self.feature_names = X.columns
+
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
         mlflow.sklearn.log_model(
@@ -155,6 +171,10 @@ class KnnLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = KNeighborsRegressor(**params)
 
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+        self.feature_names = X.columns
+
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
         mlflow.sklearn.log_model(
@@ -168,6 +188,12 @@ class KnnLearner(ScikitLearner):
 class MrLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = LinearRegression(**params)
+
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        selector = ForwardFeatureSelector(self.model)
+        feature_set, error = selector.select(X.copy(), Y)
+        self.model.fit(feature_set, Y)
+        self._feature_names = feature_set.columns
 
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
