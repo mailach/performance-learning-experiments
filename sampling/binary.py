@@ -28,7 +28,7 @@ class TrueRandomSampler(Sampler):
             raise Exception("Valueerror for samplesize.")
 
         sampled = [
-            self.configs.pop(random.randrange(len(val_configs))) for _ in range(n)
+            val_configs.pop(random.randrange(len(val_configs))) for _ in range(n)
         ]
 
         return sampled, val_configs
