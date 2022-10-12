@@ -13,6 +13,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.kernel_ridge import KernelRidge
+from sklearn.linear_model import LinearRegression
 
 from matplotlib import pyplot as plt
 
@@ -31,6 +32,23 @@ class Learner(ABC):
         pass
 
 
+class ScikitLearner(Learner):
+
+    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
+        self.model.fit(X, Y)
+        self.feature_names = X.columns
+
+    def load(self, cache_dir: str) -> None:
+        self.model = mlflow.sklearn.load_model(cache_dir)
+
+    def predict(self, X: pd.DataFrame) -> pd.Series:
+        return self.model.predict(X)
+
+    @abstractmethod
+    def log(self, cache_dir: str) -> None:
+        pass
+
+
 # minbucket = minimum sample size for any leaf = min_samples_leaf
 # minsplit = minimum sample size of a segment before it is used to further split = min_samples_split
 # |S| = size of input sample, my is 100
@@ -43,16 +61,9 @@ class Learner(ABC):
 # min_samples_leaf = min_samples_leaf, min_samples_split=min_samples_split
 
 
-class CARTLearner(Learner):
+class CARTLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = DecisionTreeRegressor(**params)
-
-    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
-        self.model.fit(X, Y)
-        self.feature_names = X.columns
-
-    def predict(self, X: pd.DataFrame) -> pd.Series:
-        return self.model.predict(X)
 
     def log(self, cache_dir) -> None:
         mlflow.sklearn.log_model(
@@ -63,9 +74,6 @@ class CARTLearner(Learner):
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
         logging.info("Visualize tree")
         self._visualize(cache_dir)
-
-    def load(self, cache_dir: str) -> None:
-        self.model = mlflow.sklearn.load_model(cache_dir)
 
     def _visualize(self, cache_dir) -> None:
         fig = plt.figure(figsize=(25, 20))
@@ -85,15 +93,9 @@ class CARTLearner(Learner):
 # max features The number of features to consider when looking for the best split:
 
 
-class RFLearner(Learner):
+class RFLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = RandomForestRegressor(**params)
-
-    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
-        self.model.fit(X, Y)
-
-    def predict(self, X: pd.DataFrame) -> pd.Series:
-        return self.model.predict(X)
 
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
@@ -104,24 +106,15 @@ class RFLearner(Learner):
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
-    def load(self, cache_dir: str) -> None:
-        self.model = mlflow.sklearn.load_model(cache_dir)
-
 
 # c
 # epsilon
 # coef0
 # shrinking
 # tol
-class SvrLearner(Learner):
+class SvrLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = SVR(**params)
-
-    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
-        self.model.fit(X, Y)
-
-    def predict(self, X: pd.DataFrame) -> pd.Series:
-        return self.model.predict(X)
 
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
@@ -132,9 +125,6 @@ class SvrLearner(Learner):
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
-    def load(self, cache_dir: str) -> None:
-        self.model = mlflow.sklearn.load_model(cache_dir)
-
 
 # alpha Parameter that aims at reducing the variance of the predictions.
 # kernel Defines the kind of kernel being considered (e.g., linear).
@@ -142,15 +132,9 @@ class SvrLearner(Learner):
 # gamma
 
 
-class KrrLearner(Learner):
+class KrrLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = KernelRidge(**params)
-
-    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
-        self.model.fit(X, Y)
-
-    def predict(self, X: pd.DataFrame) -> pd.Series:
-        return self.model.predict(X)
 
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
@@ -161,23 +145,15 @@ class KrrLearner(Learner):
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
-    def load(self, cache_dir: str) -> None:
-        self.model = mlflow.sklearn.load_model(cache_dir)
-
-
 # n_neighbors Number of configurations considered in a prediction.
 # weights Weights of the neighbor configurations.
 # algorithm Algorithm used to compute the neighbors.
 # p
-class KnnLearner(Learner):
+
+
+class KnnLearner(ScikitLearner):
     def __init__(self, params: dict[str, any]) -> None:
         self.model = KNeighborsRegressor(**params)
-
-    def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
-        self.model.fit(X, Y)
-
-    def predict(self, X: pd.DataFrame) -> pd.Series:
-        return self.model.predict(X)
 
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
@@ -188,13 +164,19 @@ class KnnLearner(Learner):
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
-    def load(self, cache_dir: str) -> None:
-        self.model = mlflow.sklearn.load_model(cache_dir)
 
+class MrLearner(ScikitLearner):
+    def __init__(self, params: dict[str, any]) -> None:
+        self.model = LinearRegression(**params)
 
-class MrLearner(Learner):
-    def __init__():
-        raise NotImplementedError
+    def log(self, cache_dir) -> None:
+        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        mlflow.sklearn.log_model(
+            sk_model=self.model,
+            artifact_path="",
+            registered_model_name="MR",
+        )
+        mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
 
 def LearnerFactory(method: str, params: dict[str, any]) -> Learner:
@@ -206,6 +188,7 @@ def LearnerFactory(method: str, params: dict[str, any]) -> Learner:
         "svr": SvrLearner,
         "krr": KrrLearner,
         "knn": KnnLearner,
+        "mr": MrLearner
     }
 
     return learners[method](params)

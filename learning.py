@@ -43,6 +43,7 @@ hyperparams = {
     "cart": ["min_samples_split", "min_samples_leaf"],
     "knn": ["n_neighbors", "weights", "algorithm", "p"],
     "krr": ["alpha", "kernel", "degree", "gamma"],
+    "mr": [],
 }
 
 
@@ -91,7 +92,8 @@ def learning(sampling_run_id: str, method: str, **kwargs):
         logging.info("Predict test set and save to cache.")
         prediction = _predict_on_test(learner, test_X, test_Y)
         model_cache.save({"predicted.json": prediction.to_dict("records")})
-        mlflow.log_artifact(os.path.join(model_cache.cache_dir, "predicted.json"), "")
+        mlflow.log_artifact(os.path.join(
+            model_cache.cache_dir, "predicted.json"), "")
 
 
 if __name__ == "__main__":
