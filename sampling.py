@@ -41,8 +41,8 @@ def sample(n: int, method: str, system_run_id: str):
                 "Only use this method when all valid configurations are available."
             )
             configurations = system_cache.retrieve("measurements_oh.json")
-            sampler.load_fm(all_configs=configurations)
-            sampled_configs, remaining_configs = sampler.sample(int(n))
+            sampled_configs, remaining_configs = sampler.sample(
+                int(n), all_configs=configurations)
 
         else:
             logging.error("Sampling method not implemented yet.")
