@@ -45,7 +45,7 @@ class BinarySampler(Sampler):
 class PseudoRandomSampler(BinarySampler):
 
     def sample(self, n: int):
-        return cns.generate_configurations(n)
+        return self.cns.generate_configurations(n)
 
 
 class OptionWiseSampler(BinarySampler):
