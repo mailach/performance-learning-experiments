@@ -12,4 +12,4 @@ dependencies:
       - requests
       - click
       - rich
-      - z3-solver
+      - git+https://github.com/smba/pycosa-toolbox.git@main
