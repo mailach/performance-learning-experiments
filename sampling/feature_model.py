@@ -10,7 +10,7 @@ class ConfigurationSolver():
         self._solver_add_constraints()
         self.literals = [Bool(l) for l in features]
 
-    def _reset_solver(self):
+    def _reset(self):
         self.solver = Solver()
         self._solver_add_constraints()
 
@@ -37,7 +37,7 @@ class ConfigurationSolver():
             self.solver.add(
                 Or([p != v for p, v in [(v, model.evaluate(v, model_completion=True)) for v in self.literals]]))
 
-        self._reset_solver()
+        self._reset()
         if len(confs) < n:
             logging.warning(
                 f"Only {len(confs)} valid configurations where created instead of {n} requested.")
