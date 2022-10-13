@@ -4,7 +4,7 @@ from random import randrange
 from abc import ABC, abstractmethod
 from typing import Sequence
 
-from .feature_model import FeatureModel
+from .feature_model import FeatureModel, ConfigurationSolver
 
 
 class Sampler(ABC):
@@ -35,10 +35,17 @@ class BinarySampler(Sampler):
 
     def __init__(self, fm: FeatureModel):
         self.fm = fm
+        self.cns = ConfigurationSolver(fm.constraints, fm.features.keys())
 
     @abstractmethod
     def sample(n: int):
         pass
+
+
+class PseudoRandomSampler(BinarySampler):
+
+    def sample(self, n: int):
+        return cns.generate_configurations(n)
 
 
 class OptionWiseSampler(BinarySampler):
@@ -55,8 +62,10 @@ class NegativeOptionWiseSampler(BinarySampler):
 
 
 def BinarySamplerFactory(method: str, fm: FeatureModel):
-    samplers = {"optionwise": OptionWiseSampler,
-                "negativeoptionwise": NegativeOptionWiseSampler, }
+    samplers = {
+        "pr": PseudoRandomSampler,
+        "ow": OptionWiseSampler,
+        "now": NegativeOptionWiseSampler, }
     return samplers[method](fm)
 
 
