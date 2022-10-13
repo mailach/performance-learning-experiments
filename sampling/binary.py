@@ -59,7 +59,7 @@ class OptionWiseSampler(BinarySampler):
         configs = []
 
         for literal in self.cns.literals:
-            config = {str(l): 0 for l in self.cns.literals}
+            config = self.cns.get_minimal()
             config[str(literal)] = 1
             valid = self.cns.is_valid(config)
             while not valid:

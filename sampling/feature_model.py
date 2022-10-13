@@ -50,6 +50,11 @@ class ConfigurationSolver():
 
         return True if valid == sat else False
 
+    def get_minimal(self):
+        min = [c[0] for c in self._constraints if len(c) == 1 and c[0] != "-"]
+        config = {str(l): 1 if str(l) in min else 0 for l in self.literals}
+        return config
+
 
 class FeatureModel():
 
