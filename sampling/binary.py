@@ -4,6 +4,8 @@ from random import randrange
 from abc import ABC, abstractmethod
 from typing import Sequence
 
+from .feature_model import FeatureModel
+
 
 class Sampler(ABC):
 
@@ -29,11 +31,33 @@ class TrueRandomSampler(Sampler):
         return sampled, confs
 
 
-class BinaryOptionSampler(Sampler):
+class BinarySampler(Sampler):
+
+    def __init__(self, fm: FeatureModel):
+        self.fm = fm
 
     @abstractmethod
-    def load_fm():
+    def sample(n: int):
         pass
+
+
+class OptionWiseSampler(BinarySampler):
+    def sample(n: int):
+        pass
+
+
+class NegativeOptionWiseSampler(BinarySampler):
+    def __init__(self, fm: FeatureModel):
+        raise NotImplementedError
+
+    def sample(n: int):
+        pass
+
+
+def BinarySamplerFactory(method: str, fm: FeatureModel):
+    samplers = {"optionwise": OptionWiseSampler,
+                "negativeoptionwise": NegativeOptionWiseSampler, }
+    return samplers[method](fm)
 
 
 def SamplerFactory(method: str) -> Sampler:

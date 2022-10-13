@@ -1,7 +1,18 @@
-from z3 import Solver, Or, Bool, Not
+import logging
+
+from z3 import Solver, Or, Bool, Not, sat
 
 
-class FeatureModel():
+class ConfigurationSolver():
+    def __init__(self, constraints, features):
+        self.solver = Solver()
+        self._constraints = constraints
+        self._solver_add_constraints()
+        self.literals = [Bool(l) for l in features]
+
+    def _reset_solver(self):
+        self.solver = Solver()
+        self._solver_add_constraints()
 
     def _make_literal(self, literal: str):
         if literal[0] == "-":
@@ -9,30 +20,55 @@ class FeatureModel():
         else:
             return(Bool(literal))
 
-    def _solver_add_clauses(self):
-        for id, name in self.features.items():
-            self.solver.add(Or(self._make_literal(
-                "-" + id), self._make_literal(id)))
-
-    def _solver_add_features(self):
-        for constraint in self.constraints:
+    def _solver_add_constraints(self):
+        for constraint in self._constraints:
             self.solver.add(Or(*[self._make_literal(literal)
                             for literal in constraint]))
 
-    def _generate_solver(self):
-        self.solver = Solver()
+    def generate_configurations(self, n: int) -> list():
+        confs = []
+        while self.solver.check() == sat and len(confs) < n:
+            model = self.solver.model()
+            conf = {str(l): 0 for l in self.literals}
+            for l in self.literals:
+                if model.evaluate(l, model_completion=True):
+                    conf[str(l)] = 1
+            confs.append(conf)
+            self.solver.add(
+                Or([p != v for p, v in [(v, model.evaluate(v, model_completion=True)) for v in self.literals]]))
 
-        self._solver_add_features()
-        self._solver_add_clauses()
+        self._reset_solver()
+        if len(confs) < n:
+            logging.warning(
+                f"Only {len(confs)} valid configurations where created instead of {n} requested.")
+        return confs
 
-    def from_dimacs(self, dimacs: list):
+    def is_configuration_valid(config: dict[str: int]) -> bool:
+        pass
+
+
+class FeatureModel():
+
+    def __init__(self, dimacs=None, xml=None):
+        if dimacs:
+            self._from_dimacs(dimacs)
+        elif xml:
+            self._from_xml(xml)
+        else:
+            logging.error("You need to provider either dimacs or xml data")
+            raise Exception()
+
+    def _from_dimacs(self, dimacs: list) -> None:
         self.features = {line.split()[1]: line.split()[2]
                          for line in dimacs if line[0] == "c"}
 
-        self.constraints = [line.split()
+        self.constraints = []
+
+        self.constraints = [line.replace(" 0", "").split()
                             for line in dimacs if line[0] not in ["p", "c"]]
 
-        self._generate_solver()
+    def _from_xml(self, xml):
+        raise NotImplementedError
 
     def is_model(model):
         pass
