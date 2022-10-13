@@ -1,6 +1,6 @@
 import logging
 
-from z3 import Solver, Or, Bool, Not, sat
+from z3 import Solver, Or, Bool, Not, sat, And
 
 
 class ConfigurationSolver():
@@ -43,8 +43,11 @@ class ConfigurationSolver():
                 f"Only {len(confs)} valid configurations where created instead of {n} requested.")
         return confs
 
-    def is_configuration_valid(config: dict[str: int]) -> bool:
-        pass
+    def is_valid(self, config: dict[str: int]) -> bool:
+        c = [Bool(option) for option, ind in config.items() if ind == 1]
+        valid = self.solver.check(*c)
+
+        return True if valid == sat else False
 
 
 class FeatureModel():
