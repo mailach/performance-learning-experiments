@@ -9,7 +9,11 @@ class ConfigurationSolver():
         self._constraints = constraints
         self._solver_add_constraints()
         self.literals = [Bool(l) for l in features]
+        self.size = BitVec("size", len(self.literals) + 1)
         self.bitvec = self._constraints_to_bitvec()
+        self.mandatory = [c[0]
+                          for c in self._constraints if len(c) == 1]
+        self.optional = [f for f in features if f not in self.mandatory]
 
     def _reset(self):
         self.solver = Solver()
@@ -20,13 +24,15 @@ class ConfigurationSolver():
                 for clause in self._constraints]
 
     def _clause_to_bitvec(self, clause: list):
-        bitvec_size = BitVec("size",  len(self.literals) + 1)
         bitvec_rep = []
         for option in clause:
             option = int(option)
             enabled = 1 if option > 0 else 0
             bitvec_rep.append(Extract(abs(option), abs(
-                option), bitvec_size) == enabled)
+                option), self.size) == enabled)
+
+        bitvec_rep.append(Extract(0, 0, self.size) == 0)
+
         return bitvec_rep
 
     def _make_literal(self, literal: str):
