@@ -1,6 +1,6 @@
 import logging
 
-from z3 import Solver, Or, Bool, Not, sat, And
+from z3 import Solver, Or, Bool, Not, sat, And, Extract, BitVec
 
 
 class ConfigurationSolver():
@@ -9,10 +9,25 @@ class ConfigurationSolver():
         self._constraints = constraints
         self._solver_add_constraints()
         self.literals = [Bool(l) for l in features]
+        self.bitvec = self._constraints_to_bitvec()
 
     def _reset(self):
         self.solver = Solver()
         self._solver_add_constraints()
+
+    def _constraints_to_bitvec(self):
+        return [Or(self._clause_to_bitvec(clause))
+                for clause in self._constraints]
+
+    def _clause_to_bitvec(self, clause: list):
+        bitvec_size = BitVec("size",  len(self.literals) + 1)
+        bitvec_rep = []
+        for option in clause:
+            option = int(option)
+            enabled = 1 if option > 0 else 0
+            bitvec_rep.append(Extract(abs(option), abs(
+                option), bitvec_size) == enabled)
+        return bitvec_rep
 
     def _make_literal(self, literal: str):
         if literal[0] == "-":
@@ -54,6 +69,11 @@ class ConfigurationSolver():
         min = [c[0] for c in self._constraints if len(c) == 1 and c[0] != "-"]
         config = {str(l): 1 if str(l) in min else 0 for l in self.literals}
         return config
+
+    def mandatory(self, option: str):
+        mandatory = [c[0]
+                     for c in self._constraints if len(c) == 1]
+        return True if option in mandatory else False
 
 
 class FeatureModel():
