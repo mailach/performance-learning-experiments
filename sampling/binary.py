@@ -49,23 +49,27 @@ class PseudoRandomSampler(BinarySampler):
 
 
 class OptionWiseSampler(BinarySampler):
-    def _add_enabled_option(config: dict[str, int]):
-        for option in conig:
+    def _add_enabled_option(self, config: dict[str, int]):
+        for option in config:
             if config[option] == 0:
                 config[option] = 1
                 return config
 
-    def sample(self, n: int):
+    def sample(self, n=None):
         configs = []
 
         for literal in self.cns.literals:
             config = {str(l): 0 for l in self.cns.literals}
-            valid = False
+            config[str(literal)] = 1
+            valid = self.cns.is_valid(config)
             while not valid:
-                config[str(literal)] = 1
-                valid = True
-
-        pass
+                config = self._add_enabled_option(config)
+                if not config:
+                    break
+                valid = self.cns.is_valid(config)
+            if valid:
+                configs.append(config)
+        return configs
 
 
 class NegativeOptionWiseSampler(BinarySampler):

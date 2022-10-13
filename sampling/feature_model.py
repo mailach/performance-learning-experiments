@@ -45,6 +45,7 @@ class ConfigurationSolver():
 
     def is_valid(self, config: dict[str: int]) -> bool:
         c = [Bool(option) for option, ind in config.items() if ind == 1]
+        c += [Not(Bool(option))for option, ind in config.items() if ind == 0]
         valid = self.solver.check(*c)
 
         return True if valid == sat else False
