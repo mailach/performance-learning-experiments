@@ -92,8 +92,7 @@ def workflow(param_file: str):
         sampling_run_id = _run_or_load("sampling", params["sampling"])
 
         learning_params["sampling_run_id"] = sampling_run_id
-        learning_run_id = _run_or_load(
-            "learning", learning_params, use_cache=False)
+        learning_run_id = _run_or_load("learning", learning_params, use_cache=False)
 
         evaluation_run_id = _run_or_load(
             "evaluation",

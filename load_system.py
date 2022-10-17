@@ -39,10 +39,10 @@ def load_system(
         cache = CacheHandler(run.info.run_id)
 
         logging.info("Load feature model.")
-        fm = Fm_handler(local["data_dir"], local["shema"])
+        fm = Fm_handler(local["data_dir"])
 
         logging.info("Transform xml measurements to one-hot-encoded")
-        mh = Measurement_handler(local["data_dir"], fm.features)
+        mh = Measurement_handler(local["data_dir"], fm.binary)
 
         mlflow.log_params(params)
         cache.save(

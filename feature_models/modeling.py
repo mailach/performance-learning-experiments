@@ -1,8 +1,11 @@
 ## Feature model parser from xml
+from calendar import c
 import os
 from itertools import combinations
 import xml.etree.ElementTree as ET
-from typing import Sequence, Tuple
+from typing import Sequence, Tuple, final
+
+from feature_models.parsing import ParserFactory
 
 
 def _alternative(literals: Sequence[int]) -> Sequence[Sequence[int]]:
@@ -85,18 +88,49 @@ def _extract_features(
     return features, clauses
 
 
-def _generate_dimacs(features: dict[int, str], clauses: Sequence[Sequence[int]]) -> str:
-    lines = [f"c {str(k)} {v}" for k, v in features.items()]
-    lines += [f"p cnf {len(features)} {len(clauses)}"]
-    lines += [" ".join([str(c) for c in clause]) + " 0" for clause in clauses]
+def _constr_to_clauses(constraints, features):
+    final_constraints = []
+    print(features)
+    for constraint in constraints:
+        constraint = constraint.replace("!", "-")
+        for id, feat in features.items():
+            constraint = constraint.replace(feat["name"], str(id))
+        constraint = constraint.replace(" | ", " ")
+        constraint += " 0"
+        if constraint.count(" ") == 1:
+            mand = constraint.split(" ")[0]
+            final_constraints += [
+                f"{mand} -{str(id)} 0" for id in features.keys() if str(id) != mand
+            ]
+        final_constraints.append(constraint)
+
+    return list(set(final_constraints))
+
+
+def _generate_dimacs(features: dict[int, str], constranints: Sequence[str]) -> str:
+
+    lines = [
+        f"c {str(k)} {v['name']}" for k, v in features.items() if v["type"] == "bin"
+    ]
+    clauses = _constr_to_clauses(constranints, features)
+    lines += [f"p cnf {len(lines)} {len(clauses)}"]
+    lines += clauses
     return "\n".join(lines)
 
 
 class Fm_handler:
-    def __init__(self, data_dir: str, shema: str):
+    def __init__(self, data_dir: str):
         self.xml = ET.parse(os.path.join(data_dir, "fm.xml"))
-        self.features, self.clauses = _extract_features(self.xml, shema)
-        self.dimacs = _generate_dimacs(self.features, self.clauses)
+        parser = ParserFactory("splc")
+        self.features, self.constraints = parser.parse(self.xml)
+        self.binary = {
+            id: v["name"] for id, v in self.features.items() if v["type"] == "bin"
+        }
+        self.numeric = {
+            id: v["name"] for id, v in self.features.items() if v["type"] == "num"
+        }
+
+        self.dimacs = _generate_dimacs(self.features, self.constraints)
 
     def get_properties(self):
         return {"fm.xml": self.xml, "fm.dimacs": self.dimacs}
