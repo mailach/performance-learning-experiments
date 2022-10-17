@@ -1,6 +1,7 @@
 ## Feature model parser from xml
 from calendar import c
 import os
+from xmlschema import validate
 from itertools import combinations
 import xml.etree.ElementTree as ET
 from typing import Sequence, Tuple, final
@@ -118,10 +119,19 @@ def _generate_dimacs(features: dict[int, str], constranints: Sequence[str]) -> s
     return "\n".join(lines)
 
 
+def _get_schema(file):
+    try:
+        validate(file, "data/schema/splc.xsd")
+        return "splc"
+    except:
+        raise Exception
+
+
 class Fm_handler:
     def __init__(self, data_dir: str):
-        self.xml = ET.parse(os.path.join(data_dir, "fm.xml"))
-        parser = ParserFactory("splc")
+        xml_file = os.path.join(data_dir, "fm.xml")
+        parser = ParserFactory(_get_schema(xml_file))
+        self.xml = ET.parse(xml_file)
         self.features, self.constraints = parser.parse(self.xml)
         self.binary = {
             id: v["name"] for id, v in self.features.items() if v["type"] == "bin"

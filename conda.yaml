@@ -13,3 +13,4 @@ dependencies:
       - click
       - rich
       - git+https://github.com/smba/pycosa-toolbox.git@main
+      - xmlschema
