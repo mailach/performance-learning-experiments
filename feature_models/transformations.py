@@ -30,7 +30,7 @@ def _xml_measurements_to_onehot(
         try:
             config = [
                 f.strip()
-                for f in row.find(f'.//data[@columname="Configuration"]').text.split(
+                for f in row.find(f'.//data[@column="Configuration"]').text.split(
                     ","
                 )
                 if f.strip() != ""
@@ -39,7 +39,7 @@ def _xml_measurements_to_onehot(
                 _one_hot_encode(
                     config,
                     features,
-                    row.find(f'.//data[@columname="Measured Value"]').text,
+                    row.find(f'.//data[@column="Measured Value"]').text,
                 )
             )
         except Exception as e:
