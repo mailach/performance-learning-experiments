@@ -1,11 +1,10 @@
 import logging
-import os
+from abc import ABC, abstractmethod
+
 
 import pandas as pd
 import mlflow
 
-
-from abc import ABC, abstractmethod
 
 from sklearn import tree
 from sklearn.tree import DecisionTreeRegressor
@@ -14,14 +13,17 @@ from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.linear_model import LinearRegression
-from sklearn.feature_selection import SequentialFeatureSelector
 
 from matplotlib import pyplot as plt
 
-from .feature_selection import ForwardFeatureSelector
+from learning.feature_selection import ForwardFeatureSelector
 
 
 class Learner(ABC):
+    """Abstract class for Learning"""
+
+    model = None
+
     @abstractmethod
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
         pass
@@ -77,9 +79,9 @@ class CARTLearner(ScikitLearner):
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
         logging.info("Visualize tree")
-        self._visualize(cache_dir)
+        self._visualize()
 
-    def _visualize(self, cache_dir) -> None:
+    def _visualize(self) -> None:
         fig = plt.figure(figsize=(25, 20))
         tree.plot_tree(
             self.model,
@@ -106,7 +108,7 @@ class RFLearner(ScikitLearner):
         self.feature_names = X.columns
 
     def log(self, cache_dir) -> None:
-        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        logging.info("Log model to registry and save to cache %s", cache_dir)
         mlflow.sklearn.log_model(
             sk_model=self.model,
             artifact_path="",
@@ -129,7 +131,7 @@ class SvrLearner(ScikitLearner):
         self.feature_names = X.columns
 
     def log(self, cache_dir) -> None:
-        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        logging.info("Log model to registry and save to cache %s", cache_dir)
         mlflow.sklearn.log_model(
             sk_model=self.model,
             artifact_path="",
@@ -153,7 +155,7 @@ class KrrLearner(ScikitLearner):
         self.feature_names = X.columns
 
     def log(self, cache_dir) -> None:
-        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        logging.info("Log model to registry and save to cache %s", cache_dir)
         mlflow.sklearn.log_model(
             sk_model=self.model,
             artifact_path="",
@@ -177,7 +179,7 @@ class KnnLearner(ScikitLearner):
         self.feature_names = X.columns
 
     def log(self, cache_dir) -> None:
-        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        logging.info("Log model to registry and save to cache %s", cache_dir)
         mlflow.sklearn.log_model(
             sk_model=self.model,
             artifact_path="",
@@ -192,12 +194,12 @@ class MrLearner(ScikitLearner):
 
     def fit(self, X: pd.DataFrame, Y: pd.Series) -> None:
         selector = ForwardFeatureSelector(self.model)
-        feature_set, error = selector.select(X.copy(), Y)
+        feature_set, _ = selector.select(X.copy(), Y)
         self.model.fit(feature_set, Y)
         self.feature_names = feature_set.columns
 
     def log(self, cache_dir) -> None:
-        logging.info(f"Log model to registry and save to cache {cache_dir}")
+        logging.info("Log model to registry and save to cache %s", cache_dir)
         mlflow.sklearn.log_model(
             sk_model=self.model,
             artifact_path="",
@@ -215,7 +217,6 @@ def LearnerFactory(method: str, params: dict[str, any]) -> Learner:
         "svr": SvrLearner,
         "krr": KrrLearner,
         "knn": KnnLearner,
-        "mr": MrLearner,
     }
 
     return learners[method](params)
