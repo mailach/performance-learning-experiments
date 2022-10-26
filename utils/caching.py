@@ -9,10 +9,9 @@ from utils.exceptions import handle_exception
 
 class CacheHandler:
     @handle_exception("Unable to instanciate CacheHandler.")
-    def __init__(self, run_id: str, artifact_path: str = None) -> None:
+    def __init__(self, run_id: str) -> None:
         self._temp_dir = tempfile.gettempdir()
         self.cache_dir = os.path.join(self._temp_dir, run_id)
-        self._artifact_path = artifact_path
 
         if not os.path.exists(self.cache_dir):
             os.mkdir(self.cache_dir)
@@ -25,11 +24,7 @@ class CacheHandler:
     def _save_artifact(self, file: str, artifact: any) -> None:
         logging.info(f"Save artifact {file} to cache...")
 
-        artifact_file = (
-            os.path.join(self.cache_dir, self._artifact_path, file)
-            if self._artifact_path
-            else os.path.join(self.cache_dir, file)
-        )
+        artifact_file = os.path.join(self.cache_dir, file)
 
         if ".xml" in artifact_file:
             artifact.write(artifact_file)
@@ -54,11 +49,7 @@ class CacheHandler:
     @handle_exception("Unable to retrieve artifact from cache.")
     def _load_artifact(self, file: str) -> any:
         logging.info(f"Retrieve artifact {file} from cache...")
-        artifact_file = (
-            os.path.join(self.cache_dir, self._artifact_path, file)
-            if self._artifact_path
-            else os.path.join(self.cache_dir, file)
-        )
+        artifact_file = os.path.join(self.cache_dir, file)
 
         if ".xml" in file:
             artifact = ET.parse(artifact_file)
