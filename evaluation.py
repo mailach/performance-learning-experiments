@@ -21,7 +21,7 @@ logging.basicConfig(
 
 
 def _evaluate(run_id: str) -> None:
-    cache = CacheHandler(run_id)
+    cache = CacheHandler(run_id, new_run=False)
     pred = cache.retrieve("predicted.tsv")
     fr = prediction_fault_rate(pred["measured"], pred["predicted"])
     update_metrics(run_id, fr)

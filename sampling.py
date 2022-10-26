@@ -34,7 +34,7 @@ def sample(n: int, method: str, system_run_id: str):
     with mlflow.start_run() as run:
 
         sampling_cache = CacheHandler(run.info.run_id)
-        system_cache = CacheHandler(system_run_id)
+        system_cache = CacheHandler(system_run_id, new_run=False)
 
         if method == "true_random":
             logging.info("Sampling using 'true random'.")

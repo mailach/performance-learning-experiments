@@ -26,7 +26,7 @@ def _run_or_load(
 
     if run_id:
         logging.info(f"Use existing run {run_id} for entrypoint {entrypoint}")
-        _load_and_cache(entrypoint, run_id)
+        cache = CacheHandler(run_id, new_run=False)
     else:
         logging.info(f"Start new run for entrypoint {entrypoint}")
         run_id = mlflow.run(
@@ -39,16 +39,6 @@ def _run_or_load(
     return run_id
 
 
-def _load_and_cache(experiment_name: str, run_id: str = None) -> None:
-
-    cache = CacheHandler(run_id)
-    if not cache.existing_cache:
-        logging.info(f"Load artifacts for run {run_id} to cache")
-        download_artifacts(run_id=run_id, dst_path=cache.cache_dir)
-    else:
-        logging.info(f"Use existing cache for run {run_id}")
-
-
 def _log_params(prefix: str, params: dict[str, str]) -> None:
     params = {prefix + "_" + key: value for key, value in params.items()}
     mlflow.log_params(params)
@@ -59,7 +49,7 @@ def _load_system(params: dict[str, str], param_file: str) -> str:
     if not params["local"]["run_id"]:
         return _run_or_load("systems", {"param_file": param_file}, use_cache=False)
     else:
-        dir = _load_and_cache("system", run_id=params["local"]["run_id"])
+        cache = CacheHandler(params["local"]["run_id"], new_run=False)
         return params["local"]["run_id"]
 
 

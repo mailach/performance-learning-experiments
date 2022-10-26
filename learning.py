@@ -77,7 +77,7 @@ def learning(sampling_run_id: str, method: str, nfp: str, **kwargs):
     logging.info("Start learning from sampled configurations.")
     params = {k: v for k, v in kwargs.items() if k in hyperparams[method]}
 
-    sampling_cache = CacheHandler(sampling_run_id)
+    sampling_cache = CacheHandler(sampling_run_id, new_run=False)
     train_X, train_Y = _load_data("train.tsv", sampling_cache, nfp)
     test_X, test_Y = _load_data("test.tsv", sampling_cache, nfp)
 
