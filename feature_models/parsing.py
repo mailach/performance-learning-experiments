@@ -1,8 +1,8 @@
+import logging
 from abc import ABC, abstractmethod
 import xml.etree.ElementTree as ET
+
 import xmlschema
-import logging
-import os
 
 
 def _implication(option1, options):
@@ -13,31 +13,60 @@ def _exclusion(option1, options, optional=None):
     simple_exclusion = [f"!{option1} | !{opt}" for opt in options]
     if optional == "True":
         return simple_exclusion
-    else:
-        return [" | ".join([option1] + options)] + simple_exclusion
+    return [" | ".join([option1] + options)] + simple_exclusion
 
 
 class Parser(ABC):
+    """
+    Abstract Parser that implements standard functionalities all Parsers need.
+    ...
+
+    Attributes
+    ----------
+    schema : xmlschema.XMLSchema
+        the schema used by the instance.
+    decoded_xml: dict
+        the last decoded xml, returned from parsing with the schema
+
+    Methods
+    -------
+    get_xml():
+        Encodes last parsed file as xml.etree.ElemetTree
+
+    parse():
+        Abstract method implemented by subclasses
+    """
+
     schema: xmlschema.XMLSchema = None
     decoded_xml: dict = None
 
     def _validate_and_decode(self, xml_file: str):
         try:
             self.schema.validate(xml_file)
-        except Exception as e:
+        except Exception:
             logging.error("The provided xml file is not valid vm format.")
-            raise e
+            raise
         self.decoded_xml = self.schema.decode(xml_file)
 
     def get_xml(self):
+        """
+        Encodes last parsed file as xml.etree.ElemetTree
+        """
         return ET.ElementTree(self.schema.encode(self.decoded_xml))
 
     @abstractmethod
-    def parse():
-        pass
+    def parse(self, xml_file):
+        """
+        Keyfunctionality every Parser-Subclass should implement
+        """
 
 
 class FmParser(Parser):
+
+    """
+    Abstract parser for feature models.
+    """
+
     @abstractmethod
     def _extract_binaries(self):
         pass
@@ -48,14 +77,23 @@ class FmParser(Parser):
 
 
 class SplcFmParser(FmParser):
+    """
+    Parser to validate and parse feature models in the SPLC xml format.
+
+    Methods
+    -------
+    parse():
+        Parses feature model and returns features and constraints.
+    """
+
     def __init__(self):
         self.schema = xmlschema.XMLSchema("data/schema/splc_fm.xsd")
 
     def _extract_binaries(self):
         binaries = []
         constraints = []
-        binaryOptions = self.decoded_xml["binaryOptions"]["configurationOption"]
-        for bo in binaryOptions:
+        binary_options = self.decoded_xml["binaryOptions"]["configurationOption"]
+        for bo in binary_options:
             binaries.append(bo["name"])
             if bo["impliedOptions"]:
                 constraints += _implication(bo["name"], bo["impliedOptions"]["option"])
@@ -66,21 +104,19 @@ class SplcFmParser(FmParser):
         return binaries, constraints
 
     def _extract_numerics(self):
-        numerics = []
-        try:
-            numericOptions = self.decoded_xml["numericOptions"]["configurationOption"]
-        except:
-            return numerics
+        if not self.decoded_xml["numericOptions"]:
+            return []
 
-        for no in numericOptions:
-            numerics.append(no["name"])
+        numerics = []
+        numeric_options = self.decoded_xml["numericOptions"]["configurationOption"]
+        for num_opt in numeric_options:
+            numerics.append(num_opt["name"])
         return numerics
 
     def _extract_bool_constraints(self):
         if self.decoded_xml["booleanConstraints"]:
             return self.decoded_xml["booleanConstraints"]
-        else:
-            return []
+        return []
 
     def parse(self, xml_file: str):
         self._validate_and_decode(xml_file)
@@ -91,12 +127,25 @@ class SplcFmParser(FmParser):
 
 
 class MeasurementParser(Parser):
+    """
+    Abstract parser for measurements.
+    """
+
     @abstractmethod
     def _extract_rows(self):
         pass
 
 
 class SplcMeasurementParser(MeasurementParser):
+    """
+    Parser to validate and parse measurements in the SPLC xml format.
+
+    Methods
+    -------
+    parse():
+        Parses measurements and returns rows with data.
+    """
+
     def __init__(self):
         self.schema = xmlschema.XMLSchema("data/schema/splc_measurements.xsd")
 
