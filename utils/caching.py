@@ -7,42 +7,40 @@ import pandas as pd
 
 from mlflow.artifacts import download_artifacts
 
-from utils.exceptions import handle_exception
-
 
 def _handle_xml(filename, artifact=None):
     if artifact:
         artifact.write(filename)
-    else:
-        return ET.parse(filename)
+        return None
+    return ET.parse(filename)
 
 
 def _handle_json(filename, artifact=None):
     if artifact:
-        with open(filename, "w") as f:
-            json.dump(artifact, f)
-    else:
-        with open(filename, "r") as f:
-            return json.load(f)
+        with open(filename, "w", encoding="utf-8") as file:
+            json.dump(artifact, file)
+        return None
+    with open(filename, "r", encoding="utf-8") as file:
+        return json.load(file)
 
 
 def _handle_tsv(filename, artifact=None):
     if artifact is None:
         return pd.read_csv(filename, sep="\t")
-    else:
-        artifact.to_csv(filename, sep="\t", index=False)
+    artifact.to_csv(filename, sep="\t", index=False)
+    return None
 
 
 def _handle_dimacs(filename, artifact=None):
     if artifact:
-        with open(filename, "w") as f:
-            f.write(artifact)
-    else:
-        with open(filename, "r") as f:
-            return f.read()
+        with open(filename, "w", encoding="utf-8") as file:
+            file.write(artifact)
+            return None
+    with open(filename, "r", encoding="utf-8") as file:
+        return file.read()
 
 
-def _fileHandling(filename, artifact=None):
+def _file_handling(filename, artifact=None):
     ending = filename.split(".")[-1]
     handlers = {
         "tsv": _handle_tsv,
@@ -54,7 +52,41 @@ def _fileHandling(filename, artifact=None):
 
 
 class CacheHandler:
+    """
+    Handles interactions with temporary directory of the local filesystems from within runs.
+    Further handles caching for runs stored remotely.
+
+    ...
+
+    Attributes
+    ----------
+    cache_dir : str
+        the temporary directory maintained by this instance of CacheHandler class
+
+    Methods
+    -------
+    __init__(run_id, new_run):
+        Constructor, generates a CacheHandler instance
+
+    save(artifacts):
+        Takes artifacts and saves them in resp. directory
+
+    retrieve(ids):
+        Takes and id or a list of ids and returns the resp. artifacts from the cache.
+    """
+
     def __init__(self, run_id: str, new_run: bool = True) -> None:
+        """
+        Constructor: instantiates CacheHandler for run.
+
+        Parameters
+        ----------
+        run_id : str
+            the run_id connected to this CacheHandler instance
+        new_run: bool
+            whether the cachehandler for this run is a new run.
+
+        """
         self._temp_dir = tempfile.gettempdir()
         self.cache_dir = os.path.join(self._temp_dir, run_id)
         if new_run:
@@ -63,36 +95,52 @@ class CacheHandler:
             self._generate_cache()
             self._load_artifacts_from_remote(run_id)
         else:
-            logging.info(f"Use existing cache for run {run_id}")
+            logging.info("Use existing cache for run %s", run_id)
 
     def _generate_cache(self):
-        logging.info(f"Create cache directory for run {self.cache_dir}")
+        logging.info("Create cache directory for run %s", self.cache_dir)
         os.mkdir(self.cache_dir)
         self.existing_cache = False
-        logging.info(f"Successfully created cache directory for run {self.cache_dir}")
+        logging.info("Successfully created cache directory for run %s", self.cache_dir)
 
     def _load_artifacts_from_remote(self, run_id: str):
-        logging.info(f"Downloading artifacts of run {run_id} to cache...")
+        logging.info("Downloading artifacts of run %s to cache...", run_id)
         download_artifacts(run_id=run_id, dst_path=self.cache_dir)
-        logging.info(f"Download successful...")
+        logging.info("Download successful...")
 
     def save(self, artifacts: dict[str, any]) -> None:
-        for id, artifact in artifacts.items():
-            filename = os.path.join(self.cache_dir, id)
-            _fileHandling(filename, artifact)
+        """
+        Takes artifacts and saves them.
+
+        Parameters
+        ----------
+        artifacts : dict[str, any]
+            Dictionary where keys are filenames and values are artifacts for storage.
+        """
+        for name, artifact in artifacts.items():
+            filename = os.path.join(self.cache_dir, name)
+            _file_handling(filename, artifact)
 
     def _load_artifact(self, filename: str) -> any:
-        logging.info(f"Retrieve artifact {filename} from cache...")
+        logging.info("Retrieve artifact %s from cache...", filename)
         filename = os.path.join(self.cache_dir, filename)
-        return _fileHandling(filename)
+        return _file_handling(filename)
 
-    def retrieve(self, ids: (list | str)) -> any:
-        if isinstance(ids, list):
+    def retrieve(self, filenames: (list | str)) -> any:
+        """
+        Takes filenames and returns the corresponding artifacts.
+
+        Parameters
+        ----------
+        filenames : list | str
+            filenames
+        """
+        if isinstance(filenames, list):
             artifacts = {}
-            for id in ids:
-                filename = os.path.join(self.cache_dir, id)
-                artifacts[id] = _fileHandling(filename)
+            for filename in filenames:
+                filename = os.path.join(self.cache_dir, filename)
+                artifacts[filename] = _file_handling(filename)
             return artifacts
         else:
-            artifact = self._load_artifact(ids)
+            artifact = self._load_artifact(filenames)
             return artifact
