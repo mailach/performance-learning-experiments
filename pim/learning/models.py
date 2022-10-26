@@ -16,7 +16,7 @@ from sklearn.linear_model import LinearRegression
 
 from matplotlib import pyplot as plt
 
-from learning.feature_selection import ForwardFeatureSelector
+from pim.learning.feature_selection import ForwardFeatureSelector
 
 
 class Learner(ABC):

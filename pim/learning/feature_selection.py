@@ -3,7 +3,7 @@ import logging
 
 import pandas as pd
 
-from .metrics import prediction_fault_rate
+from pim.learning.metrics import prediction_fault_rate
 
 
 class FeatureSelector(ABC):
