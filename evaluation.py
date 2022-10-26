@@ -22,8 +22,8 @@ logging.basicConfig(
 
 def _evaluate(run_id: str) -> None:
     cache = CacheHandler(run_id)
-    pred = pd.DataFrame(cache.retrieve("predicted.json"))
-    fr = prediction_fault_rate(pred["measured_value"], pred["predicted"])
+    pred = cache.retrieve("predicted.tsv")
+    fr = prediction_fault_rate(pred["measured"], pred["predicted"])
     update_metrics(run_id, fr)
     return fr
 
@@ -43,8 +43,7 @@ def evaluate(workflow_id: str):
         filter_string=f"tags.mlflow.parentRunId='{workflow_id}' AND attribute.status = 'FINISHED'",
     )
     if learner_runs.empty:
-        logging.warning(
-            "No runs for evaluation found. Did you use cached results?")
+        logging.warning("No runs for evaluation found. Did you use cached results?")
     else:
         logging.info(f"Evaluate prediction from runs {learner_runs['run_id']}")
 
@@ -52,8 +51,7 @@ def evaluate(workflow_id: str):
             {"id": run_id, "metrics": _evaluate(run_id)}
             for run_id in learner_runs["run_id"]
         ]
-        best = sorted(
-            metrics, key=lambda d: d["metrics"]["mean_fault_rate"])[0]
+        best = sorted(metrics, key=lambda d: d["metrics"]["mean_fault_rate"])[0]
 
         logging.info(f"Evaluated trained models. Best run: {best}")
 

@@ -1,23 +1,24 @@
 system:
   parameter:
-    system: Apache
-    year: 2012
-    domain: Webserver
-    authors: Guo et al.
-    target: performance
-    n_features_bin: 9
+    system: 7zip
+    year: x
+    domain: x
+    authors: x
+    target: x
+    n_features_bin: 1
     all_measured: True
     n_valid_configs: 192
-    link: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
+    link: x
   local:
-    run_id: False
-    data_dir: data/Apache/2012
+    run_id: d7b240c034c74e55814205dd20c22af8
+    data_dir: data/7zip/
     shema: "shema2015"
 sampling:
   method: true_random
   n: 12
 learning:
-  method: mr
+  method: cart
+  nfp: Time
   cart:
     min_samples_split: 2
     min_samples_leaf: 1

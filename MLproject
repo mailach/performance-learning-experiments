@@ -16,9 +16,10 @@ entry_points:
     parameters:
       sampling_run_id: sampling_run_id
       method: method
+      nfp: nfp
       min_samples_split: { type: int, default: 2 }
       min_samples_leaf: { type: ing, default: 1 }
-    command: "python learning.py --sampling_run_id={sampling_run_id} --method={method} "
+    command: "python learning.py --sampling_run_id={sampling_run_id} --method={method} --nfp={nfp} "
 
   evaluation:
     parameters:

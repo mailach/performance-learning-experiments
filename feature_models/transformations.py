@@ -1,6 +1,7 @@
 import os
-import xml.etree.ElementTree as ET
 from typing import Sequence
+import pandas as pd
+from feature_models.parsing import SplcMeasurementParser
 
 
 def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> None:
@@ -11,46 +12,50 @@ def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> 
         )
 
 
-def _one_hot_encode(config: Sequence[str], features: Sequence[str], value: str):
-    _check_feature_existence(config, features.values())
-    oh = {key: 1 if feature in config else 0 for key, feature in features.items()}
-    oh["measured_value"] = float(value.replace(",", "."))
+def _extract_numeric(measurement, numerics):
+    transformed = {}
+    measurement = {
+        m.split(";")[0]: m.split(";")[1] for m in measurement["numerics"].split(",")
+    }
 
-    return oh
-
-
-def _xml_measurements_to_onehot(
-    data_tree: ET, features: dict[int, str]
-) -> Sequence[dict[str, int]]:
-
-    one_hot = []
-
-    df = data_tree.getroot()
-    for row in df:
-        try:
-            config = [
-                f.strip()
-                for f in row.find(f'.//data[@column="Configuration"]').text.split(
-                    ","
-                )
-                if f.strip() != ""
-            ]
-            one_hot.append(
-                _one_hot_encode(
-                    config,
-                    features,
-                    row.find(f'.//data[@column="Measured Value"]').text,
-                )
-            )
-        except Exception as e:
-            print(row[0].attrib, row[0].text)
-            print(row[1].attrib, row[1].text)
-            raise e
-
-    return one_hot
+    _check_feature_existence(measurement.keys(), numerics)
+    for numeric in numerics:
+        transformed[numeric] = (
+            float(measurement[numeric]) if numeric in measurement else None
+        )
+    return transformed
 
 
-class Measurement_handler:
-    def __init__(self, data_dir: str, features: dict[int, str]):
-        self.xml = ET.parse(os.path.join(data_dir, "all_measurements.xml"))
-        self.one_hot = _xml_measurements_to_onehot(self.xml, features)
+def _extract_binary(measurement, binaries):
+    transformed = {}
+    _check_feature_existence(measurement["binaries"].strip(",").split(","), binaries)
+    for binary in binaries:
+        transformed[binary] = 1 if binary in measurement["binaries"] else 0
+    return transformed
+
+
+def _extract_nfp(measurement):
+    transformed = {}
+    for name, value in measurement["nfp"].items():
+        transformed[name] = float(value)
+
+    return transformed
+
+
+def _measurements_to_df(measurements, binaries, numerics):
+    table = []
+    for measurement in measurements:
+        transformed = {}
+        transformed.update(_extract_binary(measurement, binaries))
+        transformed.update(_extract_numeric(measurement, numerics))
+        transformed.update(_extract_nfp(measurement))
+        table.append(transformed)
+    return pd.DataFrame(table)
+
+
+class Measurements:
+    def __init__(self, filename: str, binary, numeric):
+        self._parser = SplcMeasurementParser()
+        self.measurements = self._parser.parse(filename)
+        self.df = _measurements_to_df(self.measurements, binary, numeric)
+        self.xml = self._parser.get_xml()

@@ -3,12 +3,11 @@ import os
 import json
 import logging
 import xml.etree.ElementTree as ET
-
+import pandas as pd
 from utils.exceptions import handle_exception
 
 
 class CacheHandler:
-
     @handle_exception("Unable to instanciate CacheHandler.")
     def __init__(self, run_id: str, artifact_path: str = None) -> None:
         self._temp_dir = tempfile.gettempdir()
@@ -18,8 +17,7 @@ class CacheHandler:
         if not os.path.exists(self.cache_dir):
             os.mkdir(self.cache_dir)
             self.existing_cache = False
-            logging.info(
-                f"Successfully created cache directory for run {run_id}")
+            logging.info(f"Successfully created cache directory for run {run_id}")
         else:
             self.existing_cache = True
 
@@ -27,17 +25,27 @@ class CacheHandler:
     def _save_artifact(self, file: str, artifact: any) -> None:
         logging.info(f"Save artifact {file} to cache...")
 
-        artifact_file = os.path.join(self.cache_dir, self._artifact_path,
-                                     file) if self._artifact_path else os.path.join(self.cache_dir, file)
+        artifact_file = (
+            os.path.join(self.cache_dir, self._artifact_path, file)
+            if self._artifact_path
+            else os.path.join(self.cache_dir, file)
+        )
 
         if ".xml" in artifact_file:
             artifact.write(artifact_file)
         elif ".json" in artifact_file:
             with open(artifact_file, "w") as f:
                 json.dump(artifact, f)
-        else:
+        elif ".tsv" in artifact_file:
+            artifact.to_csv(artifact_file, sep="\t", index=False)
+        elif ".txt" in artifact_file or ".dimacs" in artifact_file:
             with open(artifact_file, "w") as f:
                 f.write(artifact)
+        else:
+            logging.error(
+                f"Cache can not handle file {artifact_file}. Currently only xml, json, tsv and txt are supported."
+            )
+            raise Exception
 
     def save(self, artifacts: dict[str, any]) -> None:
         for id, artifact in artifacts.items():
@@ -46,11 +54,16 @@ class CacheHandler:
     @handle_exception("Unable to retrieve artifact from cache.")
     def _load_artifact(self, file: str) -> any:
         logging.info(f"Retrieve artifact {file} from cache...")
-        artifact_file = os.path.join(self.cache_dir, self._artifact_path,
-                                     file) if self._artifact_path else os.path.join(self.cache_dir, file)
+        artifact_file = (
+            os.path.join(self.cache_dir, self._artifact_path, file)
+            if self._artifact_path
+            else os.path.join(self.cache_dir, file)
+        )
 
         if ".xml" in file:
             artifact = ET.parse(artifact_file)
+        elif ".tsv" in file:
+            artifact = pd.read_csv(artifact_file, sep="\t")
         else:
             with open(artifact_file, "r") as f:
                 artifact = json.load(f)

@@ -3,6 +3,7 @@ Takes local data and saves it as artifacts
 """
 
 import logging
+import os
 import mlflow
 import click
 import yaml
@@ -11,8 +12,8 @@ import logging
 from rich.logging import RichHandler
 
 
-from feature_models.modeling import Fm_handler
-from feature_models.transformations import Measurement_handler
+from feature_models.modeling import FeatureModel
+from feature_models.transformations import Measurements
 from utils.caching import CacheHandler
 
 logging.basicConfig(
@@ -39,19 +40,23 @@ def load_system(
         cache = CacheHandler(run.info.run_id)
 
         logging.info("Load feature model.")
-        fm = Fm_handler(local["data_dir"])
+        fm = FeatureModel(os.path.join(local["data_dir"], "fm.xml"))
 
         logging.info("Transform xml measurements to one-hot-encoded")
-        mh = Measurement_handler(local["data_dir"], fm.binary)
+        mh = Measurements(
+            os.path.join(local["data_dir"], "all_measurements.xml"),
+            fm.binary,
+            fm.numeric,
+        )
 
         mlflow.log_params(params)
         cache.save(
             {
                 "fm.xml": fm.xml,
                 "fm.dimacs": fm.dimacs,
-                "features.json": fm.features,
+                "features.json": fm.get_features(),
                 "measurements.xml": mh.xml,
-                "measurements_oh.json": mh.one_hot,
+                "measurements.tsv": mh.df,
             }
         )
 

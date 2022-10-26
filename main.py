@@ -73,7 +73,10 @@ def workflow(param_file: str):
     logging.info("Start execution of workflow as new mlflow run...")
     with mlflow.start_run() as active_run:
 
-        learning_params = {"method": params["learning"]["method"]}
+        learning_params = {
+            "method": params["learning"]["method"],
+            "nfp": params["learning"]["nfp"],
+        }
         learning_params.update(
             {
                 k: v

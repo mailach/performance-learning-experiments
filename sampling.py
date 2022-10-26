@@ -7,6 +7,7 @@ import logging
 from rich.logging import RichHandler
 
 from typing import Sequence
+import pandas as pd
 
 from utils.caching import CacheHandler
 from sampling.binary import SamplerFactory
@@ -40,9 +41,10 @@ def sample(n: int, method: str, system_run_id: str):
             logging.warning(
                 "Only use this method when all valid configurations are available."
             )
-            configurations = system_cache.retrieve("measurements_oh.json")
+            configurations = system_cache.retrieve("measurements.tsv")
             sampled_configs, remaining_configs = sampler.sample(
-                int(n), all_configs=configurations)
+                int(n), all_configs=configurations
+            )
 
         else:
             logging.error("Sampling method not implemented yet.")
@@ -51,8 +53,8 @@ def sample(n: int, method: str, system_run_id: str):
         logging.info(f"Save sampled configurations to cache")
         sampling_cache.save(
             {
-                "train.json": sampled_configs,
-                "test.json": remaining_configs,
+                "train.tsv": sampled_configs,
+                "test.tsv": remaining_configs,
             }
         )
 

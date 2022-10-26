@@ -1,101 +1,120 @@
-import xml.etree.ElementTree as ET
-from typing import Sequence, Tuple
 from abc import ABC, abstractmethod
+import xml.etree.ElementTree as ET
+import xmlschema
+import logging
+import os
 
 
-class Fm_parser(ABC):
+def _implication(option1, options):
+    return [f"!{option1} | {opt}" for opt in options]
+
+
+def _exclusion(option1, options, optional=None):
+    simple_exclusion = [f"!{option1} | !{opt}" for opt in options]
+    if optional == "True":
+        return simple_exclusion
+    else:
+        return [" | ".join([option1] + options)] + simple_exclusion
+
+
+class Parser(ABC):
+    schema: xmlschema.XMLSchema = None
+    decoded_xml: dict = None
+
+    def _validate_and_decode(self, xml_file: str):
+        try:
+            self.schema.validate(xml_file)
+        except Exception as e:
+            logging.error("The provided xml file is not valid vm format.")
+            raise e
+        self.decoded_xml = self.schema.decode(xml_file)
+
+    def get_xml(self):
+        return ET.ElementTree(self.schema.encode(self.decoded_xml))
+
     @abstractmethod
     def parse():
         pass
 
 
-class Splc_parser(Fm_parser):
-    def _ext_opt_constr(self, element_list: ET.Element):
-        return [el.text for el in element_list]
+class FmParser(Parser):
+    @abstractmethod
+    def _extract_binaries(self):
+        pass
 
-    def _ext_opt(self, element_list: ET.Element):
-        opts = element_list.findall("configurationOption")
-        result = []
-        for opt in opts:
-            o = {
-                p.tag: p.text.strip() if isinstance(p.text, str) else p.text
-                for p in opt
-            }
-            o["impliedOptions"] = (
-                self._ext_opt_constr(opt.find("impliedOptions"))
-                if "impliedOptions" in o
-                else []
-            )
-
-            o["excludedOptions"] = (
-                self._ext_opt_constr(opt.find("excludedOptions"))
-                if "excludedOptions" in o
-                else []
-            )
-            result.append(o)
-
-        return result
-
-    def _ext_constr(self, element_list: ET.Element):
-        constrs = element_list.findall("constraint")
-        return [p.text.strip() if isinstance(p.text, str) else p.text for p in constrs]
-
-    def _ext_data(self, xml_tree: ET):
-        vm = xml_tree.getroot()
-
-        otags = ["binaryOptions", "numericOptions"]
-        for opt in otags:
-            yield self._ext_opt(vm.find(opt))
-
-        ctags = ["booleanConstraints", "nonBooleanConstraints", "mixedConstraints"]
-        for constr in ctags:
-            yield self._ext_constr(vm.find(constr))
-
-    def _constraints_from_options(self, options):
-        constraints = []
-        for o in options:
-            if len(o["impliedOptions"]):
-                constraints += [f"!{o['name']} | {io}" for io in o["impliedOptions"]]
-            if len(o["excludedOptions"]):
-                constraints += [f"!{o['name']} | {io}" for io in o["excludedOptions"]]
-
-            if o["optional"] == "False":
-                constraints += [o["name"]]
-
-        return constraints
-
-    def _transform_options(self, binOpt, numOpt):
-        constraints = self._constraints_from_options(binOpt)
-        features = {}
-        for i in range(1, len(binOpt) + 1):
-            features[i] = {"name": binOpt[i - 1]["name"], "type": "bin"}
-        for i in range(len(binOpt) + 1, len(binOpt) + 1):
-            o = numOpt[i - len(binOpt) + 1]
-            features[i] = {
-                "name": o["name"],
-                "type": "num",
-                "min": o["minValue"],
-                "max": o["maxValue"],
-                "step": o["stepFunction"],
-            }
-        return features, constraints
-
-    def parse(self, xml_tree: ET):
-        binOpt, numOpt, boolCon, nboolCon, mixedCon = self._ext_data(xml_tree)
-        features, constraints = self._transform_options(binOpt, numOpt)
-        constraints += boolCon + nboolCon + mixedCon
-        return features, constraints
-
-
-class Sxfm_parser(Fm_parser):
-    def __init__():
-        raise NotImplementedError
-
-    def parse(self, xml_tree: ET):
+    @abstractmethod
+    def _extract_bool_constraints(self):
         pass
 
 
-def ParserFactory(format: str):
-    parsers = {"splc": Splc_parser, "sxml": Sxfm_parser}
+class SplcFmParser(FmParser):
+    def __init__(self):
+        self.schema = xmlschema.XMLSchema("data/schema/splc_fm.xsd")
 
-    return parsers[format]()
+    def _extract_binaries(self):
+        binaries = []
+        constraints = []
+        binaryOptions = self.decoded_xml["binaryOptions"]["configurationOption"]
+        for bo in binaryOptions:
+            binaries.append(bo["name"])
+            if bo["impliedOptions"]:
+                constraints += _implication(bo["name"], bo["impliedOptions"]["option"])
+            if bo["excludedOptions"]:
+                constraints += _exclusion(
+                    bo["name"], bo["excludedOptions"]["option"], bo["optional"]
+                )
+        return binaries, constraints
+
+    def _extract_numerics(self):
+        numerics = []
+        try:
+            numericOptions = self.decoded_xml["numericOptions"]["configurationOption"]
+        except:
+            return numerics
+
+        for no in numericOptions:
+            numerics.append(no["name"])
+        return numerics
+
+    def _extract_bool_constraints(self):
+        if self.decoded_xml["booleanConstraints"]:
+            return self.decoded_xml["booleanConstraints"]
+        else:
+            return []
+
+    def parse(self, xml_file: str):
+        self._validate_and_decode(xml_file)
+        binaries, constraints = self._extract_binaries()
+        numerics = self._extract_numerics()
+        constraints += self._extract_bool_constraints()
+        return binaries, numerics, constraints
+
+
+class MeasurementParser(Parser):
+    @abstractmethod
+    def _extract_rows(self):
+        pass
+
+
+class SplcMeasurementParser(MeasurementParser):
+    def __init__(self):
+        self.schema = xmlschema.XMLSchema("data/schema/splc_measurements.xsd")
+
+    def _extract_rows(self):
+        rows = []
+        for row in self.decoded_xml["row"]:
+            config = {"nfp": {}}
+            for column in row["data"]:
+                if column["@column"] == "Configuration":
+                    config["binaries"] = column["$"].replace("\n", "")
+                elif column["@column"] == "Variable Features":
+                    config["numerics"] = column["$"].replace("\n", "")
+                else:
+                    config["nfp"][column["@column"]] = column["$"].replace("\n", "")
+            rows.append(config)
+
+        return rows
+
+    def parse(self, xml_file):
+        self._validate_and_decode(xml_file)
+        return self._extract_rows()

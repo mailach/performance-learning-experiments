@@ -4,6 +4,9 @@ import z3
 
 from abc import ABC, abstractmethod
 from typing import Sequence
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
 
 from .feature_model import FeatureModel, ConfigurationSolver
 
@@ -19,31 +22,20 @@ def _config_is_in_configs(config, configs):
 
 
 class Sampler(ABC):
-
     @abstractmethod
-    def sample(self, n: int, all_configs: list = None) -> Sequence:
+    def sample(self, n: int, all_configs=None) -> Sequence:
         pass
 
 
 class TrueRandomSampler(Sampler):
+    def sample(self, n: int, all_configs: pd.DataFrame):
 
-    def sample(self, n: int, all_configs: list):
-        self.configs = all_configs
-        confs = self.configs.copy()
-        if len(confs) < n:
-            logging.error(
-                f"Desired sample size n={n} is smaller than number of available configurations n={len(confs)}. "
-            )
-            raise Exception("Valueerror for samplesize.")
+        train, test = train_test_split(all_configs, train_size=n)
 
-        sampled = [confs.pop(randrange(len(confs)))
-                   for _ in range(n)]
-
-        return sampled, confs
+        return train, test
 
 
 class BinarySampler(Sampler):
-
     def __init__(self, fm: FeatureModel):
         self.fm = fm
         self.cns = ConfigurationSolver(fm.constraints, fm.features.keys())
@@ -54,7 +46,6 @@ class BinarySampler(Sampler):
 
 
 class PseudoRandomSampler(BinarySampler):
-
     def sample(self, n: int):
         return self.cns.generate_configurations(n)
 
@@ -127,7 +118,8 @@ def BinarySamplerFactory(method: str, fm: FeatureModel):
     samplers = {
         "pr": PseudoRandomSampler,
         "ow": OptionWiseSampler,
-        "now": NegativeOptionWiseSampler, }
+        "now": NegativeOptionWiseSampler,
+    }
     return samplers[method](fm)
 
 

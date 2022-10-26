@@ -36,13 +36,13 @@ class Learner(ABC):
 
 
 class ScikitLearner(Learner):
-    _feature_names = []
+    feature_names = []
 
     def load(self, cache_dir: str) -> None:
         self.model = mlflow.sklearn.load_model(cache_dir)
 
     def predict(self, X: pd.DataFrame) -> pd.Series:
-        return self.model.predict(X[self._feature_names])
+        return self.model.predict(X[self.feature_names])
 
     @abstractmethod
     def log(self, cache_dir: str) -> None:
@@ -161,6 +161,7 @@ class KrrLearner(ScikitLearner):
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
+
 # n_neighbors Number of configurations considered in a prediction.
 # weights Weights of the neighbor configurations.
 # algorithm Algorithm used to compute the neighbors.
@@ -193,7 +194,7 @@ class MrLearner(ScikitLearner):
         selector = ForwardFeatureSelector(self.model)
         feature_set, error = selector.select(X.copy(), Y)
         self.model.fit(feature_set, Y)
-        self._feature_names = feature_set.columns
+        self.feature_names = feature_set.columns
 
     def log(self, cache_dir) -> None:
         logging.info(f"Log model to registry and save to cache {cache_dir}")
@@ -214,7 +215,7 @@ def LearnerFactory(method: str, params: dict[str, any]) -> Learner:
         "svr": SvrLearner,
         "krr": KrrLearner,
         "knn": KnnLearner,
-        "mr": MrLearner
+        "mr": MrLearner,
     }
 
     return learners[method](params)
