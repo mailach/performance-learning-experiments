@@ -1,22 +1,22 @@
-import os
-from typing import Sequence, Tuple, final
+from typing import Sequence
 
-from feature_models.parsing import SplcFmParser
-import logging
+from parsing import SplcFmParser
 
 
 def _constr_to_clauses(constraints, features):
     final_constraints = []
     for constraint in constraints:
         constraint = constraint.replace("!", "-")
-        for id, feature in features.items():
-            constraint = constraint.replace(feature, str(id))
+        for id_nr, feature in features.items():
+            constraint = constraint.replace(feature, str(id_nr))
         constraint = constraint.replace(" | ", " ")
         constraint += " 0"
         if constraint.count(" ") == 1:
             mand = constraint.split(" ")[0]
             final_constraints += [
-                f"{mand} -{str(id)} 0" for id in features.keys() if str(id) != mand
+                f"{mand} -{str(id_nr)} 0"
+                for id_nr in features.keys()
+                if str(id_nr) != mand
             ]
         final_constraints.append(constraint)
 
@@ -34,6 +34,30 @@ def _generate_dimacs(binary: Sequence, constraints: Sequence[str]) -> str:
 
 
 class FeatureModel:
+    """
+    A FeatureModel, consisting of different representations
+    ...
+
+    Attributes
+    ----------
+    binary : Sequence[str]
+        binary options of fm
+    numeric : Sequence[str]
+        numeric options of fm
+    constraints : Sequence[str]
+        boolean constraints for binary options
+    dimacs : str
+        dimacs representation of binary options
+    xml : xml.etree.ElementTree
+        xm representation of fm
+
+
+    Methods
+    -------
+    get_features():
+        returns dict of binary and numeric features
+    """
+
     def __init__(self, xml_file: str):
         self._parser = SplcFmParser()
         self.binary, self.numeric, self.constraints = self._parser.parse(xml_file)
@@ -41,4 +65,7 @@ class FeatureModel:
         self.xml = self._parser.get_xml()
 
     def get_features(self):
+        """
+        Return dictionary representation of features
+        """
         return {"binary": self.binary, "numeric": self.numeric}

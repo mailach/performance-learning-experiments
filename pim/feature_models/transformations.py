@@ -1,7 +1,6 @@
-import os
 from typing import Sequence
 import pandas as pd
-from feature_models.parsing import SplcMeasurementParser
+from parsing import SplcMeasurementParser
 
 
 def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> None:
@@ -54,6 +53,20 @@ def _measurements_to_df(measurements, binaries, numerics):
 
 
 class Measurements:
+    """
+    Measurements corresponding to a specific featuremodel.
+    ...
+
+    Attributes
+    ----------
+    measurements : Sequence
+        list of rows, represented as dictionaries
+    df : pd.DataFrame
+        pandas representation of measurements
+    xml : xml.etree.ElementTree
+        xml representation of measurements
+    """
+
     def __init__(self, filename: str, binary, numeric):
         self._parser = SplcMeasurementParser()
         self.measurements = self._parser.parse(filename)
