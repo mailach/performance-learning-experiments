@@ -1,20 +1,17 @@
-import click
+import logging
 import os
 
+import click
 
 import mlflow
 import mlflow.sklearn
 
 import pandas as pd
-from sklearn import tree
-
-import logging
 from rich.logging import RichHandler
 
 
 from utils.caching import CacheHandler
-
-from learning.models import LearnerFactory, Learner
+from pim.learning.models import LearnerFactory, Learner
 
 
 logging.basicConfig(
@@ -24,10 +21,10 @@ logging.basicConfig(
 )
 
 
-def _predict_on_test(learner: Learner, test_X: pd.DataFrame, test_Y: pd.Series):
-    pred = pd.Series(learner.predict(test_X))
+def _predict_on_test(learner: Learner, test_x: pd.DataFrame, test_y: pd.Series):
+    pred = pd.Series(learner.predict(test_x))
 
-    prediction = pd.concat([pred, test_Y], axis=1)
+    prediction = pd.concat([pred, test_y], axis=1)
     prediction.columns = ["predicted", "measured"]
     return prediction
 
@@ -73,26 +70,38 @@ hyperparams = {
 @click.option("--degree", type=float)
 @click.option("--gamma", type=float, default=None)
 @click.option("--alpha", type=float)
-def learning(sampling_run_id: str, method: str, nfp: str, **kwargs):
+def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **kwargs):
+    """
+    Learning of influences of options on nfp
+
+    Parameters
+    ----------
+    sampling_run_id : str
+        run with sampled configurations as artifacts
+    method : str
+        learning method
+    nfp : str
+        name of nfp
+    """
     logging.info("Start learning from sampled configurations.")
     params = {k: v for k, v in kwargs.items() if k in hyperparams[method]}
 
     sampling_cache = CacheHandler(sampling_run_id, new_run=False)
-    train_X, train_Y = _load_data("train.tsv", sampling_cache, nfp)
-    test_X, test_Y = _load_data("test.tsv", sampling_cache, nfp)
+    train_x, train_y = _load_data("train.tsv", sampling_cache, nfp)
+    test_x, test_y = _load_data("test.tsv", sampling_cache, nfp)
 
     with mlflow.start_run() as run:
         model_cache = CacheHandler(run.info.run_id)
-        logging.info(f"Use hyperparameter: {params}")
+        logging.info("Use hyperparameter: %s", params)
         learner = LearnerFactory(method, params)
 
-        learner.fit(train_X, train_Y)
+        learner.fit(train_x, train_y)
 
-        logging.info(f"Log model and save to cache {model_cache.cache_dir}")
+        logging.info("Log model and save to cache %s", model_cache.cache_dir)
 
         learner.log(model_cache.cache_dir)
         logging.info("Predict test set and save to cache.")
-        prediction = _predict_on_test(learner, test_X, test_Y)
+        prediction = _predict_on_test(learner, test_x, test_y)
         model_cache.save({"predicted.tsv": prediction})
         mlflow.log_artifact(os.path.join(model_cache.cache_dir, "predicted.tsv"), "")
 

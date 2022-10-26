@@ -8,9 +8,7 @@ import mlflow
 import click
 import yaml
 
-import logging
 from rich.logging import RichHandler
-
 
 from feature_models.modeling import FeatureModel
 from feature_models.transformations import Measurements
@@ -28,11 +26,19 @@ logging.basicConfig(
 )
 @click.option("--param_file", default="run.yaml")
 def load_system(
-    param_file: str,
+    param_file: str = "run.yaml",
 ) -> None:
+    """
+    Loads, validates, and transforms data of system.
 
-    with open(param_file, "r") as f:
-        run_file = yaml.safe_load(f)
+    Parameters
+    ----------
+    param_file : str
+        file that contains parameters.
+    """
+
+    with open(param_file, "r", encoding="utf-8") as file:
+        run_file = yaml.safe_load(file)
         params = run_file["system"]["parameter"]
         local = run_file["system"]["local"]
 
@@ -40,23 +46,23 @@ def load_system(
         cache = CacheHandler(run.info.run_id)
 
         logging.info("Load feature model.")
-        fm = FeatureModel(os.path.join(local["data_dir"], "fm.xml"))
+        feature_model = FeatureModel(os.path.join(local["data_dir"], "fm.xml"))
 
         logging.info("Transform xml measurements to one-hot-encoded")
-        mh = Measurements(
+        measurements = Measurements(
             os.path.join(local["data_dir"], "all_measurements.xml"),
-            fm.binary,
-            fm.numeric,
+            feature_model.binary,
+            feature_model.numeric,
         )
 
         mlflow.log_params(params)
         cache.save(
             {
-                "fm.xml": fm.xml,
-                "fm.dimacs": fm.dimacs,
-                "features.json": fm.get_features(),
-                "measurements.xml": mh.xml,
-                "measurements.tsv": mh.df,
+                "fm.xml": feature_model.xml,
+                "fm.dimacs": feature_model.dimacs,
+                "features.json": feature_model.get_features(),
+                "measurements.xml": measurements.xml,
+                "measurements.tsv": measurements.df,
             }
         )
 

@@ -1,12 +1,10 @@
-import click
-import yaml
-
-
 import logging
+
+import yaml
+import click
+import mlflow
 from rich.logging import RichHandler
 
-import mlflow
-from mlflow.artifacts import download_artifacts
 
 from utils.runs import get_run_if_exists
 from utils.caching import CacheHandler
@@ -25,10 +23,10 @@ def _run_or_load(
     run_id = get_run_if_exists(entrypoint, params) if use_cache else False
 
     if run_id:
-        logging.info(f"Use existing run {run_id} for entrypoint {entrypoint}")
-        cache = CacheHandler(run_id, new_run=False)
+        logging.info("Use existing run %s for entrypoint %s", run_id, entrypoint)
+        CacheHandler(run_id, new_run=False)
     else:
-        logging.info(f"Start new run for entrypoint {entrypoint}")
+        logging.info("Start new run for entrypoint %s", entrypoint)
         run_id = mlflow.run(
             ".",
             entry_point=entrypoint,
@@ -45,20 +43,28 @@ def _log_params(prefix: str, params: dict[str, str]) -> None:
 
 
 def _load_system(params: dict[str, str], param_file: str) -> str:
-    logging.info(f"Load system {params['parameter']['system']}")
+    logging.info("Load system %s", params["parameter"]["system"])
     if not params["local"]["run_id"]:
         return _run_or_load("systems", {"param_file": param_file}, use_cache=False)
     else:
-        cache = CacheHandler(params["local"]["run_id"], new_run=False)
+        CacheHandler(params["local"]["run_id"], new_run=False)
         return params["local"]["run_id"]
 
 
 @click.command()
 @click.option("--param_file", default="run.yaml")
-def workflow(param_file: str):
+def workflow(param_file: str = "run.yaml"):
+    """
+    Function that executes a multistep workflow.
+
+    Parameters
+    ----------
+    param_file : str
+        file that contains parameters.
+    """
     logging.info("Loading parameters...")
-    with open(param_file, "r") as f:
-        params = yaml.safe_load(f)
+    with open(param_file, "r", encoding="utf-8") as file:
+        params = yaml.safe_load(file)
 
     logging.info("Start execution of workflow as new mlflow run...")
     with mlflow.start_run() as active_run:
@@ -97,6 +103,7 @@ def workflow(param_file: str):
                 "system_run_id": system_run_id,
                 "sampling_run_id": sampling_run_id,
                 "learning_run_id": learning_run_id,
+                "evaluation_run_id": evaluation_run_id,
             }
         )
 

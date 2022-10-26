@@ -1,16 +1,11 @@
 import logging
-import random
 import mlflow
 import click
 
-import logging
 from rich.logging import RichHandler
 
-from typing import Sequence
-import pandas as pd
-
 from utils.caching import CacheHandler
-from sampling.binary import SamplerFactory
+from pim.sampling.binary import SamplerFactory
 
 
 mlflow.set_experiment("sampling")
@@ -25,7 +20,19 @@ logging.basicConfig(
 @click.option("--system_run_id", default="")
 @click.option("--method", default="true_random")
 @click.option("--n", default=10, type=int)
-def sample(n: int, method: str, system_run_id: str):
+def sample(n: int = 10, method: str = "true_random", system_run_id: str = ""):
+    """
+    Samples valid configurations from a variability model.
+
+    Parameters
+    ----------
+    n: int
+        number of samples
+    method: str
+        method for sampling
+    system_run_id : str
+        run of system loading
+    """
 
     logging.info("Start sampling from configuration space.")
 
@@ -50,7 +57,7 @@ def sample(n: int, method: str, system_run_id: str):
             logging.error("Sampling method not implemented yet.")
             raise NotImplementedError
 
-        logging.info(f"Save sampled configurations to cache")
+        logging.info("Save sampled configurations to cache")
         sampling_cache.save(
             {
                 "train.tsv": sampled_configs,
