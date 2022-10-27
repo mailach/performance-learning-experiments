@@ -3,10 +3,11 @@ import mlflow
 import click
 
 from rich.logging import RichHandler
+import pandas as pd
+from splc2py.sampling import Sampler
 
 from utils.caching import CacheHandler
 from pim.sampling.binary import SamplerFactory
-
 
 mlflow.set_experiment("sampling")
 logging.basicConfig(
@@ -36,22 +37,31 @@ def sample(n: int = 10, method: str = "true_random", system_run_id: str = ""):
 
     logging.info("Start sampling from configuration space.")
 
-    sampler = SamplerFactory(method)
-
     with mlflow.start_run() as run:
 
         sampling_cache = CacheHandler(run.info.run_id)
         system_cache = CacheHandler(system_run_id, new_run=False)
+        vm = system_cache.retrieve("fm.xml")
+        data = system_cache.retrieve("measurements.tsv")
+        logging.error(vm)
 
         if method == "true_random":
+            sampler = SamplerFactory(method)
             logging.info("Sampling using 'true random'.")
             logging.warning(
                 "Only use this method when all valid configurations are available."
             )
             configurations = system_cache.retrieve("measurements.tsv")
-            sampled_configs, remaining_configs = sampler.sample(
-                int(n), all_configs=configurations
+            train, test = sampler.sample(int(n), all_configs=configurations)
+
+        elif method == "featurewise":
+            sampler = Sampler(vm)
+            samples = pd.DataFrame(sampler.sample(binary="featurewise", format="dict"))
+            data = data.merge(
+                samples, on=list(samples.columns), how="left", indicator=True
             )
+            train = data[data["_merge"] == "both"].drop("_merge", axis=1)
+            test = data[data["_merge"] == "left_only"].drop("_merge", axis=1)
 
         else:
             logging.error("Sampling method not implemented yet.")
@@ -60,8 +70,8 @@ def sample(n: int = 10, method: str = "true_random", system_run_id: str = ""):
         logging.info("Save sampled configurations to cache")
         sampling_cache.save(
             {
-                "train.tsv": sampled_configs,
-                "test.tsv": remaining_configs,
+                "train.tsv": train,
+                "test.tsv": test,
             }
         )
 

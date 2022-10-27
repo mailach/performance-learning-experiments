@@ -82,12 +82,14 @@ class CARTLearner(ScikitLearner):
         self._visualize()
 
     def _visualize(self) -> None:
-        fig = plt.figure(figsize=(25, 20))
+
+        fig = plt.figure()
         tree.plot_tree(
             self.model,
             feature_names=self.feature_names,
             # class_names=iris.target_names,
             filled=True,
+            fontsize=1,
         )
 
         mlflow.log_figure(figure=fig, artifact_file="decistion_tree.png")
