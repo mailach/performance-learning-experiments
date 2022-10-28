@@ -4,10 +4,9 @@ import click
 
 from rich.logging import RichHandler
 import pandas as pd
-from splc2py.sampling import Sampler
 
 from utils.caching import CacheHandler
-from pim.sampling.binary import SamplerFactory
+from pim.sampling.binary import true_random_sampling, binary_sampling, mixed_sampling
 
 mlflow.set_experiment("sampling")
 logging.basicConfig(
@@ -19,9 +18,17 @@ logging.basicConfig(
 
 @click.command(help="Sample from feature model or list of configurations.")
 @click.option("--system_run_id", default="")
-@click.option("--method", default="true_random")
+@click.option("--binary_method", default=None)
+@click.option("--numeric_method", default=None)
+@click.option("--true_random", type=bool, default=None)
 @click.option("--n", default=10, type=int)
-def sample(n: int = 10, method: str = "true_random", system_run_id: str = ""):
+def sample(
+    n: int = 10,
+    binary_method: str = None,
+    numeric_method: str = None,
+    true_random: bool = False,
+    system_run_id: str = "",
+):
     """
     Samples valid configurations from a variability model.
 
@@ -45,18 +52,26 @@ def sample(n: int = 10, method: str = "true_random", system_run_id: str = ""):
         data = system_cache.retrieve("measurements.tsv")
         logging.error(vm)
 
-        if method == "true_random":
-            sampler = SamplerFactory(method)
+        if numeric_method == "None":
+            numeric_method = None
+        if true_random:
             logging.info("Sampling using 'true random'.")
             logging.warning(
                 "Only use this method when all valid configurations are available."
             )
             configurations = system_cache.retrieve("measurements.tsv")
-            train, test = sampler.sample(int(n), all_configs=configurations)
+            train, test = true_random_sampling(int(n), all_configs=configurations)
 
-        elif method == "featurewise":
-            sampler = Sampler(vm)
-            samples = pd.DataFrame(sampler.sample(binary="featurewise", format="dict"))
+        elif binary_method and numeric_method:
+            samples = pd.DataFrame(mixed_sampling(binary_method, numeric_method, vm))
+            data = data.merge(
+                samples, on=list(samples.columns), how="left", indicator=True
+            )
+            train = data[data["_merge"] == "both"].drop("_merge", axis=1)
+            test = data[data["_merge"] == "left_only"].drop("_merge", axis=1)
+
+        elif binary_method:
+            samples = pd.DataFrame(binary_sampling("featurewise", vm=vm))
             data = data.merge(
                 samples, on=list(samples.columns), how="left", indicator=True
             )

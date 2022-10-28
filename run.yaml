@@ -14,10 +14,12 @@ system:
     data_dir: data/7zip/
     shema: "shema2015"
 sampling:
-  method: true_random
+  binary_method: featurewise
+  numeric_method: null
+  true_random: False
   n: 12
 learning:
-  method: cart
+  method: rf
   nfp: Time
   cart:
     min_samples_split: 2

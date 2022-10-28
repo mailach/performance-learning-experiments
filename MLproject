@@ -9,8 +9,10 @@ entry_points:
     parameters:
       system_run_id: system_run_id
       n: n
-      method: method
-    command: "python sampling.py --system_run_id={system_run_id} --n={n} --method={method}"
+      binary_method: binary_method
+      numeric_method: numeric_method
+      true_random: true_random
+    command: "python sampling.py --system_run_id={system_run_id} --n={n} --binary_method={binary_method} --numeric_method={numeric_method} --true_random={true_random}"
 
   learning:
     parameters:

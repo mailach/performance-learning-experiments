@@ -136,11 +136,10 @@ class CacheHandler:
             filenames
         """
         if isinstance(filenames, list):
-            artifacts = {}
+            artifacts = []
             for filename in filenames:
                 filename = os.path.join(self.cache_dir, filename)
-                artifacts[filename] = _file_handling(filename)
-            return artifacts
-        else:
-            artifact = self._load_artifact(filenames)
-            return artifact
+                artifacts.append(_file_handling(filename))
+                return artifacts
+        artifact = self._load_artifact(filenames)
+        return artifact
