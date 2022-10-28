@@ -71,7 +71,7 @@ def sample(
             test = data[data["_merge"] == "left_only"].drop("_merge", axis=1)
 
         elif binary_method:
-            samples = pd.DataFrame(binary_sampling("featurewise", vm=vm))
+            samples = pd.DataFrame(binary_sampling(binary_method, vm=vm))
             data = data.merge(
                 samples, on=list(samples.columns), how="left", indicator=True
             )
