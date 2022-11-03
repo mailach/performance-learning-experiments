@@ -50,7 +50,6 @@ def sample(
         system_cache = CacheHandler(system_run_id, new_run=False)
         vm = system_cache.retrieve("fm.xml")
         data = system_cache.retrieve("measurements.tsv")
-        logging.error(vm)
 
         if numeric_method == "None":
             numeric_method = None

@@ -1,4 +1,6 @@
 name: performance-influence-modeling
+docker_env: 
+  image: pim-pipeline:latest
 entry_points:
   systems:
     parameters:

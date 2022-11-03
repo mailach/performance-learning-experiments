@@ -70,6 +70,7 @@
         </xs:element>
         <xs:element name="booleanConstraints" />
         <xs:element name="nonBooleanConstraints" />
+        <xs:element name="mixedConstraints" />
       </xs:sequence>
       <xs:attribute type="xs:string" name="name"/>
     </xs:complexType>

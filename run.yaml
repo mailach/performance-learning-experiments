@@ -10,13 +10,13 @@ system:
     n_valid_configs: 192
     link: x
   local:
-    run_id: d7b240c034c74e55814205dd20c22af8
+    run_id: False
     data_dir: data/7zip/
     shema: "shema2015"
 sampling:
-  binary_method: featurewise
-  numeric_method: centralcomposite
-  true_random: False
+  binary_method: true_random
+  numeric_method: None
+  true_random: True
   n: 12
 learning:
   method: rf

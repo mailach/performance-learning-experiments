@@ -63,6 +63,10 @@ def workflow(param_file: str = "run.yaml"):
         file that contains parameters.
     """
     logging.info("Loading parameters...")
+
+    import os
+
+    logging.error(os.environ.get("MLFLOW_TRACKING_URI"))
     with open(param_file, "r", encoding="utf-8") as file:
         params = yaml.safe_load(file)
 
