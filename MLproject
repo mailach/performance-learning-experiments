@@ -1,6 +1,7 @@
 name: performance-influence-modeling
-docker_env: 
+docker_env:
   image: pim-pipeline:latest
+  environment: ["MLFLOW_TRACKING_USERNAME", "MLFLOW_TRACKING_PASSWORD"]
 entry_points:
   systems:
     parameters:

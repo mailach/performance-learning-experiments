@@ -59,10 +59,12 @@ def sample(
                 "Only use this method when all valid configurations are available."
             )
             configurations = system_cache.retrieve("measurements.tsv")
-            train, test = true_random_sampling(int(n), all_configs=configurations)
+            train, test = true_random_sampling(
+                int(n), all_configs=configurations)
 
         elif binary_method and numeric_method:
-            samples = pd.DataFrame(mixed_sampling(binary_method, numeric_method, vm))
+            samples = pd.DataFrame(mixed_sampling(
+                binary_method, numeric_method, vm))
             data = data.merge(
                 samples, on=list(samples.columns), how="left", indicator=True
             )
@@ -88,8 +90,8 @@ def sample(
                 "test.tsv": test,
             }
         )
-
-        mlflow.log_artifact(sampling_cache.cache_dir, "")
+        logging.info("Sampling cache dir: %s", sampling_cache.cache_dir)
+        mlflow.log_artifacts(sampling_cache.cache_dir, "")
 
 
 if __name__ == "__main__":

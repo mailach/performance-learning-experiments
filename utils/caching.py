@@ -4,7 +4,7 @@ import json
 import logging
 import xml.etree.ElementTree as ET
 import pandas as pd
-
+import time
 from mlflow.artifacts import download_artifacts
 
 
@@ -101,7 +101,8 @@ class CacheHandler:
         logging.info("Create cache directory for run %s", self.cache_dir)
         os.mkdir(self.cache_dir)
         self.existing_cache = False
-        logging.info("Successfully created cache directory for run %s", self.cache_dir)
+        logging.info(
+            "Successfully created cache directory for run %s", self.cache_dir)
 
     def _load_artifacts_from_remote(self, run_id: str):
         logging.info("Downloading artifacts of run %s to cache...", run_id)
@@ -122,9 +123,19 @@ class CacheHandler:
             _file_handling(filename, artifact)
 
     def _load_artifact(self, filename: str) -> any:
-        logging.info("Retrieve artifact %s from cache...", filename)
+
         filename = os.path.join(self.cache_dir, filename)
-        return _file_handling(filename)
+        try:
+            logging.info(
+                "Retrieve artifact %s from cache...", filename)
+            artifact = _file_handling(filename)
+        except:
+            logging.error("Can not retrieve artifact %s", filename)
+            time.sleep(120)
+            raise Exception
+        logging.info(
+            " Succssesfully retrieved artifact %s from cache...")
+        return artifact
 
     def retrieve(self, filenames: (list | str)) -> any:
         """

@@ -20,19 +20,20 @@ logging.basicConfig(
 def _run_or_load(
     entrypoint: str, params: dict[str, str], use_cache: bool = True
 ) -> str:
-    run_id = get_run_if_exists(entrypoint, params) if use_cache else False
+    #run_id = get_run_if_exists(entrypoint, params) if use_cache else False
 
-    if run_id:
-        logging.info("Use existing run %s for entrypoint %s", run_id, entrypoint)
-        CacheHandler(run_id, new_run=False)
-    else:
-        logging.info("Start new run for entrypoint %s", entrypoint)
-        run_id = mlflow.run(
-            ".",
-            entry_point=entrypoint,
-            parameters=params,
-            experiment_name=entrypoint,
-        ).run_id
+    # if run_id:
+    #     logging.info("Use existing run %s for entrypoint %s",
+    #                  run_id, entrypoint)
+    #     CacheHandler(run_id, new_run=False)
+    # else:
+    logging.info("Start new run for entrypoint %s", entrypoint)
+    run_id = mlflow.run(
+        ".",
+        entry_point=entrypoint,
+        parameters=params,
+        experiment_name=entrypoint
+    ).run_id
 
     return run_id
 
@@ -95,7 +96,8 @@ def workflow(param_file: str = "run.yaml"):
         sampling_run_id = _run_or_load("sampling", params["sampling"])
 
         learning_params["sampling_run_id"] = sampling_run_id
-        learning_run_id = _run_or_load("learning", learning_params, use_cache=False)
+        learning_run_id = _run_or_load(
+            "learning", learning_params, use_cache=False)
 
         evaluation_run_id = _run_or_load(
             "evaluation",

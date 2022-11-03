@@ -68,7 +68,13 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="booleanConstraints" />
+        <xs:element name="booleanConstraints">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="constraint" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="nonBooleanConstraints" />
         <xs:element name="mixedConstraints" />
       </xs:sequence>
@@ -76,4 +82,3 @@
     </xs:complexType>
   </xs:element>
 </xs:schema>
-

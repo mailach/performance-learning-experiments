@@ -1,9 +1,8 @@
 FROM python:3.10-slim
 
 COPY requirements.txt requirements.txt
-COPY .env .env
 
-RUN export $(grep -v '^#' .env | xargs)
+RUN apt-get -y update && apt-get install -y git 
 RUN pip install -r requirements.txt
 
 

@@ -6,4 +6,5 @@ requests
 click
 rich
 xmlschema
+git+https://github.com/mailach/SPLC2py.git@main 
 
