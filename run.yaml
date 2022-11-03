@@ -10,7 +10,7 @@ system:
     n_valid_configs: 192
     link: x
   local:
-    run_id: False
+    run_id: 5932b020975a4ec7bb78ee8f0e19d8f7
     data_dir: data/7zip/
     shema: "shema2015"
 sampling:

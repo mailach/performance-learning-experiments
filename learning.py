@@ -1,17 +1,12 @@
+from pim.learning.models import LearnerFactory, Learner
+from utils.caching import CacheHandler
+from rich.logging import RichHandler
+import pandas as pd
+import mlflow.sklearn
+import mlflow
+import click
 import logging
 import os
-
-import click
-
-import mlflow
-import mlflow.sklearn
-
-import pandas as pd
-from rich.logging import RichHandler
-
-
-from utils.caching import CacheHandler
-from pim.learning.models import LearnerFactory, Learner
 
 
 logging.basicConfig(
@@ -103,7 +98,8 @@ def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **k
         logging.info("Predict test set and save to cache.")
         prediction = _predict_on_test(learner, test_x, test_y)
         model_cache.save({"predicted.tsv": prediction})
-        mlflow.log_artifact(os.path.join(model_cache.cache_dir, "predicted.tsv"), "")
+        mlflow.log_artifact(os.path.join(
+            model_cache.cache_dir, "predicted.tsv"), "")
 
 
 if __name__ == "__main__":

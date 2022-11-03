@@ -1,12 +1,11 @@
+from pim.sampling.binary import true_random_sampling, binary_sampling, mixed_sampling
+from utils.caching import CacheHandler
+import pandas as pd
+from rich.logging import RichHandler
 import logging
 import mlflow
 import click
 
-from rich.logging import RichHandler
-import pandas as pd
-
-from utils.caching import CacheHandler
-from pim.sampling.binary import true_random_sampling, binary_sampling, mixed_sampling
 
 mlflow.set_experiment("sampling")
 logging.basicConfig(

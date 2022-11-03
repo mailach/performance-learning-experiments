@@ -32,7 +32,9 @@ def _run_or_load(
         ".",
         entry_point=entrypoint,
         parameters=params,
-        experiment_name=entrypoint
+        experiment_name=entrypoint,
+        backend="kubernetes",
+        backend_config="k8s_config.json"
     ).run_id
 
     return run_id

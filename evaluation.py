@@ -1,15 +1,11 @@
+from pim.learning.metrics import prediction_fault_rate
+from utils.runs import update_metrics, update_params
+from utils.caching import CacheHandler
+from rich.logging import RichHandler
 import logging
 
 import click
 import mlflow
-
-
-from rich.logging import RichHandler
-
-from utils.caching import CacheHandler
-from utils.runs import update_metrics, update_params
-
-from pim.learning.metrics import prediction_fault_rate
 
 
 logging.basicConfig(
@@ -49,15 +45,18 @@ def evaluate(workflow_id: str = ""):
         filter_string=f"tags.mlflow.parentRunId='{workflow_id}' AND attribute.status = 'FINISHED'",
     )
     if learner_runs.empty:
-        logging.warning("No runs for evaluation found. Did you use cached results?")
+        logging.warning(
+            "No runs for evaluation found. Did you use cached results?")
     else:
-        logging.info("Evaluate prediction from runs %s", learner_runs["run_id"])
+        logging.info("Evaluate prediction from runs %s",
+                     learner_runs["run_id"])
 
         metrics = [
             {"id": run_id, "metrics": _evaluate(run_id)}
             for run_id in learner_runs["run_id"]
         ]
-        best = sorted(metrics, key=lambda d: d["metrics"]["mean_fault_rate"])[0]
+        best = sorted(
+            metrics, key=lambda d: d["metrics"]["mean_fault_rate"])[0]
 
         logging.info("Evaluated trained models. Best run: %s", best)
 
