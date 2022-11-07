@@ -1,0 +1,5 @@
+{
+  "kube-context": "aged",
+  "kube-job-template-path": "k8s_job_temp.yaml",
+  "repository-uri": "mailach/pim-pipeline"
+}
