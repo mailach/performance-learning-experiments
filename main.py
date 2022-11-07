@@ -18,24 +18,31 @@ logging.basicConfig(
 
 
 def _run_or_load(
-    entrypoint: str, params: dict[str, str], use_cache: bool = True
+    entrypoint: str, params: dict[str, str], use_cache: bool = True, backend: str = None
 ) -> str:
-    #run_id = get_run_if_exists(entrypoint, params) if use_cache else False
+    
+    if backend == "kubernetes":
+        logging.warning("Using kubernetes as backend, this feature is experimental.")
+        run_id = mlflow.run(
+            ".",
+            entry_point=entrypoint,
+            parameters=params,
+            experiment_name=entrypoint,
+            backend="kubernetes",
+            backend_config="config/k8s/k8s_config.json",
+        ).run_id
+    else:
+        # run_id = get_run_if_exists(entrypoint, params) if use_cache else False
 
-    # if run_id:
-    #     logging.info("Use existing run %s for entrypoint %s",
-    #                  run_id, entrypoint)
-    #     CacheHandler(run_id, new_run=False)
-    # else:
-    logging.info("Start new run for entrypoint %s", entrypoint)
-    run_id = mlflow.run(
-        ".",
-        entry_point=entrypoint,
-        parameters=params,
-        experiment_name=entrypoint,
-        backend="kubernetes",
-        backend_config="k8s_config.json"
-    ).run_id
+        # if run_id:
+        #     logging.info("Use existing run %s for entrypoint %s",
+        #                  run_id, entrypoint)
+        #     CacheHandler(run_id, new_run=False)
+        # else:
+        logging.info("Start new run for entrypoint %s", entrypoint)
+        run_id = mlflow.run(
+            ".", entry_point=entrypoint, parameters=params, experiment_name=entrypoint
+        ).run_id
 
     return run_id
 
@@ -56,7 +63,8 @@ def _load_system(params: dict[str, str], param_file: str) -> str:
 
 @click.command()
 @click.option("--param_file", default="run.yaml")
-def workflow(param_file: str = "run.yaml"):
+@click.option("--backend", default=None)
+def workflow(param_file: str = "run.yaml", backend: str = None):
     """
     Function that executes a multistep workflow.
 
@@ -67,9 +75,6 @@ def workflow(param_file: str = "run.yaml"):
     """
     logging.info("Loading parameters...")
 
-    import os
-
-    logging.error(os.environ.get("MLFLOW_TRACKING_URI"))
     with open(param_file, "r", encoding="utf-8") as file:
         params = yaml.safe_load(file)
 
@@ -95,15 +100,15 @@ def workflow(param_file: str = "run.yaml"):
         system_run_id = _load_system(params["system"], param_file)
 
         params["sampling"]["system_run_id"] = system_run_id
-        sampling_run_id = _run_or_load("sampling", params["sampling"])
+        sampling_run_id = _run_or_load("sampling", params["sampling"], backend=backend)
 
         learning_params["sampling_run_id"] = sampling_run_id
         learning_run_id = _run_or_load(
-            "learning", learning_params, use_cache=False)
+            "learning", learning_params, use_cache=False, backend=backend
+        )
 
         evaluation_run_id = _run_or_load(
-            "evaluation",
-            {"workflow_id": active_run.info.run_id},
+            "evaluation", {"workflow_id": active_run.info.run_id}, backend=backend
         )
 
         mlflow.log_params(
