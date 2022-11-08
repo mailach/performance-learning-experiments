@@ -49,6 +49,7 @@ def _measurements_to_df(measurements, binaries, numerics):
         transformed.update(_extract_numeric(measurement, numerics))
         transformed.update(_extract_nfp(measurement))
         table.append(transformed)
+
     return pd.DataFrame(table)
 
 
@@ -70,5 +71,7 @@ class Measurements:
     def __init__(self, filename: str, binary, numeric):
         self._parser = SplcMeasurementParser()
         self.measurements = self._parser.parse(filename)
-        self.df = _measurements_to_df(self.measurements, binary, numeric)
+        df = _measurements_to_df(self.measurements, binary, numeric)
+        nfps = list(set(df.columns) - set(binary) - set(numeric))
+        self.df = df.rename(columns={nfp: "nfp_" + nfp for nfp in nfps})
         self.xml = self._parser.get_xml()

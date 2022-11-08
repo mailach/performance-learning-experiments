@@ -12,5 +12,6 @@ dependencies:
       - requests
       - click
       - rich
+      - kubernetes
       - xmlschema
       - git+https://github.com/mailach/SPLC2py.git@main

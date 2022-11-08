@@ -26,6 +26,9 @@ def _predict_on_test(learner: Learner, test_x: pd.DataFrame, test_y: pd.Series):
 
 def _load_data(data_file: str, cache: CacheHandler, nfp: str):
     data = cache.retrieve(data_file)
+    nfp = "nfp_" + nfp
+    columns_to_drop = [col for col in data.columns if "nfp_" in col and col != nfp]
+    data = data.drop(columns_to_drop, axis=1)
     Y = data[nfp]
     X = data.drop(nfp, axis=1)
     return X, Y
@@ -78,6 +81,7 @@ def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **k
     nfp : str
         name of nfp
     """
+    mlflow.autolog(silent=True)
     logging.info("Start learning from sampled configurations.")
     params = {k: v for k, v in kwargs.items() if k in hyperparams[method]}
 
@@ -86,6 +90,7 @@ def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **k
     test_x, test_y = _load_data("test.tsv", sampling_cache, nfp)
 
     with mlflow.start_run() as run:
+
         model_cache = CacheHandler(run.info.run_id)
         logging.info("Use hyperparameter: %s", params)
         learner = LearnerFactory(method, params)
@@ -97,9 +102,9 @@ def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **k
         learner.log(model_cache.cache_dir)
         logging.info("Predict test set and save to cache.")
         prediction = _predict_on_test(learner, test_x, test_y)
+
         model_cache.save({"predicted.tsv": prediction})
-        mlflow.log_artifact(os.path.join(
-            model_cache.cache_dir, "predicted.tsv"), "")
+        mlflow.log_artifact(os.path.join(model_cache.cache_dir, "predicted.tsv"), "")
 
 
 if __name__ == "__main__":

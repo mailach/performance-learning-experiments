@@ -22,3 +22,4 @@ def prediction_fault_rate(y: pd.Series, y_hat: pd.Series):
         "median_fault_rate": fault_rate.median(),
         "sd_fault_rate": fault_rate.std(),
     }
+
