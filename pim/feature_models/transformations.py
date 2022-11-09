@@ -12,6 +12,8 @@ def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> 
 
 
 def _extract_numeric(measurement, numerics):
+    if "numerics" not in measurement:
+        return {}
     transformed = {}
     measurement = {
         m.split(";")[0]: m.split(";")[1] for m in measurement["numerics"].split(",")

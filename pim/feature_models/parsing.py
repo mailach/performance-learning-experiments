@@ -2,7 +2,11 @@ import logging
 from abc import ABC, abstractmethod
 import xml.etree.ElementTree as ET
 
+import importlib.resources
 import xmlschema
+
+xsd_path_fm = importlib.resources.path("pim.ressources", "schema_splc_fm.xsd")
+xsd_path_measure = importlib.resources.path("pim.ressources", "schema_splc_meas.xsd")
 
 
 def _implication(option1, options):
@@ -16,23 +20,24 @@ def _exclusion(option1, options, optional=None):
     return [" | ".join([option1] + options)] + simple_exclusion
 
 
+def _optional(option):
+    return [option]
+
+
 class Parser(ABC):
     """
     Abstract Parser that implements standard functionalities all Parsers need.
     ...
-
     Attributes
     ----------
     schema : xmlschema.XMLSchema
         the schema used by the instance.
     decoded_xml: dict
         the last decoded xml, returned from parsing with the schema
-
     Methods
     -------
     get_xml():
         Encodes last parsed file as xml.etree.ElemetTree
-
     parse():
         Abstract method implemented by subclasses
     """
@@ -79,7 +84,6 @@ class FmParser(Parser):
 class SplcFmParser(FmParser):
     """
     Parser to validate and parse feature models in the SPLC xml format.
-
     Methods
     -------
     parse():
@@ -87,7 +91,7 @@ class SplcFmParser(FmParser):
     """
 
     def __init__(self):
-        self.schema = xmlschema.XMLSchema("data/schema/splc_fm.xsd")
+        self.schema = xmlschema.XMLSchema(xsd_path_fm)
 
     def _extract_binaries(self):
         binaries = []
@@ -101,6 +105,11 @@ class SplcFmParser(FmParser):
                 constraints += _exclusion(
                     bo["name"], bo["excludedOptions"]["option"], bo["optional"]
                 )
+            if bo["optional"] == "False":
+                constraints += _optional(bo["name"])
+
+            if bo["parent"]:
+                constraints += _implication(bo["name"], [bo["parent"]])
         return binaries, constraints
 
     def _extract_numerics(self):
@@ -115,7 +124,7 @@ class SplcFmParser(FmParser):
 
     def _extract_bool_constraints(self):
         if self.decoded_xml["booleanConstraints"]:
-            return self.decoded_xml["booleanConstraints"]
+            return [c for c in self.decoded_xml["booleanConstraints"]["constraint"]]
         return []
 
     def parse(self, xml_file: str):
@@ -139,7 +148,6 @@ class MeasurementParser(Parser):
 class SplcMeasurementParser(MeasurementParser):
     """
     Parser to validate and parse measurements in the SPLC xml format.
-
     Methods
     -------
     parse():
@@ -147,7 +155,7 @@ class SplcMeasurementParser(MeasurementParser):
     """
 
     def __init__(self):
-        self.schema = xmlschema.XMLSchema("data/schema/splc_measurements.xsd")
+        self.schema = xmlschema.XMLSchema(xsd_path_measure)
 
     def _extract_rows(self):
         rows = []

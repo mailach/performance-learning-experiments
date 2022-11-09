@@ -1,9 +1,8 @@
-<vm name="fm">
+<vm name="Apache">
   <binaryOptions>
     <configurationOption>
       <name>root</name>
-      <outputString>
-      </outputString>
+      <outputString>root</outputString>
       <prefix>
       </prefix>
       <postfix>
@@ -16,109 +15,106 @@
     </configurationOption>
     <configurationOption>
       <name>HostnameLookups</name>
-      <outputString>
-      </outputString>
+      <outputString>HostnameLookups</outputString>
       <prefix>
       </prefix>
       <postfix>
       </postfix>
-      <parent>root</parent>
+      <parent>
+      </parent>
       <impliedOptions />
       <excludedOptions />
       <optional>True</optional>
     </configurationOption>
     <configurationOption>
       <name>KeepAlive</name>
-      <outputString>
-      </outputString>
+      <outputString>KeepAlive</outputString>
       <prefix>
       </prefix>
       <postfix>
       </postfix>
-      <parent>root</parent>
+      <parent>
+      </parent>
       <impliedOptions />
       <excludedOptions />
       <optional>True</optional>
     </configurationOption>
     <configurationOption>
       <name>EnableSendfile</name>
-      <outputString>
-      </outputString>
+      <outputString>EnableSendfile</outputString>
       <prefix>
       </prefix>
       <postfix>
       </postfix>
-      <parent>root</parent>
+      <parent>
+      </parent>
       <impliedOptions />
       <excludedOptions />
       <optional>True</optional>
     </configurationOption>
     <configurationOption>
       <name>FollowSymLinks</name>
-      <outputString>
-      </outputString>
+      <outputString>FollowSymLinks</outputString>
       <prefix>
       </prefix>
       <postfix>
       </postfix>
-      <parent>root</parent>
-      <impliedOptions>
-        <options>InMemory</options>
-      </impliedOptions>
-      <excludedOptions>
-        <options>HostnameLookups</options>
-        <options>HostnameLookups</options>
-      </excludedOptions>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
       <optional>True</optional>
     </configurationOption>
     <configurationOption>
       <name>AccessLog</name>
-      <outputString>
-      </outputString>
+      <outputString>AccessLog</outputString>
       <prefix>
       </prefix>
       <postfix>
       </postfix>
-      <parent>root</parent>
-      <impliedOptions />
-      <excludedOptions />
-      <optional>True</optional>
-    </configurationOption>
-    <configurationOption>
-      <name>InMemory</name>
-      <outputString>
-      </outputString>
-      <prefix>
-      </prefix>
-      <postfix>
-      </postfix>
-      <parent>root</parent>
-      <impliedOptions />
-      <excludedOptions />
-      <optional>True</optional>
-    </configurationOption>
-    <configurationOption>
-      <name>Handle</name>
-      <outputString>
-      </outputString>
-      <prefix>
-      </prefix>
-      <postfix>
-      </postfix>
-      <parent>root</parent>
+      <parent>
+      </parent>
       <impliedOptions />
       <excludedOptions />
       <optional>True</optional>
     </configurationOption>
     <configurationOption>
       <name>ExtendedStatus</name>
-      <outputString>
-      </outputString>
+      <outputString>ExtendedStatus</outputString>
       <prefix>
       </prefix>
       <postfix>
       </postfix>
-      <parent>root</parent>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>InMemory</name>
+      <outputString>InMemory</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>Handle</option>
+      </excludedOptions>
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Handle</name>
+      <outputString>Handle</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
       <impliedOptions />
       <excludedOptions />
       <optional>True</optional>

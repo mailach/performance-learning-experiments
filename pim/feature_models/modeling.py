@@ -6,18 +6,23 @@ from pim.feature_models.parsing import SplcFmParser
 def _constr_to_clauses(constraints, features):
     final_constraints = []
     for constraint in constraints:
+        # bring constraint to dimacs format
         constraint = constraint.replace("!", "-")
-        for id_nr, feature in features.items():
-            constraint = constraint.replace(feature, str(id_nr))
         constraint = constraint.replace(" | ", " ")
         constraint += " 0"
-        if constraint.count(" ") == 1:
-            mand = constraint.split(" ")[0]
-            final_constraints += [
-                f"{mand} -{str(id_nr)} 0"
-                for id_nr in features.keys()
-                if str(id_nr) != mand
-            ]
+
+        # replace feature name with id
+        for id_nr, feature in features.items():
+            constraint = constraint.replace(feature, str(id_nr))
+
+        # identify mandatory features and add constraints for the combination of each one
+        # if constraint.count(" ") == 1:
+        #     mand = constraint.split(" ")[0]
+        #     final_constraints += [
+        #         f"{mand} -{str(id_nr)} 0"
+        #         for id_nr in features.keys()
+        #         if str(id_nr) != mand
+        #     ]
         final_constraints.append(constraint)
 
     return list(set(final_constraints))
@@ -37,7 +42,6 @@ class FeatureModel:
     """
     A FeatureModel, consisting of different representations
     ...
-
     Attributes
     ----------
     binary : Sequence[str]
@@ -50,8 +54,6 @@ class FeatureModel:
         dimacs representation of binary options
     xml : xml.etree.ElementTree
         xm representation of fm
-
-
     Methods
     -------
     get_features():

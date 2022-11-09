@@ -1,0 +1,84 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="vm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="binaryOptions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="configurationOption" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name" minOccurs="1"/>
+                    <xs:element type="xs:string" name="outputString" minOccurs="0"/>
+                    <xs:element type="xs:string" name="prefix" minOccurs="0"/>
+                    <xs:element type="xs:string" name="postfix" minOccurs="0"/>
+                    <xs:element type="xs:string" name="parent" minOccurs="0"/>
+                    <xs:element name="impliedOptions" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="option" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="excludedOptions" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="option" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="optional" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="numericOptions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="configurationOption" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name" minOccurs="1"/>
+                    <xs:element type="xs:string" name="outputString" minOccurs="0"/>
+                    <xs:element type="xs:string" name="prefix" minOccurs="0"/>
+                    <xs:element type="xs:string" name="postfix" minOccurs="0"/>
+                    <xs:element type="xs:string" name="parent" minOccurs="0"/>
+                    <xs:element name="impliedOptions" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="option" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="excludedOptions" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="option" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:float" name="minValue"/>
+                    <xs:element type="xs:float" name="maxValue"/>
+                    <xs:element type="xs:string" name="stepFunction"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="booleanConstraints">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="constraint" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="nonBooleanConstraints" />
+        <xs:element name="mixedConstraints" />
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="name"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

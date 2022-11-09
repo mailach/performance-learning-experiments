@@ -1,0 +1,11 @@
+system: Apache
+domain: Web Server
+year: 2012
+authors: Guo et al.
+paper: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
+configurations: 192
+features: 9
+all_measured: True
+binary_features: True
+numeric_features: False
+nfp: [Measured_Value]
