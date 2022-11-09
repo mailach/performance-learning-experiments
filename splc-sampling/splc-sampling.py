@@ -118,7 +118,7 @@ def sample(
         run of system loading
     """
 
-    logging.info("Start sampling from configuration space.")
+    logging.info("Start sampling from configuration space using SPLC2py.")
     numeric_method = None if numeric_method == "None" else numeric_method
     system_cache = CacheHandler(system_run_id, new_run=False)
     feature_model = system_cache.retrieve("fm.xml")
