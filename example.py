@@ -1,8 +1,25 @@
-import mlflow
 import os
+import mlflow
 import logging
 from workflow import SimpleWorkflow, Step
 
+from steps import CustomStep
+
+
+# Registered sources:
+# systems:
+#     - "systems" -> params needs accessible data_dir
+#     - "existing" -> params needs to contain "run_id"
+# sampling:
+#     - "sampling"
+#     - "splc-sampling"
+# learning:
+#     - "sk-learning"
+# evaluation:
+#     - "evaluation"
+CWD = os.getcwd()
+
+system_params = {"data_dir": os.path.join(CWD, "data/Apache")}
 sampling_params = {"binary_method": "featurewise"}
 learning_params = {
     "method": "rf",
@@ -13,42 +30,20 @@ learning_params = {
     "min_samples_leaf": 2,
 }
 
-CWD = os.getcwd()
+# custom Step(custom["path"], custom["entrypoint"], params)
+
+custom_learner_step = CustomStep(
+    "https://github.com/mailach/deepperf-mlflow.git", "main"
+)
+
 
 workflow = SimpleWorkflow()
-workflow.set_system(data_dir=os.path.join(CWD, "data/Apache"))
-workflow.set_sampling(sampling_params)
-workflow.set_learning(learning_params)
+workflow.set_system("systems", system_params)
+workflow.set_sampling("splc-sampling", sampling_params)
+# workflow.set_learning("sk-learning", learning_params)  #
+
+print(custom_learner_step.path)
+workflow.set_learning(custom=custom_learner_step)
 workflow.execute()
 
-
-# system_id = mlflow.run(
-#     ".",
-#     entry_point="systems",
-#     parameters={"param_file": "run.yaml"},
-#     experiment_id=4,
-# ).run_id
-
-# sampling_id = mlflow.run(
-#     "splc-sampling/",
-#     parameters={
-#         "system_run_id": system_id,
-#         "binary_method": "featurewise",
-#         "numeric_method": "centralcomposite",
-#     },
-#     experiment_id=1,
-# ).run_id
-
-# learning_id = mlflow.run(
-#     ".",
-#     entry_point="learning",
-#     parameters={"sampling_run_id": sampling_id, "method": "rf", "nfp": "Time"},
-#     experiment_id=2,
-# ).run_id
-
-# evaluation_id = mlflow.run(
-#     ".",
-#     entry_point="evaluation",
-#     parameters={"learning_run_id": learning_id},
-#     experiment_id=3,
-# ).run_id
+# %%

@@ -2,6 +2,7 @@ import sys
 import logging
 from rich.logging import RichHandler
 import mlflow
+from steps import Step, StepFactory
 
 
 logging.basicConfig(
@@ -10,31 +11,7 @@ logging.basicConfig(
     handlers=[RichHandler()],
 )
 
-
-class Step:
-    run_id = None
-
-    def __init__(self, path: str, entry_point: str, params: dict = None, run_id=None):
-        self.path = path
-        self.entry_point = entry_point
-        self.params = params if params else {}
-        self.run_id = run_id
-
-    @classmethod
-    def from_run_id(cls, run_id):
-        """create step object from an existing run_id"""
-        return cls(None, None, None, run_id)
-
-    def run(self):
-        """either runs specified project or returns existing run"""
-        if not self.run_id:
-            self.run_id = mlflow.run(
-                self.path,
-                entry_point=self.entry_point,
-                parameters=self.params,
-                experiment_name=self.entry_point,
-            ).run_id
-        return self.run_id
+log = logging.getLogger("rich")
 
 
 class SimpleWorkflow:
@@ -45,33 +22,29 @@ class SimpleWorkflow:
     evaluation: Step = None
 
     def __init__(self):
-        self.evaluation = Step("steps/", "evaluation")
+        self.evaluation = StepFactory("evaluation")
 
-    def set_system(self, system_run_id: str = None, data_dir: str = None):
+    def set_system(self, source, params: dict = None):
         """set the system used in this workflow"""
-        if system_run_id:
-            self.system = Step.from_run_id(system_run_id)
-        elif data_dir:
-            self.system = Step("steps/", "systems", {"data_dir": data_dir})
+        self.system = StepFactory(source, params)
 
-    def set_sampling(self, params, custom: bool = False):
+    def set_sampling(self, source=None, params: dict = None, custom: Step = None):
         """specify sampling step"""
-        if not custom:
-            if "true_random" not in params:
-                self.sampling = Step("steps/splc-sampling/", "sampling", params)
-            else:
-                self.sampling = Step("steps/", "sampling", params)
+        self.sampling = custom if custom else StepFactory(source, params)
 
-    def set_learning(self, params, custom: bool = False):
+    def set_learning(self, source=None, params: dict = None, custom: Step = None):
         """specify learning step"""
-        if not custom:
-            self.learning = Step("steps/", "learning", params)
+        self.learning = custom if custom else StepFactory(source, params)
+
+    def set_evaluation(self, source=None, params: dict = None, custom: Step = None):
+        """specify learning step"""
+        self.evaluation = custom if custom else StepFactory(source, params)
 
     def execute(self, backend=None, backend_config=None):
         """execute specified steps"""
 
         if None in [self.system, self.sampling, self.learning, self.evaluation]:
-            logging.error("Specify all steps prior to execution. Exiting...")
+            log.error("Specify all steps prior to execution. Exiting...")
             sys.exit()
         with mlflow.start_run() as run:
             ids = {}
