@@ -27,6 +27,7 @@
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
+                    <xs:element type="xs:string" name="defaultValue" minOccurs="0"/>
                     <xs:element type="xs:string" name="optional" minOccurs="0"/>
                   </xs:sequence>
                 </xs:complexType>
@@ -62,6 +63,7 @@
                     <xs:element type="xs:float" name="minValue"/>
                     <xs:element type="xs:float" name="maxValue"/>
                     <xs:element type="xs:string" name="stepFunction"/>
+                    <xs:element type="xs:string" name="defaultValue" minOccurs="0"/>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>

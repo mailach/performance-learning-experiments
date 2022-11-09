@@ -1,0 +1,12 @@
+system: Dune
+domain: Multi-Grid Solver
+year: 2015
+authors: Siegmund et al.
+paper: https://dl.acm.org/doi/pdf/10.1145/2786805.2786845
+configurations: 2304
+features: 11
+constraints: 20
+all_measured: True
+binary_features: 8
+numeric_features: 3
+nfp: [Performance]

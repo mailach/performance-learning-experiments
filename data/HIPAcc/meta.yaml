@@ -1,0 +1,12 @@
+system: HIPAcc
+domain: Image Processing
+year: 2015
+authors: Siegmund et al.
+paper: https://dl.acm.org/doi/pdf/10.1145/2786805.2786845
+configurations: 13485
+features: 33
+constraints: 416
+all_measured: True
+binary_features: 31
+numeric_features: 2
+nfp: [Performance]
