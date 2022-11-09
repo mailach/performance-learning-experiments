@@ -1,9 +1,0 @@
-system: x264
-domain: Encoder
-measurements: 
-  - year: 2012
-    authors: Guo et al.
-    paper: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
-    configurations: 1152
-    features: 16
-    all_measured: True

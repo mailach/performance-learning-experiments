@@ -86,8 +86,8 @@ def load_system(data_dir: str):
                 "fm.xml": feature_model.xml,
                 "fm.dimacs": feature_model.dimacs,
                 "features.json": feature_model.get_features(),
-                "measurements.xml": measurements.xml,
                 "measurements.tsv": measurements.df,
+                "meta.json": params,
             }
         )
 

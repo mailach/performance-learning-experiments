@@ -1,0 +1,12 @@
+system: BerkeleyDBJ
+domain: Database
+measurements: 
+year: 2012
+authors: Guo et al.
+paper: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
+configurations: 400
+features: 26
+all_measured: True
+binary_features: 26
+numeric_features: 0
+nfp: [Performance]

@@ -1,527 +1,434 @@
-<plm canReuseInstance="true" name="BerkeleyDB">
-	<element dynamic="false" id="2" name="Base" optional="false" type="feature">
-		<path_absolut/>
-		<parentElement/>
-		<path_relativ/>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="3" name="Persistence" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement/>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>4</id>
-			</child>
-			<child optional="false">
-				<id>12</id>
-			</child>
-			<child optional="false">
-				<id>15</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="4" name="IO" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>3</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>5</id>
-			</child>
-			<child optional="false">
-				<id>6</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="5" name="OldIO" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>4</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>6</id>
-					<name>NewIO</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="6" name="NewIO" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>4</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>5</id>
-					<name>OldIO</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>7</id>
-			</child>
-			<child optional="false">
-				<id>8</id>
-			</child>
-			<child optional="true">
-				<id>11</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="7" name="NIOBase" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>6</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="8" name="NIOType" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>6</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>9</id>
-			</child>
-			<child optional="false">
-				<id>10</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="9" name="ChunkedNIO" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>8</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>10</id>
-					<name>SingleWriteNIO</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="10" name="SingleWriteNIO" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>8</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>9</id>
-					<name>ChunkedNIO</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="11" name="DirectNIO" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>6</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="12" name="LogSize" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>3</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>13</id>
-			</child>
-			<child optional="false">
-				<id>14</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="13" name="S100MiB" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>12</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>14</id>
-					<name>S1MiB</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="14" name="S1MiB" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>12</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>13</id>
-					<name>S100MiB</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="15" name="Checksum" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>3</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="16" name="BTreeFeatures" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement/>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="true">
-				<id>17</id>
-			</child>
-			<child optional="false">
-				<id>18</id>
-			</child>
-			<child optional="true">
-				<id>21</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="17" name="INCompressor" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>16</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="18" name="IEvictor" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>16</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>19</id>
-			</child>
-			<child optional="false">
-				<id>20</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="19" name="Evictor" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>18</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="20" name="Critical_Eviction" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>18</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="21" name="Verifier" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>16</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires">
-				<constraint_element>
-					<id>17</id>
-					<name>INCompressor</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="22" name="ITracing" optional="true" type="feature">
-		<path_absolut/>
-		<parentElement/>
-		<path_relativ/>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>23</id>
-			</child>
-			<child optional="false">
-				<id>24</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="23" name="Tracing" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>22</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="24" name="TracingLevel" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>22</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>25</id>
-			</child>
-			<child optional="false">
-				<id>26</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="25" name="Severe" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>24</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>26</id>
-					<name>Finest</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="26" name="Finest" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>24</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>25</id>
-					<name>Severe</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="27" name="Statistics" optional="true" type="feature">
-		<path_absolut/>
-		<parentElement/>
-		<path_relativ/>
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<properties/>
-	<furtherConstraints/>
-</plm>
+<vm name="BerkeleyDB">
+  <binaryOptions>
+    <configurationOption>
+      <name>Base</name>
+      <outputString>Base</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Persistence</name>
+      <outputString>Persistence</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>IO</name>
+      <outputString>IO</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>Persistence</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>OldIO</name>
+      <outputString>OldIO</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>IO</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>NewIO</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>NewIO</name>
+      <outputString>NewIO</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>IO</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>OldIO</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>NIOBase</name>
+      <outputString>NIOBase</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>NewIO</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>NIOType</name>
+      <outputString>NIOType</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>NewIO</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>ChunkedNIO</name>
+      <outputString>ChunkedNIO</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>NIOType</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>SingleWriteNIO</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>SingleWriteNIO</name>
+      <outputString>SingleWriteNIO</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>NIOType</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>ChunkedNIO</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>DirectNIO</name>
+      <outputString>DirectNIO</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>NewIO</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>LogSize</name>
+      <outputString>LogSize</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>Persistence</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>S10MiB</name>
+      <outputString>S10MiB</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>LogSize</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>S100MiB</option>
+        <option>S1MiB</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>S100MiB</name>
+      <outputString>S100MiB</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>LogSize</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>S10MiB</option>
+        <option>S1MiB</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>S1MiB</name>
+      <outputString>S1MiB</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>LogSize</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>S10MiB</option>
+        <option>S100MiB</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Checksum</name>
+      <outputString>Checksum</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>Persistence</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>BTreeFeatures</name>
+      <outputString>BTreeFeatures</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>INCompressor</name>
+      <outputString>INCompressor</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>BTreeFeatures</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>IEvictor</name>
+      <outputString>IEvictor</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>BTreeFeatures</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Evictor</name>
+      <outputString>Evictor</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>IEvictor</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Critical_Eviction</name>
+      <outputString>Critical_Eviction</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>IEvictor</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Verifier</name>
+      <outputString>Verifier</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>BTreeFeatures</parent>
+      <impliedOptions>
+        <option>INCompressor</option>
+      </impliedOptions>
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>BTreeCacheSize</name>
+      <outputString>BTreeCacheSize</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>BTreeFeatures</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Max</name>
+      <outputString>Max</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>BTreeCacheSize</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>Mid</option>
+        <option>Min</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Mid</name>
+      <outputString>Mid</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>BTreeCacheSize</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>Max</option>
+        <option>Min</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Min</name>
+      <outputString>Min</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>BTreeCacheSize</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>Max</option>
+        <option>Mid</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>ITracing</name>
+      <outputString>ITracing</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Tracing</name>
+      <outputString>Tracing</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>ITracing</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>TracingLevel</name>
+      <outputString>TracingLevel</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>ITracing</parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Severe</name>
+      <outputString>Severe</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>TracingLevel</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>Config</option>
+        <option>Finest</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Config</name>
+      <outputString>Config</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>TracingLevel</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>Severe</option>
+        <option>Finest</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Finest</name>
+      <outputString>Finest</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>TracingLevel</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>Severe</option>
+        <option>Config</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>Statistics</name>
+      <outputString>Statistics</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+  </binaryOptions>
+  <numericOptions />
+  <booleanConstraints />
+  <nonBooleanConstraints />
+  <mixedConstraints />
+</vm>

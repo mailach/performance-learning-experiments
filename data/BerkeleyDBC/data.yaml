@@ -1,9 +1,0 @@
-system: BerkeleyDBC
-domain: Database
-measurements: 
-  - year: 2012
-    authors: Guo et al.
-    paper: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6693089
-    configurations: 2560
-    features: 18
-    all_measured: True

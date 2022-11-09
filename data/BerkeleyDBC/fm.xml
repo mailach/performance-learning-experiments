@@ -1,420 +1,275 @@
-<plm name="BerkeleyDbC" canReuseInstance="true">
-  <element id="1" name="HAVE_CRYPTO" type="feature" optional="true" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="3" name="HAVE_HASH" type="feature" optional="true" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="4" name="HAVE_REPLICATION" type="feature" optional="true" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="5" name="HAVE_VERIFY" type="feature" optional="true" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="6" name="HAVE_SEQUENCE" type="feature" optional="true" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="7" name="HAVE_STATISTICS" type="feature" optional="true" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="8" name="DIAGNOSTIC" type="feature" optional="true" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="9" name="PAGESIZE" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements>
-      <child optional="false">
-        <id>10</id>
-      </child>
-      <child optional="false">
-        <id>11</id>
-      </child>
-      <child optional="false">
-        <id>12</id>
-      </child>
-      <child optional="false">
-        <id>13</id>
-      </child>
-      <child optional="false">
-        <id>14</id>
-      </child>
-    </childElements>
-    <order />
-  </element>
-  <element id="10" name="PS1K" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>9</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>11</id>
-          <name>PS4k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>12</id>
-          <name>PS8k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>13</id>
-          <name>PS16k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>14</id>
-          <name>PS32k</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="11" name="PS4K" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>9</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>10</id>
-          <name>PS1k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>14</id>
-          <name>PS32k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>13</id>
-          <name>PS16k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>12</id>
-          <name>PS8k</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="12" name="PS8K" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>9</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>10</id>
-          <name>PS1k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>11</id>
-          <name>PS4k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>13</id>
-          <name>PS16k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>14</id>
-          <name>PS32k</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="13" name="PS16K" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>9</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>10</id>
-          <name>PS1k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>11</id>
-          <name>PS4k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>12</id>
-          <name>PS8k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>14</id>
-          <name>PS32k</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="14" name="PS32K" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>9</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>10</id>
-          <name>PS1k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>11</id>
-          <name>PS4k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>12</id>
-          <name>PS8k</name>
-        </constraint_element>
-        <constraint_element>
-          <id>13</id>
-          <name>PS16k</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="15" name="CACHESIZE" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement />
-    <constraints>
-      <constraint type="alternative" />
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements>
-      <child optional="false">
-        <id>16</id>
-      </child>
-      <child optional="false">
-        <id>17</id>
-      </child>
-      <child optional="false">
-        <id>18</id>
-      </child>
-      <child optional="false">
-        <id>19</id>
-      </child>
-    </childElements>
-    <order />
-  </element>
-  <element id="16" name="CS32MB" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>15</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>17</id>
-          <name>CS16MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>18</id>
-          <name>CS64MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>19</id>
-          <name>CS512MB</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="17" name="CS16MB" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>15</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>16</id>
-          <name>CS32MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>19</id>
-          <name>CS512MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>18</id>
-          <name>CS64MB</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="18" name="CS64MB" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>15</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>16</id>
-          <name>CS32MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>17</id>
-          <name>CS16MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>19</id>
-          <name>CS512MB</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-  <element id="19" name="CS512MB" type="feature" optional="false" dynamic="true">
-    <path_absolut />
-    <path_relativ />
-    <parentElement>
-      <id>15</id>
-    </parentElement>
-    <constraints>
-      <constraint type="alternative">
-        <constraint_element>
-          <id>16</id>
-          <name>CS32MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>17</id>
-          <name>CS16MB</name>
-        </constraint_element>
-        <constraint_element>
-          <id>18</id>
-          <name>CS64MB</name>
-        </constraint_element>
-      </constraint>
-      <constraint type="commulative" />
-      <constraint type="requires" />
-      <constraint type="excludes" />
-    </constraints>
-    <childElements />
-    <order />
-  </element>
-</plm>
+<vm name="BerkeleyDbC">
+  <binaryOptions>
+    <configurationOption>
+      <name>HAVE_CRYPTO</name>
+      <outputString>HAVE_CRYPTO1</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>HAVE_HASH</name>
+      <outputString>HAVE_HASH</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>HAVE_REPLICATION</name>
+      <outputString>HAVE_REPLICATION</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>HAVE_VERIFY</name>
+      <outputString>HAVE_VERIFY</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>HAVE_SEQUENCE</name>
+      <outputString>HAVE_SEQUENCE</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>HAVE_STATISTICS</name>
+      <outputString>HAVE_STATISTICS</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>DIAGNOSTIC</name>
+      <outputString>DIAGNOSTIC</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>PAGESIZE</name>
+      <outputString>PAGESIZE</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>PS1K</name>
+      <outputString>PS1K</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>PAGESIZE</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>PS4K</option>
+        <option>PS8K</option>
+        <option>PS16K</option>
+        <option>PS32K</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>PS4K</name>
+      <outputString>PS4K</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>PAGESIZE</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>PS1K</option>
+        <option>PS32K</option>
+        <option>PS16K</option>
+        <option>PS8K</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>PS8K</name>
+      <outputString>PS8K</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>PAGESIZE</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>PS1K</option>
+        <option>PS4K</option>
+        <option>PS16K</option>
+        <option>PS32K</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>PS16K</name>
+      <outputString>PS16K</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>PAGESIZE</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>PS1K</option>
+        <option>PS4K</option>
+        <option>PS8K</option>
+        <option>PS32K</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>PS32K</name>
+      <outputString>PS32K</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>PAGESIZE</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>PS1K</option>
+        <option>PS4K</option>
+        <option>PS8K</option>
+        <option>PS16K</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>CACHESIZE</name>
+      <outputString>CACHESIZE</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+    <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>CS32MB</name>
+      <outputString>CS32MB</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>CACHESIZE</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>CS16MB</option>
+        <option>CS64MB</option>
+        <option>CS512MB</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>CS16MB</name>
+      <outputString>CS16MB</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>CACHESIZE</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>CS32MB</option>
+        <option>CS512MB</option>
+        <option>CS64MB</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>CS64MB</name>
+      <outputString>CS64MB</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>CACHESIZE</parent>     
+      <impliedOptions />
+      <excludedOptions>
+        <option>CS32MB</option>
+        <option>CS16MB</option>
+        <option>CS512MB</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>CS512MB</name>
+      <outputString>CS512MB</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>CACHESIZE</parent>     
+      <impliedOptions />
+      <excludedOptions>
+        <option>CS32MB</option>
+        <option>CS16MB</option>
+        <option>CS64MB</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+  </binaryOptions>
+  <numericOptions />
+  <booleanConstraints />
+  <nonBooleanConstraints />
+  <mixedConstraints />
+</vm>
+

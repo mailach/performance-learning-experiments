@@ -1,314 +1,228 @@
-<plm canReuseInstance="true" name="H264">
-	<element dynamic="false" id="2" name="no_asm" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="3" name="no_8x8dct" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="4" name="no_cabac" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="5" name="no_deblock" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="6" name="no_fast_pskip" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="7" name="no_mbtree" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="8" name="no_mixed_refs" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="9" name="no_weightb" optional="true" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="10" name="rc_lookahead" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>11</id>
-			</child>
-			<child optional="false">
-				<id>12</id>
-			</child>
-			<child optional="false">
-				<id>13</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="11" name="rc_lookahead_20" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>10</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>12</id>
-					<name>rc_lookahead_40</name>
-				</constraint_element>
-				<constraint_element>
-					<id>13</id>
-					<name>rc_lookahead_60</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="12" name="rc_lookahead_40" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>10</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>11</id>
-					<name>rc_lookahead_20</name>
-				</constraint_element>
-				<constraint_element>
-					<id>13</id>
-					<name>rc_lookahead_60</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="13" name="rc_lookahead_60" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>10</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>11</id>
-					<name>rc_lookahead_20</name>
-				</constraint_element>
-				<constraint_element>
-					<id>12</id>
-					<name>rc_lookahead_40</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="14" name="ref" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement />
-		<constraints>
-			<constraint type="alternative"/>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements>
-			<child optional="false">
-				<id>15</id>
-			</child>
-			<child optional="false">
-				<id>16</id>
-			</child>
-			<child optional="false">
-				<id>17</id>
-			</child>
-		</childElements>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="15" name="ref_1" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>14</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>16</id>
-					<name>ref_5</name>
-				</constraint_element>
-				<constraint_element>
-					<id>17</id>
-					<name>ref_9</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="16" name="ref_5" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>14</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>15</id>
-					<name>ref_1</name>
-				</constraint_element>
-				<constraint_element>
-					<id>17</id>
-					<name>ref_9</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<element dynamic="false" id="17" name="ref_9" optional="false" type="feature">
-		<path_absolut/>
-		<path_relativ/>
-		<parentElement>
-			<id>14</id>
-		</parentElement>
-		<constraints>
-			<constraint type="alternative">
-				<constraint_element>
-					<id>15</id>
-					<name>ref_1</name>
-				</constraint_element>
-				<constraint_element>
-					<id>16</id>
-					<name>ref_5</name>
-				</constraint_element>
-			</constraint>
-			<constraint type="commulative"/>
-			<constraint type="requires"/>
-			<constraint type="excludes"/>
-		</constraints>
-		<childElements/>
-		<order/>
-		<classes/>
-	</element>
-	<properties/>
-	<furtherConstraints/>
-</plm>
+<vm name="H264">
+  <binaryOptions>
+    <configurationOption>
+      <name>no_asm</name>
+      <outputString>no_asm</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>no_8x8dct</name>
+      <outputString>no_8x8dct</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>no_cabac</name>
+      <outputString>no_cabac</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>no_deblock</name>
+      <outputString>no_deblock</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>no_fast_pskip</name>
+      <outputString>no_fast_pskip</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>no_mbtree</name>
+      <outputString>no_mbtree</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>no_mixed_refs</name>
+      <outputString>no_mixed_refs</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>no_weightb</name>
+      <outputString>no_weightb</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>True</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>rc_lookahead</name>
+      <outputString>rc_lookahead</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>rc_lookahead_20</name>
+      <outputString>rc_lookahead_20</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>rc_lookahead</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>rc_lookahead_40</option>
+        <option>rc_lookahead_60</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>rc_lookahead_40</name>
+      <outputString>rc_lookahead_40</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>rc_lookahead</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>rc_lookahead_20</option>
+        <option>rc_lookahead_60</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>rc_lookahead_60</name>
+      <outputString>rc_lookahead_60</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>rc_lookahead</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>rc_lookahead_20</option>
+        <option>rc_lookahead_40</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>ref</name>
+      <outputString>ref</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>
+      </parent>
+      <impliedOptions />
+      <excludedOptions />
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>ref_1</name>
+      <outputString>ref_1</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>ref</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>ref_5</option>
+        <option>ref_9</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>ref_5</name>
+      <outputString>ref_5</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>ref</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>ref_1</option>
+        <option>ref_9</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+    <configurationOption>
+      <name>ref_9</name>
+      <outputString>ref_9</outputString>
+      <prefix>
+      </prefix>
+      <postfix>
+      </postfix>
+      <parent>ref</parent>
+      <impliedOptions />
+      <excludedOptions>
+        <option>ref_1</option>
+        <option>ref_5</option>
+      </excludedOptions>
+      <optional>False</optional>
+    </configurationOption>
+  </binaryOptions>
+  <numericOptions />
+  <booleanConstraints />
+  <nonBooleanConstraints />
+  <mixedConstraints />
+</vm>

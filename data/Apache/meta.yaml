@@ -8,4 +8,4 @@ features: 9
 all_measured: True
 binary_features: True
 numeric_features: False
-nfp: [Measured_Value]
+nfp: [ResponseRate]
