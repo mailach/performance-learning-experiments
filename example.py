@@ -12,7 +12,7 @@ from steps import CustomStep
 #     - "sampling"
 #     - "splc-sampling"
 # learning:
-#     - "sk-learning"
+#     - "sk-learning" #supported: RandamForest, CART, KNNR, KRR,
 # evaluation:
 #     - "evaluation"
 CWD = os.getcwd()

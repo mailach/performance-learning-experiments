@@ -1,4 +1,42 @@
+import os
+import yaml
+import logging
+
+from rich.logging import RichHandler
 import mlflow
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="WORKFLOW    %(message)s",
+    handlers=[RichHandler()],
+)
+
+
+def _generate_filter_string(params: dict):
+    clauses = [
+        "parameter." + param + " = '" + str(value) + "'"
+        for param, value in params.items()
+        if param != "data_dir"
+    ]
+    query = " AND ".join(clauses) + " AND attribute.status = 'FINISHED'"
+    return query
+
+
+def get_run_if_exists(entrypoint: str, parameters: dict):
+    """
+    Returns a run if one exists.
+
+    Parameters
+    ----------
+    parameters : dict[str, any]
+        the parameters that the run should contain
+    """
+
+    filter_string = _generate_filter_string(parameters)
+    runs = mlflow.search_runs(
+        experiment_names=[entrypoint], filter_string=filter_string
+    )
+    return runs["run_id"][0] if not runs.empty else False
 
 
 class Step:
@@ -14,12 +52,15 @@ class Step:
 
     def run(self):
         """either runs specified project or returns existing run"""
-        self.run_id = mlflow.run(
-            self.path,
-            entry_point=self.entry_point,
-            parameters=self.params,
-            experiment_name=self.entry_point,
-        ).run_id
+        if not self.run_id:
+            self.run_id = mlflow.run(
+                self.path,
+                entry_point=self.entry_point,
+                parameters=self.params,
+                experiment_name=self.entry_point,
+            ).run_id
+        else:
+            logging.warning("Use existing system data from run %s", self.run_id)
 
         return self.run_id
 
@@ -70,6 +111,7 @@ class DefaultEvaluationStep(Step):
 
 class SystemLoadingStep(Step):
     def __init__(self, params: dict = None):
+        self.run_id = get_run_if_exists("systems", params)
         self.path = "steps/"
         self.entry_point = "systems"
         self.params = params if params else {}
