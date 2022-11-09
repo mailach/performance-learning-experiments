@@ -16,7 +16,7 @@ def _generate_filter_string(params: dict):
     clauses = [
         "parameter." + param + " = '" + str(value) + "'"
         for param, value in params.items()
-        if param != "data_dir"
+        if param != "nfp"
     ]
     query = " AND ".join(clauses) + " AND attribute.status = 'FINISHED'"
     return query
@@ -111,10 +111,14 @@ class DefaultEvaluationStep(Step):
 
 class SystemLoadingStep(Step):
     def __init__(self, params: dict = None):
-        self.run_id = get_run_if_exists("systems", params)
+        self.run_id = get_run_if_exists("systems", self._load_meta(params["data_dir"]))
         self.path = "steps/"
         self.entry_point = "systems"
         self.params = params if params else {}
+
+    def _load_meta(self, data_dir):
+        with open(os.path.join(data_dir, "meta.yaml"), "r", encoding="utf-8") as f:
+            return yaml.safe_load(f)
 
 
 def StepFactory(source, params=None):
