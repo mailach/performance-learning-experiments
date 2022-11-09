@@ -4,7 +4,7 @@ docker_env:
   image: mailach/splc2py
   environment: ["MLFLOW_TRACKING_URI","MLFLOW_TRACKING_USERNAME", "MLFLOW_TRACKING_PASSWORD"]
 entry_points:
-  main:
+  sampling:
     parameters:
       system_run_id: {type: string}
       binary_method: {type: string}
