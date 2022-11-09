@@ -1,4 +1,14 @@
+import sys
+import logging
+from rich.logging import RichHandler
 import mlflow
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="WORKFLOW    %(message)s",
+    handlers=[RichHandler()],
+)
 
 
 class Step:
@@ -58,30 +68,30 @@ class SimpleWorkflow:
             self.learning = Step("steps/", "learning", params)
 
     def execute(self, backend=None, backend_config=None):
+        """execute specified steps"""
+
+        if None in [self.system, self.sampling, self.learning, self.evaluation]:
+            logging.error("Specify all steps prior to execution. Exiting...")
+            sys.exit()
         with mlflow.start_run() as run:
+            ids = {}
 
-            workflow_run_id = run.info.run_id
-            system_run_id = self.system.run()
+            ids["workflow_run_id"] = run.info.run_id
+            ids["system_run_id"] = self.system.run()
 
-            self.sampling.params["system_run_id"] = system_run_id
-            sampling_run_id = self.sampling.run()
+            self.sampling.params["system_run_id"] = ids["system_run_id"]
+            ids["sampling_run_id"] = self.sampling.run()
 
-            self.learning.params["sampling_run_id"] = sampling_run_id
-            learning_run_id = self.learning.run()
+            self.learning.params["sampling_run_id"] = ids["sampling_run_id"]
+            ids["learning_run_id"] = self.learning.run()
 
-            self.evaluation.params["learning_run_id"] = learning_run_id
-            evaluation_run_id = self.evaluation.run()
+            self.evaluation.params["learning_run_id"] = ids["learning_run_id"]
+            ids["evaluation_run_id"] = self.evaluation.run()
 
         if backend and backend_config:
             pass
 
-        return {
-            "workflow_run_id": workflow_run_id,
-            "system_run_id": system_run_id,
-            "sampling_run_id": sampling_run_id,
-            "learning_run_id": learning_run_id,
-            "evaluation_run_id": evaluation_run_id,
-        }
+        return ids
 
 
 class MultiLearnerWorkflow:
