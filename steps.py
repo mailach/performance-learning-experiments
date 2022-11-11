@@ -4,6 +4,7 @@ import logging
 
 from rich.logging import RichHandler
 import mlflow
+import mlflow.projects
 
 logging.basicConfig(
     level=logging.INFO,
@@ -53,7 +54,7 @@ class Step:
     def run(self):
         """either runs specified project or returns existing run"""
         if not self.run_id:
-            self.run_id = mlflow.run(
+            self.run_id = mlflow.projects.run(
                 self.path,
                 entry_point=self.entry_point,
                 parameters=self.params,

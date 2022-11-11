@@ -9,14 +9,6 @@ CWD = os.getcwd()
 
 system_params = {"data_dir": os.path.join(CWD, "data/Apache")}
 sampling_params = {"binary_method": "featurewise"}
-learning_params = {
-    "method": "rf",
-    "nfp": "ResponseRate",
-    "random_state": 1,
-    "max_features": 4,
-    "n_estimators": 15,
-    "min_samples_leaf": 2,
-}
 
 
 custom_learner_step = CustomStep(

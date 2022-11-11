@@ -72,11 +72,7 @@ class CARTLearner(ScikitLearner):
         self.feature_names = X.columns
 
     def log(self, cache_dir) -> None:
-        mlflow.sklearn.log_model(
-            sk_model=self.model,
-            artifact_path="",
-            registered_model_name="CART",
-        )
+        mlflow.sklearn.log_model(sk_model=self.model, artifact_path="")
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
         logging.info("Visualize tree")
         self._visualize()
@@ -111,11 +107,7 @@ class RFLearner(ScikitLearner):
 
     def log(self, cache_dir) -> None:
         logging.info("Log model to registry and save to cache %s", cache_dir)
-        mlflow.sklearn.log_model(
-            sk_model=self.model,
-            artifact_path="",
-            registered_model_name="RF",
-        )
+        mlflow.sklearn.log_model(sk_model=self.model, artifact_path="")
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
 
@@ -134,11 +126,7 @@ class SvrLearner(ScikitLearner):
 
     def log(self, cache_dir) -> None:
         logging.info("Log model to registry and save to cache %s", cache_dir)
-        mlflow.sklearn.log_model(
-            sk_model=self.model,
-            artifact_path="",
-            registered_model_name="SVR",
-        )
+        mlflow.sklearn.log_model(sk_model=self.model, artifact_path="")
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
 
@@ -161,7 +149,6 @@ class KrrLearner(ScikitLearner):
         mlflow.sklearn.log_model(
             sk_model=self.model,
             artifact_path="",
-            registered_model_name="KRR",
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
@@ -182,11 +169,7 @@ class KnnLearner(ScikitLearner):
 
     def log(self, cache_dir) -> None:
         logging.info("Log model to registry and save to cache %s", cache_dir)
-        mlflow.sklearn.log_model(
-            sk_model=self.model,
-            artifact_path="",
-            registered_model_name="KNN",
-        )
+        mlflow.sklearn.log_model(sk_model=self.model, artifact_path="")
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
 
@@ -205,7 +188,6 @@ class MrLearner(ScikitLearner):
         mlflow.sklearn.log_model(
             sk_model=self.model,
             artifact_path="",
-            registered_model_name="MR",
         )
         mlflow.sklearn.save_model(sk_model=self.model, path=cache_dir)
 
