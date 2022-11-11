@@ -102,7 +102,7 @@ class MultiStepWorkflow(Workflow):
                 "Running a simple workflow as multistep. Consider using SimpleWorkflow class."
             )
 
-    def _execute_multiple_steps(self, step_name, threads=5):
+    def _execute_multiple_steps(self, step_name, threads=2):
 
         with ThreadPoolExecutor(max_workers=threads) as executor:
             run_ids = executor.map(lambda step: step.run(), self.steps[step_name])

@@ -5,7 +5,6 @@ from workflow import MultiStepWorkflow
 CWD = os.getcwd()
 
 system_params = {"data_dir": os.path.join(CWD, "data/Apache")}
-sampling_params = {"binary_method": "negfw"}
 learning_params = {"method": "rf", "nfp": "ResponseRate"}
 
 

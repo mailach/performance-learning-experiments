@@ -81,7 +81,6 @@ def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **k
     nfp : str
         name of nfp
     """
-    mlflow.autolog(silent=True)
     logging.info("Start learning from sampled configurations.")
     params = {k: v for k, v in kwargs.items() if k in hyperparams[method]}
 
