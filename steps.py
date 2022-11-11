@@ -64,6 +64,14 @@ class Step:
 
         return self.run_id
 
+    def deepcopy(self):
+        copy = Step()
+        copy.path = self.path
+        copy.run_id = self.run_id
+        copy.entry_point = self.entry_point
+        copy.params = self.params.copy()
+        return copy
+
 
 class CustomStep(Step):
     def __init__(self, path: str, entry_point: str, params: dict = None, run_id=None):
