@@ -1,6 +1,5 @@
 import logging
 import sys
-import yaml
 from abc import ABC
 from concurrent.futures import ThreadPoolExecutor
 

@@ -1,6 +1,5 @@
 import yaml
 import logging
-import rich
 from rich.logging import RichHandler
 import sys
 from collections import Counter
