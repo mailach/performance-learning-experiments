@@ -1,0 +1,26 @@
+system:
+  source: systems
+  params:
+    data_dir: data/Apache/
+sampling:
+  -
+    source: splc-sampling
+    params: 
+      binary_method: negfw
+  -    
+    source: splc-sampling
+    params:
+      binary_method: featurewise
+learning:
+  - 
+    source: sk-learning
+    params:
+      method: rf
+      nfp: ResponseRate
+      random_state: 1
+      max_features: 4
+      n_estimators: 15
+      min_samples_leaf: 2
+evaluation:
+  source: evaluation
+       

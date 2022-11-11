@@ -26,5 +26,11 @@ workflow.set_multistep(
         ("splc-sampling", {"binary_method": "featurewise"}),
     ],
 )
-workflow.set_multistep("learning", [("sk-learning", learning_params)])
+workflow.set_multistep(
+    "learning",
+    [
+        ("sk-learning", learning_params),
+        ("sk-learning", {"method": "svr", "nfp": "ResponseRate"}),
+    ],
+)
 workflow.execute()

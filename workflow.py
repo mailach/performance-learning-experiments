@@ -1,5 +1,6 @@
 import logging
 import sys
+import yaml
 from abc import ABC
 from concurrent.futures import ThreadPoolExecutor
 
@@ -18,7 +19,7 @@ log = logging.getLogger("rich")
 
 
 class Workflow(ABC):
-    steps: dict = {
+    steps = {
         "system": None,
         "sampling": None,
         "learning": None,
