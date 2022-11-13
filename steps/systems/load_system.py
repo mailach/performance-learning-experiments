@@ -10,9 +10,9 @@ import yaml
 
 from rich.logging import RichHandler
 
-from pim.feature_models.modeling import FeatureModel
-from pim.feature_models.transformations import Measurements
-from utils.caching import CacheHandler
+from modeling import FeatureModel
+from transformations import Measurements
+from caching import CacheHandler
 
 logging.basicConfig(
     level=logging.INFO,

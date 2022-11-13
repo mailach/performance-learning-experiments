@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from pim.feature_models.parsing import SplcFmParser
+from parsing import SplcFmParser
 
 
 def _constr_to_clauses(constraints, features):

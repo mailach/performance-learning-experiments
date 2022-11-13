@@ -92,7 +92,7 @@ class NonExecutingStep(Step):
 
 class SplcSamplingStep(Step):
     def __init__(self, params: dict = None):
-        self.path = "steps/splc-sampling"
+        self.path = "steps/sampling/splc-sampling"
         self.entry_point = "sampling"
         self.params = params if params else {}
 

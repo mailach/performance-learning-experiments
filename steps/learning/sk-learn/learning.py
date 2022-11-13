@@ -1,5 +1,5 @@
-from pim.learning.models import LearnerFactory, Learner
-from utils.caching import CacheHandler
+from models import LearnerFactory, Learner
+from caching import CacheHandler
 from rich.logging import RichHandler
 import pandas as pd
 import mlflow.sklearn

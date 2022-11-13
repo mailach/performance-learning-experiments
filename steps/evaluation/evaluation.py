@@ -1,13 +1,33 @@
-from pim.learning.metrics import prediction_fault_rate
-from utils.runs import update_metrics, update_params
-from utils.caching import CacheHandler
+from runs import update_metrics
+from caching import CacheHandler
 from rich.logging import RichHandler
 import logging
 from sklearn.metrics import mean_squared_error
-
-
 import click
-import mlflow
+import pandas as pd
+
+
+def prediction_fault_rate(y: pd.Series, y_hat: pd.Series):
+    """
+    Calculates prediction fault rate.
+
+    Parameters
+    ----------
+    y : pd.DataFrame
+        measured value
+    y_hat: pd.DataFrame
+        predicted value
+    """
+    if any(y == 0):
+        raise Exception("True value can not be zero.")
+
+    fault_rate = abs(y - y_hat) / y
+
+    return {
+        "mean_fault_rate": fault_rate.mean(),
+        "median_fault_rate": fault_rate.median(),
+        "sd_fault_rate": fault_rate.std(),
+    }
 
 
 logging.basicConfig(

@@ -5,8 +5,8 @@ import xml.etree.ElementTree as ET
 import importlib.resources
 import xmlschema
 
-xsd_path_fm = importlib.resources.path("pim.ressources", "schema_splc_fm.xsd")
-xsd_path_measure = importlib.resources.path("pim.ressources", "schema_splc_meas.xsd")
+xsd_path_fm = "systems/schema/schema_splc_fm.xsd"
+xsd_path_measure = "systems/schema/schema_splc_meas.xsd"
 
 
 def _implication(option1, options):

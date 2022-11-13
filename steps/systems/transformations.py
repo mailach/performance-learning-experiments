@@ -1,6 +1,6 @@
 from typing import Sequence
 import pandas as pd
-from pim.feature_models.parsing import SplcMeasurementParser
+from parsing import SplcMeasurementParser
 
 
 def _check_feature_existence(config: Sequence[str], features: Sequence[str]) -> None:
