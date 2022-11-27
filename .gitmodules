@@ -1,0 +1,6 @@
+[submodule "steps/learning/decart"]
+	path = steps/learning/decart
+	url = git@github.com:mailach/decart-mlflow.git
+[submodule "steps/learning/deepperf"]
+	path = steps/learning/deepperf
+	url = git@github.com:mailach/deepperf-mlflow.git
