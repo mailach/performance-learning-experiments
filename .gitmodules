@@ -1,3 +1,0 @@
-[submodule "steps/learning/deepperf-mlflow"]
-	path = steps/learning/deepperf
-	url = git@github.com:mailach/deepperf-mlflow.git
