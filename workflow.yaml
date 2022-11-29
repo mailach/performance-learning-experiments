@@ -1,19 +1,13 @@
 system:
   source: systems
   params:
-    data_dir: data/Apache/
+    data_dir: resources/data/Apache/
 sampling:
-  -
-    source: splc-sampling
-    params: 
-      binary_method: negfw
-  -    
-    source: splc-sampling
+  - source: splc-sampling
     params:
       binary_method: featurewise
 learning:
-  - 
-    source: sk-learning
+  - source: sk-learning
     params:
       method: rf
       nfp: ResponseRate
