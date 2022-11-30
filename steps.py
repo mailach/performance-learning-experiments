@@ -97,7 +97,7 @@ class SplcSamplingStep(Step):
         self.params = params if params else {}
 
 
-class DefaultSamplingStep(Step):
+class SklearnSamplingStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/"
         self.entry_point = "sampling"
@@ -134,7 +134,7 @@ def StepFactory(source, params=None):
     sources = {
         "sk-learning": ScikitLearnerStep,
         "splc-sampling": SplcSamplingStep,
-        "sampling": DefaultSamplingStep,
+        "sklearn-sampling": SklearnSamplingStep,
         "evaluation": DefaultEvaluationStep,
         "systems": SystemLoadingStep,
         "existing": NonExecutingStep,

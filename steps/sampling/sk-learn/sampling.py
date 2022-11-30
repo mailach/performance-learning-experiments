@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 from rich.logging import RichHandler
 import logging
@@ -31,15 +32,11 @@ def true_random_sampling(n: int, all_configs: pd.DataFrame):
 
 @click.command(help="Sample from feature model or list of configurations.")
 @click.option("--system_run_id", default="")
-@click.option("--binary_method", default=None)
-@click.option("--numeric_method", default=None)
-@click.option("--true_random", type=bool, default=None)
+@click.option("--method", default=None)
 @click.option("--n", default=10, type=int)
 def sample(
+    method: str,
     n: int = 10,
-    binary_method: str = None,
-    numeric_method: str = None,
-    true_random: bool = False,
     system_run_id: str = "",
 ):
     """
@@ -63,11 +60,15 @@ def sample(
         system_cache = CacheHandler(system_run_id, new_run=False)
         data = system_cache.retrieve("measurements.tsv")
 
-        logging.info("Sampling using 'true random'.")
+        logging.info("Sampling using '%s'.", method)
         logging.warning(
             "Only use this method when all valid configurations are available."
         )
-        train, test = true_random_sampling(int(n), all_configs=data)
+        if method == "random":
+            train, test = true_random_sampling(int(n), all_configs=data)
+        else:
+            logging.error("Method not found, exiting...")
+            sys.exit(1)
 
         logging.info("Save sampled configurations to cache")
         sampling_cache.save(
@@ -81,4 +82,5 @@ def sample(
 
 
 if __name__ == "__main__":
+    # pylint: disable-next=no-value-for-parameter
     sample()

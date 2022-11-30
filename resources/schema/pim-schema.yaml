@@ -76,13 +76,10 @@ sampling:
             - kexchange: 
               - sampleSize: {type: int, default: 10, min: 1, max: 20}
               - k: {type: int, default: 3, min: 1, max: 10}
-    - name: sklearn
+    - name: sklearn-sampling
       params: 
-        true_random: 
-          default: True
-          values: 
-            - True
-            - False
+        method: {default: random, values: [random]}
+        n: {type: int, default: 10}
 learning:
   sources:
     - name: sk-learn
