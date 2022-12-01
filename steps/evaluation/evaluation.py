@@ -5,6 +5,7 @@ import logging
 from sklearn.metrics import mean_squared_error
 import click
 import pandas as pd
+import mlflow
 
 
 def prediction_fault_rate(y: pd.Series, y_hat: pd.Series):
@@ -31,9 +32,10 @@ def prediction_fault_rate(y: pd.Series, y_hat: pd.Series):
 
 
 logging.basicConfig(
+    filename="logs.txt",
     level=logging.INFO,
     format="EVALUATION    %(message)s",
-    handlers=[RichHandler()],
+    # handlers=[RichHandler()],
 )
 
 
@@ -60,6 +62,7 @@ def evaluate(learning_run_id: str = ""):
     mse = mean_squared_error(pred["measured"], pred["predicted"])
     update_metrics(learning_run_id, fault_rate)
     update_metrics(learning_run_id, {"test_mse": mse})
+    mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":

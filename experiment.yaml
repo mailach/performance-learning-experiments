@@ -1,24 +1,25 @@
 configuration:
-  repetitions: 30
+  repetitions: 2
+  threads: 10
   output_file: decart_apache.csv
-  same_data: False
-  multi_values:
-    sample_size: [9,18,27,36,45]
-  
+  learn_on_same_data: False
+  parametrization:
+    sampling: 
+      n: [9, 18, 27, 36, 45]
+    learning:
+      resampleMethod: ["crossvalidation", "bootsraping"]
 experiment:
   system:
     source: systems
     params:
       data_dir: resources/data/Apache/
   sampling:
-    - source: sampling
+      source: sklearn-sampling
       params:
-        method: true_random
-        n: {{ sample_size }}
+        method: random
   learning:
-    - source: decart
+      source: decart
       params:
-        resampleMethod: "crossvalidation"
         nfp: ResponseRate
         paraSearchMethod: "randomsearch"
   evaluation:

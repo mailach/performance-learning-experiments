@@ -53,6 +53,7 @@ class Step:
 
     def run(self):
         """either runs specified project or returns existing run"""
+
         if not self.run_id:
             self.run_id = mlflow.projects.run(
                 self.path,
@@ -61,7 +62,9 @@ class Step:
                 experiment_name=self.entry_point,
             ).run_id
         else:
-            logging.warning("Use existing system data from run %s", self.run_id)
+            logging.warning(
+                "Use existing run %s in entrypoint %s", self.run_id, self.entry_point
+            )
 
         return self.run_id
 

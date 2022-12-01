@@ -1,6 +1,8 @@
 name: pim-pipeline
 
-conda_env: conda.yaml
+docker_env: 
+  image: mailach/pim-pipeline
+  environment: ["MLFLOW_TRACKING_URI","MLFLOW_TRACKING_USERNAME", "MLFLOW_TRACKING_PASSWORD"]
 
 entry_points:
   systems:

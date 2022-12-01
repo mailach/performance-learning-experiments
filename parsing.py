@@ -1,10 +1,13 @@
 import yaml
+import copy
 import logging
+import itertools
 from rich.logging import RichHandler
 import sys
 from collections import Counter
-
-from experiment import MultiStepExperiment
+from concurrent.futures import ThreadPoolExecutor
+import mlflow
+from experiment import SimpleExperiment, MultiStepExperiment
 
 logging.basicConfig(
     level=logging.INFO,
@@ -34,8 +37,6 @@ def parse_workflow(filename):
     exp.set_multistep("learning", [tuple(s.values()) for s in learning])
     exp.set_evaluation(**evaluation)
 
-    return exp
-
 
 def _validate_system(system):
     if not isinstance(system, dict):
@@ -53,3 +54,140 @@ def _validate(content: dict):
 
     _validate_steps(content.keys())
     _validate_system(content["system"])
+
+
+#########################################################
+def _params_to_list(params):
+    param_list = []
+    param_names = []
+    for step in params:
+        for param_name, param in params[step].items():
+            param_list.append(param)
+            param_names.append((step, param_name))
+
+    return param_list, param_names
+
+
+def _generate_param_substitutions(params, names):
+    substitutions = []
+    params = [prod for prod in itertools.product(*params)]
+    for param_tup in params:
+        conf = []
+        for i, name in enumerate(names):
+            conf.append((name[0], name[1], param_tup[i]))
+        substitutions.append(conf)
+    return substitutions
+
+
+def _expand_params(params):
+    params, names = _params_to_list(params)
+    subs = _generate_param_substitutions(params, names)
+    return subs
+
+
+def _substitute_params(parameters, experiment):
+    substitutions = _expand_params(parameters) if parameters else []
+    experiments = []
+    for exp_params in substitutions:
+        tmp_exp = copy.deepcopy(experiment)
+        for sub in exp_params:
+            tmp_exp[sub[0]]["params"][sub[1]] = sub[2]
+        experiments.append(tmp_exp)
+
+    return experiments
+
+
+def _load_run_infos(run_id, entrypoint):
+    run = mlflow.get_run(run_id)
+
+    data = {}
+    data.update(run.info)
+    data.update(run.data.tags)
+    data.update({f"param.{k}": val for k, val in run.data.params.items()})
+    data.update({f"metric.{k}": val for k, val in run.data.metrics.items()})
+
+    data = {f"{entrypoint}.{cname}": value for cname, value in data.items()}
+
+    return data
+
+
+def _load_data(run_ids, repetition):
+    data = _load_run_infos(run_ids["system_run_id"], "system")
+    data.update(_load_run_infos(run_ids["sampling_run_id"], "sampling"))
+    data.update(_load_run_infos(run_ids["learning_run_id"], "learning"))
+    data["repetition"] = repetition
+
+    return data
+
+
+def _exp_from_config(config):
+    exp = SimpleExperiment()
+    exp.set_system(config["system"]["source"], config["system"]["params"])
+    exp.set_sampling(config["sampling"]["source"], config["sampling"]["params"])
+    exp.set_learning(config["learning"]["source"], config["learning"]["params"])
+    exp.set_evaluation(config["evaluation"]["source"])
+    return exp
+
+
+def _generate_simple_experiments(parameters, experiment, threads):
+    exp_confs = _substitute_params(parameters, experiment)
+
+    exps = []
+    for conf in exp_confs:
+        exp = _exp_from_config(conf)
+        exps.append(exp)
+
+    # with ThreadPoolExecutor(max_workers=threads) as executor:
+    #     exps = executor.map(_exp_from_config, exp_confs)
+    # return [e for e in exps]
+    return exps
+
+
+class Executor:
+    def __init__(self, config_file):
+        self.experiments = {}
+        self.run_ids = {}
+        self.data = []
+
+        with open(config_file, "r", encoding="utf-8") as f:
+            content = yaml.safe_load(f)
+
+        self.config = content["configuration"]
+        self._load_experiments(content["experiment"])
+        logging.info(
+            "Generated %i experiments from your configuration.", len(self.experiments)
+        )
+        logging.info(
+            "Execution will lead to %i runs in %i threads.",
+            len(self.experiments) * self.config["repetitions"],
+            self.config["threads"],
+        )
+
+    def _load_experiments(self, experiment_config):
+        # if self.config["learn_on_same_data"]:
+        #     logging.error(
+        #         "Learning on same data not implemented in Executor yet. Exiting..."
+        #     )
+        #     sys.exit(1)
+
+        for r in range(1, self.config["repetitions"] + 1):
+            self.experiments[r] = _generate_simple_experiments(
+                self.config["parametrization"],
+                experiment_config,
+                self.config["threads"],
+            )
+
+    def execute(self):
+        for r, exps in self.experiments.items():
+            logging.info("Start repetition %i of %i", r, self.config["repetitions"])
+
+            with ThreadPoolExecutor(max_workers=self.config["threads"]) as executor:
+                run_ids = executor.map(lambda exp: exp.execute(), exps)
+
+            self.run_ids[r] = [x for x in run_ids]
+
+    def get_csv(self):
+        for repetition, runs in self.run_ids.items():
+            for run in runs:
+                self.data.append(_load_data(run, repetition))
+        return self.data

@@ -10,9 +10,10 @@ from caching import CacheHandler
 
 mlflow.set_experiment("sampling")
 logging.basicConfig(
+    filename="logs.txt",
     level=logging.INFO,
     format="SAMPLING    %(message)s",
-    handlers=[RichHandler()],
+    # handlers=[RichHandler()],
 )
 
 
@@ -79,6 +80,7 @@ def sample(
         )
         logging.info("Sampling cache dir: %s", sampling_cache.cache_dir)
         mlflow.log_artifacts(sampling_cache.cache_dir, "")
+        mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":

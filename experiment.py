@@ -14,23 +14,20 @@ logging.basicConfig(
     handlers=[RichHandler()],
 )
 
-log = logging.getLogger("rich")
-
 
 class Experiment(ABC):
-    steps = {
-        "system": None,
-        "sampling": None,
-        "learning": None,
-        "evaluation": None,
-    }
-
     def __init__(self):
+        self.steps = {
+            "system": None,
+            "sampling": None,
+            "learning": None,
+            "evaluation": None,
+        }
         self.steps["evaluation"] = StepFactory("evaluation")
 
     def _all_steps_set_or_exit(self):
         if None in self.steps.values():
-            log.error("Specify all steps prior to execution. Exiting...")
+            logging.error("Specify all steps prior to execution. Exiting...")
             sys.exit()
 
     def set_system(self, source, params: dict = None):
@@ -56,20 +53,19 @@ class SimpleExperiment(Experiment):
 
         self._all_steps_set_or_exit()
 
-        with mlflow.start_run() as run:
-            ids = {}
+        # with mlflow.start_run() as run:
+        ids = {}
 
-            ids["workflow_run_id"] = run.info.run_id
-            ids["system_run_id"] = self.steps["system"].run()
+        ids["system_run_id"] = self.steps["system"].run()
 
-            self.steps["sampling"].params["system_run_id"] = ids["system_run_id"]
-            ids["sampling_run_id"] = self.steps["sampling"].run()
+        self.steps["sampling"].params["system_run_id"] = ids["system_run_id"]
+        ids["sampling_run_id"] = self.steps["sampling"].run()
 
-            self.steps["learning"].params["sampling_run_id"] = ids["sampling_run_id"]
-            ids["learning_run_id"] = self.steps["learning"].run()
+        self.steps["learning"].params["sampling_run_id"] = ids["sampling_run_id"]
+        ids["learning_run_id"] = self.steps["learning"].run()
 
-            self.steps["evaluation"].params["learning_run_id"] = ids["learning_run_id"]
-            ids["evaluation_run_id"] = self.steps["evaluation"].run()
+        self.steps["evaluation"].params["learning_run_id"] = ids["learning_run_id"]
+        ids["evaluation_run_id"] = self.steps["evaluation"].run()
 
         if backend and backend_config:
             pass

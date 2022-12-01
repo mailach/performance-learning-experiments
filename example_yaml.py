@@ -1,5 +1,8 @@
-from parsing import parse_workflow
+import pandas as pd
+from parsing import Executor
 
 
-exp = parse_workflow("experiment.yaml")
+exp = Executor("experiment.yaml")
 exp.execute()
+data = pd.DataFrame(exp.get_csv())
+data.to_csv("test.csv", index=False)
