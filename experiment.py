@@ -10,14 +10,14 @@ from steps import Step, StepFactory
 
 logging.basicConfig(
     level=logging.INFO,
-    format="WORKFLOW    %(message)s",
+    format="EXPERIMENT    %(message)s",
     handlers=[RichHandler()],
 )
 
 log = logging.getLogger("rich")
 
 
-class Workflow(ABC):
+class Experiment(ABC):
     steps = {
         "system": None,
         "sampling": None,
@@ -42,7 +42,7 @@ class Workflow(ABC):
         self.steps["evaluation"] = custom if custom else StepFactory(source, params)
 
 
-class SimpleWorkflow(Workflow):
+class SimpleExperiment(Experiment):
     def set_sampling(self, source=None, params: dict = None, custom: Step = None):
         """specify sampling step"""
         self.steps["sampling"] = custom if custom else StepFactory(source, params)
@@ -77,7 +77,7 @@ class SimpleWorkflow(Workflow):
         return ids
 
 
-class MultiStepWorkflow(Workflow):
+class MultiStepExperiment(Experiment):
     def _generate_step_list(self, steps: list):
         return [StepFactory(step_info[0], step_info[1]) for step_info in steps]
 

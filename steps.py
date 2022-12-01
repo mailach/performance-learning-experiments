@@ -8,7 +8,7 @@ import mlflow.projects
 
 logging.basicConfig(
     level=logging.INFO,
-    format="WORKFLOW    %(message)s",
+    format="STEP    %(message)s",
     handlers=[RichHandler()],
 )
 
@@ -111,6 +111,13 @@ class ScikitLearnerStep(Step):
         self.params = params if params else {}
 
 
+class DecartLearnerStep(Step):
+    def __init__(self, params: dict = None):
+        self.path = "steps/learning/decart/decart"
+        self.entry_point = "learning"
+        self.params = params if params else {}
+
+
 class DefaultEvaluationStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/"
@@ -135,6 +142,7 @@ def StepFactory(source, params=None):
         "sk-learning": ScikitLearnerStep,
         "splc-sampling": SplcSamplingStep,
         "sklearn-sampling": SklearnSamplingStep,
+        "decart": DecartLearnerStep,
         "evaluation": DefaultEvaluationStep,
         "systems": SystemLoadingStep,
         "existing": NonExecutingStep,

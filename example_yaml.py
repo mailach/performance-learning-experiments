@@ -1,5 +1,5 @@
 from parsing import parse_workflow
 
 
-workflow = parse_workflow("workflow.yaml")
-workflow.execute()
+exp = parse_workflow("experiment.yaml")
+exp.execute()

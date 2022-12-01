@@ -4,7 +4,7 @@ from rich.logging import RichHandler
 import sys
 from collections import Counter
 
-from workflow import MultiStepWorkflow
+from experiment import MultiStepExperiment
 
 logging.basicConfig(
     level=logging.INFO,
@@ -28,13 +28,13 @@ def parse_workflow(filename):
 
     system, sampling, learning, evaluation = _extract_steps(content)
 
-    workflow = MultiStepWorkflow()
-    workflow.set_system(system["source"], system["params"])
-    workflow.set_multistep("sampling", [tuple(s.values()) for s in sampling])
-    workflow.set_multistep("learning", [tuple(s.values()) for s in learning])
-    workflow.set_evaluation(**evaluation)
+    exp = MultiStepExperiment()
+    exp.set_system(system["source"], system["params"])
+    exp.set_multistep("sampling", [tuple(s.values()) for s in sampling])
+    exp.set_multistep("learning", [tuple(s.values()) for s in learning])
+    exp.set_evaluation(**evaluation)
 
-    return workflow
+    return exp
 
 
 def _validate_system(system):

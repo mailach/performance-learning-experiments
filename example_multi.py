@@ -1,36 +1,27 @@
 import os
 
-from workflow import MultiStepWorkflow
+from experiment import MultiStepExperiment
 
 CWD = os.getcwd()
 
-system_params = {"data_dir": os.path.join(CWD, "data/Apache")}
+system_params = {"data_dir": os.path.join(CWD, "resources/data/Apache")}
 learning_params = {"method": "rf", "nfp": "ResponseRate"}
 
 
-workflow = MultiStepWorkflow()
-workflow.set_system("systems", system_params)
-workflow.set_multistep(
+exp = MultiStepExperiment()
+exp.set_system("systems", system_params)
+exp.set_multistep(
     "sampling",
     [
         ("splc-sampling", {"binary_method": "featurewise"}),
         ("splc-sampling", {"binary_method": "pairwise"}),
-        ("splc-sampling", {"binary_method": "featurewise"}),
-        ("splc-sampling", {"binary_method": "pairwise"}),
-        ("splc-sampling", {"binary_method": "featurewise"}),
-        ("splc-sampling", {"binary_method": "pairwise"}),
-        ("splc-sampling", {"binary_method": "featurewise"}),
-        ("splc-sampling", {"binary_method": "pairwise"}),
-        ("splc-sampling", {"binary_method": "featurewise"}),
-        ("splc-sampling", {"binary_method": "pairwise"}),
-        ("splc-sampling", {"binary_method": "featurewise"}),
     ],
 )
-workflow.set_multistep(
+exp.set_multistep(
     "learning",
     [
         ("sk-learning", learning_params),
-        ("sk-learning", {"method": "svr", "nfp": "ResponseRate"}),
+        ("sk-learning", {"method": "rf", "nfp": "ResponseRate"}),
     ],
 )
-workflow.execute()
+exp.execute()

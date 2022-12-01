@@ -1,0 +1,26 @@
+configuration:
+  repetitions: 30
+  output_file: decart_apache.csv
+  same_data: False
+  multi_values:
+    sample_size: [9,18,27,36,45]
+  
+experiment:
+  system:
+    source: systems
+    params:
+      data_dir: resources/data/Apache/
+  sampling:
+    - source: sampling
+      params:
+        method: true_random
+        n: {{ sample_size }}
+  learning:
+    - source: decart
+      params:
+        resampleMethod: "crossvalidation"
+        nfp: ResponseRate
+        paraSearchMethod: "randomsearch"
+  evaluation:
+    source: evaluation
+       
