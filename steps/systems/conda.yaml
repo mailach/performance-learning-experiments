@@ -1,0 +1,13 @@
+name: master-thesis-dev
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - matplotlib=3.5.2
+  - pip
+  - pip:
+      - mlflow>=1.0
+      - pandas
+      - click
+      - rich
+      - xmlschema

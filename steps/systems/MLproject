@@ -1,0 +1,9 @@
+name: pim-pipeline
+
+conda-env: conda.yaml
+
+entry_points:
+  systems:
+    parameters:
+      data_dir: {type: str, default: None}
+    command: "python load_system.py --data_dir={data_dir}"
