@@ -1,22 +1,23 @@
 configuration:
-  repetitions: 2
-  threads: 10
+  repetitions: 1
+  threads: 20
   output_file: decart_apache.csv
   learn_on_same_data: False
   parametrization:
     sampling: 
-      n: [9, 18, 27, 36, 45]
+      n: [9, 18, 27, 36, 45, 9, 9]
     learning:
-      resampleMethod: ["crossvalidation", "bootsraping"]
+      resampleMethod: ["crossvalidation","bootsraping", "holdout"]
 experiment:
   system:
     source: systems
     params:
-      data_dir: resources/data/Apache/
+      data_dir: /u/mailach/git/master-thesis/resources/data/Apache/
   sampling:
       source: sklearn-sampling
       params:
         method: random
+        silent: True
   learning:
       source: decart
       params:

@@ -8,6 +8,7 @@ from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 import mlflow
 from experiment import SimpleExperiment, MultiStepExperiment
+from steps import StepFactory
 
 logging.basicConfig(
     level=logging.INFO,
@@ -148,36 +149,44 @@ class Executor:
         self.experiments = {}
         self.run_ids = {}
         self.data = []
+        self.config, self.experiment = self._load_config(config_file)
+        self._log_run_information()
 
-        with open(config_file, "r", encoding="utf-8") as f:
-            content = yaml.safe_load(f)
+    def _log_run_information(self):
+        n_runs = self.config["repetitions"]
+        for step in self.config["parametrization"]:
+            for param in self.config["parametrization"][step]:
+                n_runs = n_runs * len(self.config["parametrization"][step][param])
 
-        self.config = content["configuration"]
-        self._load_experiments(content["experiment"])
-        logging.info(
-            "Generated %i experiments from your configuration.", len(self.experiments)
-        )
         logging.info(
             "Execution will lead to %i runs in %i threads.",
-            len(self.experiments) * self.config["repetitions"],
+            n_runs,
             self.config["threads"],
         )
 
-    def _load_experiments(self, experiment_config):
-        # if self.config["learn_on_same_data"]:
-        #     logging.error(
-        #         "Learning on same data not implemented in Executor yet. Exiting..."
-        #     )
-        #     sys.exit(1)
+    def _load_config(self, config_file):
+        with open(config_file, "r", encoding="utf-8") as f:
+            content = yaml.safe_load(f)
+
+        return content["configuration"], content["experiment"]
+
+    def _load_experiments(self):
 
         for r in range(1, self.config["repetitions"] + 1):
             self.experiments[r] = _generate_simple_experiments(
                 self.config["parametrization"],
-                experiment_config,
+                self.experiment,
                 self.config["threads"],
             )
 
-    def execute(self):
+    def _execute_system_loading(self):
+        system = StepFactory(
+            self.experiment["system"]["source"],
+            self.experiment["system"]["params"],
+        )
+        system.run()
+
+    def _execute_experiments(self):
         for r, exps in self.experiments.items():
             logging.info("Start repetition %i of %i", r, self.config["repetitions"])
 
@@ -185,6 +194,11 @@ class Executor:
                 run_ids = executor.map(lambda exp: exp.execute(), exps)
 
             self.run_ids[r] = [x for x in run_ids]
+
+    def execute(self):
+        self._execute_system_loading()
+        self._load_experiments()
+        self._execute_experiments()
 
     def get_csv(self):
         for repetition, runs in self.run_ids.items():
