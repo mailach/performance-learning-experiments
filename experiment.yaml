@@ -5,9 +5,7 @@ configuration:
   learn_on_same_data: False
   parametrization:
     sampling:
-      n: [9]
-    learning:
-      resampleMethod: ["crossvalidation"]
+      n: [5]
 experiment:
   system:
     source: systems
@@ -18,10 +16,9 @@ experiment:
     params:
       method: random
   learning:
-    source: decart
+    source: deepperf
     params:
       nfp: ResponseRate
-      paraSearchMethod: "randomsearch"
   evaluation:
     source: evaluation
     params: {}

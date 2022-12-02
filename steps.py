@@ -119,6 +119,13 @@ class DecartLearnerStep(Step):
         self.params = params if params else {}
 
 
+class DeepperfLearnerStep(Step):
+    def __init__(self, params: dict = None):
+        self.path = "steps/learning/deepperf"
+        self.entry_point = "learning"
+        self.params = params if params else {}
+
+
 class DefaultEvaluationStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/evaluation"
@@ -146,6 +153,7 @@ def StepFactory(source, params=None):
         "splc-sampling": SplcSamplingStep,
         "sklearn-sampling": SklearnSamplingStep,
         "decart": DecartLearnerStep,
+        "deepperf": DeepperfLearnerStep,
         "evaluation": DefaultEvaluationStep,
         "systems": SystemLoadingStep,
         "existing": NonExecutingStep,
