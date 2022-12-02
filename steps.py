@@ -100,14 +100,14 @@ class SplcSamplingStep(Step):
 
 class SklearnSamplingStep(Step):
     def __init__(self, params: dict = None):
-        self.path = "steps/"
+        self.path = "steps/sampling/sk-learn"
         self.entry_point = "sampling"
         self.params = params if params else {}
 
 
 class ScikitLearnerStep(Step):
     def __init__(self, params: dict = None):
-        self.path = "steps/"
+        self.path = "steps/learning/sk-learn"
         self.entry_point = "learning"
         self.params = params if params else {}
 
@@ -121,7 +121,7 @@ class DecartLearnerStep(Step):
 
 class DefaultEvaluationStep(Step):
     def __init__(self, params: dict = None):
-        self.path = "steps/"
+        self.path = "steps/evaluation"
         self.entry_point = "evaluation"
         self.params = params if params else {}
 

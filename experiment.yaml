@@ -4,22 +4,24 @@ configuration:
   output_file: decart_apache.csv
   learn_on_same_data: False
   parametrization:
+    sampling:
+      n: [9]
     learning:
-      max_features: [2, 3]
+      resampleMethod: ["crossvalidation"]
 experiment:
   system:
     source: systems
     params:
       data_dir: /u/mailach/git/master-thesis/resources/data/Apache/
   sampling:
-    source: splc-sampling
+    source: sklearn-sampling
     params:
-      binary_method: featurewise
+      method: random
   learning:
-    source: sk-learning
+    source: decart
     params:
       nfp: ResponseRate
-      method: rf
+      paraSearchMethod: "randomsearch"
   evaluation:
     source: evaluation
     params: {}

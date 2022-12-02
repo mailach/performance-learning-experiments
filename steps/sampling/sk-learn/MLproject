@@ -1,0 +1,19 @@
+name: pim-pipeline
+
+docker_env:
+  image: mailach/pim-pipeline
+  environment:
+    [
+      "MLFLOW_TRACKING_URI",
+      "MLFLOW_TRACKING_USERNAME",
+      "MLFLOW_TRACKING_PASSWORD",
+    ]
+
+entry_points:
+  sampling:
+    parameters:
+      system_run_id: system_run_id
+      n: n
+      method: method
+      logs_to_artifact: { type: bool, default: False }
+    command: "python sampling.py --system_run_id={system_run_id} --n={n} --method={method} --logs_to_artifact={logs_to_artifact}"
