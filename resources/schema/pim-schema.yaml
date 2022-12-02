@@ -4,7 +4,7 @@ system:
       params:
         name:
           default: Apache
-          values: 
+          values:
             - Apache:
                 nfp: [ResponseRate]
                 configurations: 192
@@ -40,90 +40,104 @@ system:
                 configurations: 1152
                 all_measured: True
                 binary_features: 16
-                numeric_features: 0      
+                numeric_features: 0
 sampling:
   sources:
     - name: splc-sampling
-      params: 
-        binary_method: 
+      params:
+        binary_method:
           default: featurewise
-          values: 
+          values:
             - featurewise
             - negfw
             - pairwise
             - distance-based:
-              - optionWeight: {type: int, default: 2, min: 1, max: 10}
-              - numConfigs: {type: int, default: 3, min: 1, max: 10}
+                - optionWeight: { type: int, default: 2, min: 1, max: 10 }
+                - numConfigs: { type: int, default: 3, min: 1, max: 10 }
             - twise:
-              - t: {type: int, default: 2, min: 1, max: 10}
+                - t: { type: int, default: 2, min: 1, max: 10 }
         numeric_method:
           default: None
-          values: 
+          values:
             - None
             - centralcomposite
             - fullfactorial
             - boxbehnken
             - plackettburman:
-              - measurements: {type: int, default: 125, min: 1, max: 200}
-              - level: {type: int, default: 5, min: 1, max: 10}
-            - random: 
-              - sampleSize: {type: int, default: 20, min: 1, max: 100}
-              - seed: {type: int, default: 5, min: 1, max: 10}
+                - measurements: { type: int, default: 125, min: 1, max: 200 }
+                - level: { type: int, default: 5, min: 1, max: 10 }
+            - random:
+                - sampleSize: { type: int, default: 20, min: 1, max: 100 }
+                - seed: { type: int, default: 5, min: 1, max: 10 }
             - hypersampling:
-              - precision: {type: int, default: 25, min: 1, max: 100}
-            - onefactoratatime: 
-              - distinctValuesPerOption: {type: int, default: 5, min: 1, max: 10}
-            - kexchange: 
-              - sampleSize: {type: int, default: 10, min: 1, max: 20}
-              - k: {type: int, default: 3, min: 1, max: 10}
+                - precision: { type: int, default: 25, min: 1, max: 100 }
+            - onefactoratatime:
+                - distinctValuesPerOption:
+                    { type: int, default: 5, min: 1, max: 10 }
+            - kexchange:
+                - sampleSize: { type: int, default: 10, min: 1, max: 20 }
+                - k: { type: int, default: 3, min: 1, max: 10 }
     - name: sklearn-sampling
-      params: 
-        method: {default: random, values: [random]}
-        n: {type: int, default: 10}
+      params:
+        method: { default: random, values: [random] }
+        n: { type: int, default: 10 }
 learning:
   sources:
-    - name: sk-learn
-      params: 
-        nfp : {depending_on: system_nfp}
-        method: 
+    - name: sk-learning
+      params:
+        nfp: { depending_on: system_nfp }
+        method:
           default: rf
           values:
             - rf:
-              - random_state: {type: int, default: None}
-              - max_features: {type: float, default: 1.0}
-              - n_estimators: {type: int, default: 100}
-              - min_samples_leaf: {type: int, default: 1}
+                - random_state: { type: int, default: None }
+                - max_features: { type: float, default: 1.0 }
+                - n_estimators: { type: int, default: 100 }
+                - min_samples_leaf: { type: int, default: 1 }
             - cart:
-              - min_samples_split: {type: int, default: 2}
-              - min_samples_leaf: {type: int, default: 1}
+                - min_samples_split: { type: int, default: 2 }
+                - min_samples_leaf: { type: int, default: 1 }
             - knn:
-              - n_neighbors: {type: int, default: 5}
-              - weights: {type: str, default: uniform, values: [uniform, distance]}
-              - algorithm: {type: str, default: auto, values: [auto, ball_tree, kd_tree, brute]}
-              - p: {type: int, default: 2}
+                - n_neighbors: { type: int, default: 5 }
+                - weights:
+                    { type: str, default: uniform, values: [uniform, distance] }
+                - algorithm:
+                    {
+                      type: str,
+                      default: auto,
+                      values: [auto, ball_tree, kd_tree, brute],
+                    }
+                - p: { type: int, default: 2 }
             - svr:
-              - epsilon: {type: float, default: 0.1}
-              - coef0: {type: float, default: 0.0}
-              - shrinking: {type: bool, default: True}
-              - tol: {type: float, default: 0.001}
+                - epsilon: { type: float, default: 0.1 }
+                - coef0: { type: float, default: 0.0 }
+                - shrinking: { type: bool, default: True }
+                - tol: { type: float, default: 0.001 }
             - krr:
-              - alpha: {type: float, default: 1.0}
-              - kernel: {type: str, default: linear}
-              - degree: {type: float, default: 3.0}
-              - gamma: {type: float, default: None}
+                - alpha: { type: float, default: 1.0 }
+                - kernel: { type: str, default: linear }
+                - degree: { type: float, default: 3.0 }
+                - gamma: { type: float, default: None }
     - name: decart
-      params: 
-        nfp : {depending_on: system_nfp}
-        resampleMethod: {type: str, default: crossvalidation , values: [crossvalidation, bootstraping, holdout]}
-        pureCART: {type: bool, default: False}
-        paraSearchMethod: {type: str, default: gridsearch, values: [gridsearch, randomsearch, bayesian]}
+      params:
+        nfp: { depending_on: system_nfp }
+        resampleMethod:
+          {
+            type: str,
+            default: crossvalidation,
+            values: [crossvalidation, bootstraping, holdout],
+          }
+        pureCART: { type: bool, default: False }
+        paraSearchMethod:
+          {
+            type: str,
+            default: gridsearch,
+            values: [gridsearch, randomsearch, bayesian],
+          }
     - name: deepperf
-      params: 
-        nfp : {depending_on: system_nfp}
+      params:
+        nfp: { depending_on: system_nfp }
         method: deepperf
-evaluation: 
+evaluation:
   sources:
     - name: evaluation
-
-
-

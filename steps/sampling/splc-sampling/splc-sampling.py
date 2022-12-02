@@ -22,11 +22,20 @@ from splc2py.sampling import Sampler
 
 
 mlflow.set_experiment("sampling")
-logging.basicConfig(
-    level=logging.INFO,
-    format="SAMPLING    %(message)s",
-    handlers=[RichHandler()],
-)
+
+
+def activate_logging(logs_to_artifact):
+    if logs_to_artifact:
+        return logging.basicConfig(
+            filename="logs.txt",
+            level=logging.INFO,
+            format="SAMPLING    %(message)s",
+        )
+    return logging.basicConfig(
+        level=logging.INFO,
+        format="SAMPLING    %(message)s",
+        handlers=[RichHandler()],
+    )
 
 
 def _extract_parameters(params, method, param_dict):
@@ -80,6 +89,7 @@ def _split_dataset_by_samples(data, samples):
 @click.option("--system_run_id", required=True)
 @click.option("--binary_method", required=True)
 @click.option("--numeric_method", default=None)
+@click.option("--logs_to_artifact", type=bool, default=False)
 @click.pass_context
 # @click.option("--sampleSize", default=None)
 # @click.option("--seed", default=None)
@@ -104,6 +114,7 @@ def sample(
     # optionWeight: int,
     # numConfigs: int,
     numeric_method: str = None,
+    logs_to_artifact: bool = False,
 ):
     """
     Samples valid configurations from a variability model.
@@ -117,6 +128,7 @@ def sample(
     system_run_id : str
         run of system loading
     """
+    activate_logging(logs_to_artifact)
 
     logging.info("Start sampling from configuration space using SPLC2py.")
     numeric_method = None if numeric_method == "None" else numeric_method
@@ -154,6 +166,8 @@ def sample(
         )
         logging.info("Sampling cache dir: %s", sampling_cache.cache_dir)
         mlflow.log_artifacts(sampling_cache.cache_dir, "")
+        if logs_to_artifact:
+            mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":

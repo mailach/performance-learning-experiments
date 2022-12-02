@@ -130,7 +130,7 @@ def _exp_from_config(config):
     return exp
 
 
-def _generate_simple_experiments(parameters, experiment, threads):
+def _generate_simple_experiments(parameters, experiment):
     exp_confs = _substitute_params(parameters, experiment)
 
     exps = []
@@ -142,6 +142,13 @@ def _generate_simple_experiments(parameters, experiment, threads):
     #     exps = executor.map(_exp_from_config, exp_confs)
     # return [e for e in exps]
     return exps
+
+
+def _set_logging_to_file(config):
+    for step in config:
+        config[step]["params"]["logs_to_artifact"] = True
+
+    return config
 
 
 class Executor:
@@ -168,7 +175,10 @@ class Executor:
         with open(config_file, "r", encoding="utf-8") as f:
             content = yaml.safe_load(f)
 
-        return content["configuration"], content["experiment"]
+        exp_config = content["configuration"]
+        step_config = _set_logging_to_file(content["experiment"])
+
+        return exp_config, step_config
 
     def _load_experiments(self):
 
@@ -176,7 +186,6 @@ class Executor:
             self.experiments[r] = _generate_simple_experiments(
                 self.config["parametrization"],
                 self.experiment,
-                self.config["threads"],
             )
 
     def _execute_system_loading(self):

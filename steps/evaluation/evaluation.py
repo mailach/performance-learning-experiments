@@ -62,7 +62,7 @@ def evaluate(learning_run_id: str = ""):
     mse = mean_squared_error(pred["measured"], pred["predicted"])
     update_metrics(learning_run_id, fault_rate)
     update_metrics(learning_run_id, {"test_mse": mse})
-    mlflow.log_artifact("logs.txt", "")
+    # mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":

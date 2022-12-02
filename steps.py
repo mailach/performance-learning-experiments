@@ -42,7 +42,7 @@ class Step:
     path: str = None
     run_id: str = None
     entry_point: str = None
-    params: dict = {}
+    params: dict = None
 
     @classmethod
     def from_run_id(cls, run_id):

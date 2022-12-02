@@ -9,12 +9,6 @@ from caching import CacheHandler
 
 
 mlflow.set_experiment("sampling")
-logging.basicConfig(
-    filename="logs.txt",
-    level=logging.INFO,
-    format="SAMPLING    %(message)s",
-    # handlers=[RichHandler()],
-)
 
 
 def _split_dataset_by_samples(data, samples):
@@ -31,14 +25,27 @@ def true_random_sampling(n: int, all_configs: pd.DataFrame):
     return train, test
 
 
+def activate_logging(logs_to_artifact):
+    if logs_to_artifact:
+        return logging.basicConfig(
+            filename="logs.txt",
+            level=logging.INFO,
+            format="SAMPLING    %(message)s",
+        )
+    return logging.basicConfig(
+        level=logging.INFO,
+        format="SAMPLING    %(message)s",
+        handlers=[RichHandler()],
+    )
+
+
 @click.command(help="Sample from feature model or list of configurations.")
 @click.option("--system_run_id", default="")
 @click.option("--method", default=None)
 @click.option("--n", default=10, type=int)
+@click.option("--logs_to_artifact", type=bool, default=False)
 def sample(
-    method: str,
-    n: int = 10,
-    system_run_id: str = "",
+    method: str, n: int = 10, system_run_id: str = "", logs_to_artifact: bool = False
 ):
     """
     Samples valid configurations from a variability model.
@@ -52,15 +59,14 @@ def sample(
     system_run_id : str
         run of system loading
     """
+    activate_logging(logs_to_artifact)
 
     logging.info("Start sampling from configuration space.")
 
     with mlflow.start_run() as run:
-
         sampling_cache = CacheHandler(run.info.run_id)
         system_cache = CacheHandler(system_run_id, new_run=False)
         data = system_cache.retrieve("measurements.tsv")
-
         logging.info("Sampling using '%s'.", method)
         logging.warning(
             "Only use this method when all valid configurations are available."
@@ -80,7 +86,8 @@ def sample(
         )
         logging.info("Sampling cache dir: %s", sampling_cache.cache_dir)
         mlflow.log_artifacts(sampling_cache.cache_dir, "")
-        mlflow.log_artifact("logs.txt", "")
+        if logs_to_artifact:
+            mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":

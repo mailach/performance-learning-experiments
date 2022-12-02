@@ -14,11 +14,20 @@ from modeling import FeatureModel
 from transformations import Measurements
 from caching import CacheHandler
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="LOAD SYSTEM    %(message)s",
-    handlers=[RichHandler()],
-)
+
+def activate_logging(logs_to_artifact):
+    if logs_to_artifact:
+        return logging.basicConfig(
+            filename="logs.txt",
+            level=logging.INFO,
+            format="LOAD SYSTEM    %(message)s",
+        )
+    return logging.basicConfig(
+        level=logging.INFO,
+        format="LOAD SYSTEM    %(message)s",
+        handlers=[RichHandler()],
+    )
+
 
 mlflow.set_experiment("systems")
 
@@ -52,7 +61,8 @@ def _check_dir_content(data_dir: str):
 
 @click.command(help="Imports feature model and measurement data.")
 @click.option("--data_dir")
-def load_system(data_dir: str):
+@click.option("--logs_to_artifact", type=bool, default=False)
+def load_system(data_dir: str, logs_to_artifact: bool = False):
     """
     Loads, validates, and transforms data of system.
 
@@ -64,6 +74,8 @@ def load_system(data_dir: str):
         - fm.xml
         - measurements.xml or measurements.tsv
     """
+    activate_logging(logs_to_artifact)
+
     _check_dir_content(data_dir)
     with open(os.path.join(data_dir, "meta.yaml"), "r", encoding="utf-8") as f:
         params = yaml.safe_load(f)
@@ -94,6 +106,8 @@ def load_system(data_dir: str):
         logging.info("Log artifacts and parameters to MLflow")
         mlflow.log_artifacts(cache.cache_dir, "")
         mlflow.log_params(params)
+        if logs_to_artifact:
+            mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":

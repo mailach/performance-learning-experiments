@@ -1,13 +1,18 @@
 name: pim-pipeline
 
-docker_env: 
+docker_env:
   image: mailach/pim-pipeline
-  environment: ["MLFLOW_TRACKING_URI","MLFLOW_TRACKING_USERNAME", "MLFLOW_TRACKING_PASSWORD"]
+  environment:
+    [
+      "MLFLOW_TRACKING_URI",
+      "MLFLOW_TRACKING_USERNAME",
+      "MLFLOW_TRACKING_PASSWORD",
+    ]
 
 entry_points:
   systems:
     parameters:
-      data_dir: {type: str, default: None}
+      data_dir: { type: str, default: None }
     command: "python systems/load_system.py --data_dir={data_dir}"
 
   sampling:
@@ -15,7 +20,8 @@ entry_points:
       system_run_id: system_run_id
       n: n
       method: method
-    command: "python sampling/sk-learn/sampling.py --system_run_id={system_run_id} --n={n} --method={method}"
+      logs_to_artifact: { type: bool, default: False }
+    command: "python sampling/sk-learn/sampling.py --system_run_id={system_run_id} --n={n} --method={method} --logs_to_artifact={logs_to_artifact}"
 
   learning:
     parameters:

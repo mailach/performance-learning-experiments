@@ -9,11 +9,18 @@ import logging
 import os
 
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="LEARNING    %(message)s",
-    handlers=[RichHandler()],
-)
+def activate_logging(logs_to_artifact):
+    if logs_to_artifact:
+        return logging.basicConfig(
+            filename="logs.txt",
+            level=logging.INFO,
+            format="LEARNING    %(message)s",
+        )
+    return logging.basicConfig(
+        level=logging.INFO,
+        format="LEARNING    %(message)s",
+        handlers=[RichHandler()],
+    )
 
 
 def _predict_on_test(learner: Learner, test_x: pd.DataFrame, test_y: pd.Series):
@@ -68,7 +75,14 @@ hyperparams = {
 @click.option("--degree", type=float)
 @click.option("--gamma", type=float, default=None)
 @click.option("--alpha", type=float)
-def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **kwargs):
+@click.option("--logs_to_artifact", type=bool, default=False)
+def learning(
+    sampling_run_id: str = "",
+    method: str = "cart",
+    nfp: str = "",
+    logs_to_artifact: bool = False,
+    **kwargs
+):
     """
     Learning of influences of options on nfp
 
@@ -81,6 +95,7 @@ def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **k
     nfp : str
         name of nfp
     """
+    activate_logging(logs_to_artifact)
     logging.info("Start learning from sampled configurations.")
     params = {k: v for k, v in kwargs.items() if k in hyperparams[method]}
 
@@ -104,7 +119,10 @@ def learning(sampling_run_id: str = "", method: str = "cart", nfp: str = "", **k
 
         model_cache.save({"predicted.tsv": prediction})
         mlflow.log_artifact(os.path.join(model_cache.cache_dir, "predicted.tsv"), "")
+        if logs_to_artifact:
+            mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":
+    # pylint: disable-next=no-value-for-parameter
     learning()
