@@ -96,9 +96,17 @@ class NonExecutingStep(Step):
 
 class SplcSamplingStep(Step):
     def __init__(self, params: dict = None):
-        self.path = "steps/sampling/splc-sampling"
+        self.path = "steps/SPLConqueror"
         self.entry_point = "sampling"
         self.experiment_name = "splc-sampling"
+        self.params = params if params else {}
+
+
+class SplcLearningStep(Step):
+    def __init__(self, params: dict = None):
+        self.path = "steps/SPLConqueror"
+        self.entry_point = "learning"
+        self.experiment_name = "splc-learning"
         self.params = params if params else {}
 
 
@@ -161,6 +169,7 @@ def StepFactory(source, params=None):
     sources = {
         "sk-learning": ScikitLearnerStep,
         "splc-sampling": SplcSamplingStep,
+        "splc-learning": SplcLearningStep,
         "sklearn-sampling": SklearnSamplingStep,
         "decart": DecartLearnerStep,
         "deepperf": DeepperfLearnerStep,

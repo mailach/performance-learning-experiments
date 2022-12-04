@@ -136,22 +136,22 @@ def _exp_from_config(config, experiment_name):
 
 
 def _generate_simple_experiments(parameters, experiment, experiment_name):
-    exp_confs = _substitute_params(parameters, experiment)
+    if parameters != "None":
+        exp_confs = _substitute_params(parameters, experiment)
+    else:
+        exp_confs = [experiment]
 
     exps = []
     for conf in exp_confs:
         exp = _exp_from_config(conf, experiment_name)
         exps.append(exp)
 
-    # with ThreadPoolExecutor(max_workers=threads) as executor:
-    #     exps = executor.map(_exp_from_config, exp_confs)
-    # return [e for e in exps]
     return exps
 
 
 def _set_logging_to_file(config):
     for step in config:
-        config[step]["params"]["logs_to_artifact"] = True
+        config[step]["params"]["logs_to_artifact"] = False
 
     return config
 
@@ -166,10 +166,14 @@ class Executor:
         self._log_run_information()
 
     def _log_run_information(self):
-        n_runs = self.config["repetitions"]
-        for step in self.config["parametrization"]:
-            for param in self.config["parametrization"][step]:
-                n_runs = n_runs * len(self.config["parametrization"][step][param])
+        if self.config["parametrization"] != "None":
+            n_runs = self.config["repetitions"]
+            for step in self.config["parametrization"]:
+                for param in self.config["parametrization"][step]:
+                    n_runs = n_runs * len(self.config["parametrization"][step][param])
+
+        else:
+            n_runs = self.config["repetitions"]
 
         logging.info(
             "Execution will lead to %i runs in %i threads.",
@@ -189,6 +193,7 @@ class Executor:
     def _load_experiments(self):
 
         for r in range(1, self.config["repetitions"] + 1):
+
             self.experiments[r] = _generate_simple_experiments(
                 self.config["parametrization"], self.experiment, self.config["name"]
             )

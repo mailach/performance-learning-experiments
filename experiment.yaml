@@ -4,24 +4,20 @@ configuration:
   name: decart_apache
   learn_on_same_data: False
   parametrization:
-    sampling:
-      n: [9]
-    learning:
-      resampleMethod: ["crossvalidation"]
+    None
 experiment:
   system:
     source: systems
     params:
       data_dir: /u/mailach/git/master-thesis/resources/data/Apache/
   sampling:
-    source: sklearn-sampling
+    source: splc-sampling
     params:
-      method: random
+      binary_method: featurewise
   learning:
-    source: decart
+    source: splc-learning
     params:
       nfp: ResponseRate
-      paraSearchMethod: "randomsearch"
   evaluation:
     source: evaluation
     params: {}
