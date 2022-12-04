@@ -4,5 +4,7 @@ from parsing import Executor
 
 exp = Executor("experiment.yaml")
 exp.execute()
-data = pd.DataFrame(exp.get_csv())
-data.to_csv("test.csv", index=False)
+full = exp.full_data
+aggregated = exp.experiment_data
+pd.DataFrame(full).to_csv("test-full.csv", index=False)
+pd.DataFrame(aggregated).to_csv("test-aggr.csv", index=False)

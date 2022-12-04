@@ -98,27 +98,32 @@ def _substitute_params(parameters, experiment):
     return experiments
 
 
-def _load_run_infos(run_id, entrypoint):
+def _load_run_infos(run_id, entrypoint=None):
     run = mlflow.get_run(run_id)
 
     data = {}
     data.update(run.info)
     data.update(run.data.tags)
-    data.update({f"param.{k}": val for k, val in run.data.params.items()})
-    data.update({f"metric.{k}": val for k, val in run.data.metrics.items()})
-
-    data = {f"{entrypoint}.{cname}": value for cname, value in data.items()}
+    if entrypoint:
+        data.update({f"param.{k}": val for k, val in run.data.params.items()})
+        data.update({f"metric.{k}": val for k, val in run.data.metrics.items()})
+        data = {f"{entrypoint}.{cname}": value for cname, value in data.items()}
+    else:
+        data.update(run.data.params)
+        data.update(run.data.metrics)
 
     return data
 
 
 def _load_data(run_ids, repetition):
-    data = _load_run_infos(run_ids["system"], "system")
-    data.update(_load_run_infos(run_ids["sampling"], "sampling"))
-    data.update(_load_run_infos(run_ids["learning"], "learning"))
-    data["repetition"] = repetition
+    full_data = _load_run_infos(run_ids["system"], "system")
+    full_data.update(_load_run_infos(run_ids["sampling"], "sampling"))
+    full_data.update(_load_run_infos(run_ids["learning"], "learning"))
+    full_data["repetition"] = repetition
 
-    return data
+    aggregated_data = _load_run_infos(run_ids["experiment"])
+
+    return full_data, aggregated_data
 
 
 def _exp_from_config(config, experiment_name):
@@ -155,7 +160,8 @@ class Executor:
     def __init__(self, config_file):
         self.experiments = {}
         self.run_ids = {}
-        self.data = []
+        self.full_data = []
+        self.experiment_data = []
         self.config, self.experiment = self._load_config(config_file)
         self._log_run_information()
 
@@ -189,23 +195,26 @@ class Executor:
 
     def _execute_experiments(self):
         for r, exps in self.experiments.items():
+            executed_runs = []
 
             if r == 1:
-                exps[0].execute()
+                executed_runs.append(exps[0].execute())
                 exps = exps[1:]
 
             logging.info("Start repetition %i of %i", r, self.config["repetitions"])
             with ThreadPoolExecutor(max_workers=self.config["threads"]) as executor:
-                run_ids = executor.map(lambda exp: exp.execute(), exps)
-
-            self.run_ids[r] = [x for x in run_ids]
+                ids = executor.map(lambda exp: exp.execute(), exps)
+            executed_runs += [x for x in ids]
+            self.run_ids[r] = executed_runs
 
     def execute(self):
         self._load_experiments()
         self._execute_experiments()
+        self._load_experiment_data()
 
-    def get_csv(self):
+    def _load_experiment_data(self):
         for repetition, runs in self.run_ids.items():
             for run in runs:
-                self.data.append(_load_data(run, repetition))
-        return self.data
+                full, aggr = _load_data(run, repetition)
+                self.full_data.append(full)
+                self.experiment_data.append(aggr)
