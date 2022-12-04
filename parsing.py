@@ -151,7 +151,7 @@ def _generate_simple_experiments(parameters, experiment, experiment_name):
 
 def _set_logging_to_file(config):
     for step in config:
-        config[step]["params"]["logs_to_artifact"] = False
+        config[step]["params"]["logs_to_artifact"] = True
 
     return config
 
