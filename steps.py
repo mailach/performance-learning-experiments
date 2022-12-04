@@ -43,6 +43,7 @@ class Step:
     run_id: str = None
     entry_point: str = None
     params: dict = None
+    experiment_name: str = None
 
     @classmethod
     def from_run_id(cls, run_id):
@@ -56,8 +57,8 @@ class Step:
             self.run_id = mlflow.projects.run(
                 self.path,
                 entry_point=self.entry_point,
+                experiment_name=self.experiment_name,
                 parameters=self.params,
-                experiment_name=self.entry_point,
             ).run_id
         else:
             logging.warning(
@@ -71,6 +72,7 @@ class Step:
         copy.path = self.path
         copy.run_id = self.run_id
         copy.entry_point = self.entry_point
+        copy.experiment_name = self.experiment_name
         copy.params = self.params.copy()
         return copy
 
@@ -79,6 +81,7 @@ class CustomStep(Step):
     def __init__(self, path: str, entry_point: str, params: dict = None, run_id=None):
         self.path = path
         self.entry_point = entry_point
+        self.experiment_name = "custom"
         self.params = params if params else {}
         self.run_id = run_id
 
@@ -95,6 +98,7 @@ class SplcSamplingStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/sampling/splc-sampling"
         self.entry_point = "sampling"
+        self.experiment_name = "splc-sampling"
         self.params = params if params else {}
 
 
@@ -102,6 +106,7 @@ class SklearnSamplingStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/sampling/sk-learn"
         self.entry_point = "sampling"
+        self.experiment_name = "sklearn-sampling"
         self.params = params if params else {}
 
 
@@ -109,6 +114,7 @@ class ScikitLearnerStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/learning/sk-learn"
         self.entry_point = "learning"
+        self.experiment_name = "sklearn-learning"
         self.params = params if params else {}
 
 
@@ -116,6 +122,7 @@ class DecartLearnerStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/learning/decart/decart"
         self.entry_point = "learning"
+        self.experiment_name = "decart"
         self.params = params if params else {}
 
 
@@ -123,6 +130,7 @@ class DeepperfLearnerStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/learning/deepperf"
         self.entry_point = "learning"
+        self.experiment_name = "deepperf"
         self.params = params if params else {}
 
 
@@ -130,6 +138,7 @@ class DefaultEvaluationStep(Step):
     def __init__(self, params: dict = None):
         self.path = "steps/evaluation"
         self.entry_point = "evaluation"
+        self.experiment_name = "evaluation"
         self.params = params if params else {}
 
 
@@ -140,6 +149,7 @@ class SystemLoadingStep(Step):
         )
         self.path = "steps/systems/"
         self.entry_point = "systems"
+        self.experiment_name = "systems"
         self.params = params if params else {}
 
     def _load_name(self, data_dir):

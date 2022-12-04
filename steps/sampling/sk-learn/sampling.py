@@ -8,9 +8,6 @@ from sklearn.model_selection import train_test_split
 from caching import CacheHandler
 
 
-mlflow.set_experiment("sampling")
-
-
 def _split_dataset_by_samples(data, samples):
     data = data.merge(samples, on=list(samples.columns), how="left", indicator=True)
     train = data[data["_merge"] == "both"].drop("_merge", axis=1)

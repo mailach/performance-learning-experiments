@@ -1,11 +1,13 @@
 configuration:
   repetitions: 1
-  threads: 20
+  threads: 1
   output_file: decart_apache.csv
   learn_on_same_data: False
   parametrization:
     sampling:
-      n: [5]
+      n: [9]
+    learning:
+      resampleMethod: ["crossvalidation"]
 experiment:
   system:
     source: systems
@@ -16,9 +18,10 @@ experiment:
     params:
       method: random
   learning:
-    source: deepperf
+    source: decart
     params:
       nfp: ResponseRate
+      paraSearchMethod: "randomsearch"
   evaluation:
     source: evaluation
     params: {}

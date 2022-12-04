@@ -21,9 +21,6 @@ import click
 from splc2py.sampling import Sampler
 
 
-mlflow.set_experiment("sampling")
-
-
 def activate_logging(logs_to_artifact):
     if logs_to_artifact:
         return logging.basicConfig(
