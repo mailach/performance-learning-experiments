@@ -15,14 +15,35 @@ logging.basicConfig(
 )
 
 
+def _load_params_and_metrics(run_id):
+    run = mlflow.get_run(run_id)
+    return run.data.params, run.data.metrics
+
+
+def _update_run_data(experiment_id, sub_run_id, sub_run_name):
+    params, metrics = _load_params_and_metrics(sub_run_id)
+    params = {f"{sub_run_name}.{k}": v for k, v in params.items()}
+    metrics = {f"{sub_run_name}.{k}": v for k, v in metrics.items()}
+    with mlflow.start_run(run_id=experiment_id):
+        mlflow.log_metrics(metrics)
+        mlflow.log_params(params)
+
+
+def _update_exp_params_and_metrics(ids):
+    steps = [step.replace("run_id", "") for step in ids if step != "experiment"]
+    for step in steps:
+        _update_run_data(ids["experiment"], ids[step], step)
+
+
 class Experiment(ABC):
-    def __init__(self):
+    def __init__(self, experiment_name: str = None):
         self.steps = {
             "system": None,
             "sampling": None,
             "learning": None,
             "evaluation": None,
         }
+        self.experiment_name = experiment_name
         self.steps["evaluation"] = StepFactory("evaluation")
 
     def _all_steps_set_or_exit(self):
@@ -52,23 +73,27 @@ class SimpleExperiment(Experiment):
         """execute specified steps"""
 
         self._all_steps_set_or_exit()
+        mlflow.set_experiment(experiment_name=self.experiment_name)
 
-        # with mlflow.start_run() as run:
-        ids = {}
+        with mlflow.start_run() as run:
+            ids = {}
+            ids["experiment"] = run.info.run_id
 
-        ids["system_run_id"] = self.steps["system"].run()
+            ids["system"] = self.steps["system"].run()
 
-        self.steps["sampling"].params["system_run_id"] = ids["system_run_id"]
-        ids["sampling_run_id"] = self.steps["sampling"].run()
+            self.steps["sampling"].params["system_run_id"] = ids["system"]
+            ids["sampling"] = self.steps["sampling"].run()
 
-        self.steps["learning"].params["sampling_run_id"] = ids["sampling_run_id"]
-        ids["learning_run_id"] = self.steps["learning"].run()
+            self.steps["learning"].params["sampling_run_id"] = ids["sampling"]
+            ids["learning"] = self.steps["learning"].run()
 
-        self.steps["evaluation"].params["learning_run_id"] = ids["learning_run_id"]
-        ids["evaluation_run_id"] = self.steps["evaluation"].run()
+            self.steps["evaluation"].params["learning_run_id"] = ids["learning"]
+            ids["evaluation"] = self.steps["evaluation"].run()
 
-        if backend and backend_config:
-            pass
+            if backend and backend_config:
+                pass
+
+        _update_exp_params_and_metrics(ids)
 
         return ids
 

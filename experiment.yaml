@@ -1,7 +1,7 @@
 configuration:
   repetitions: 1
   threads: 1
-  output_file: decart_apache.csv
+  name: decart_apache
   learn_on_same_data: False
   parametrization:
     sampling:

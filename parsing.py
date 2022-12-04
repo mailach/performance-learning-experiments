@@ -113,16 +113,16 @@ def _load_run_infos(run_id, entrypoint):
 
 
 def _load_data(run_ids, repetition):
-    data = _load_run_infos(run_ids["system_run_id"], "system")
-    data.update(_load_run_infos(run_ids["sampling_run_id"], "sampling"))
-    data.update(_load_run_infos(run_ids["learning_run_id"], "learning"))
+    data = _load_run_infos(run_ids["system"], "system")
+    data.update(_load_run_infos(run_ids["sampling"], "sampling"))
+    data.update(_load_run_infos(run_ids["learning"], "learning"))
     data["repetition"] = repetition
 
     return data
 
 
-def _exp_from_config(config):
-    exp = SimpleExperiment()
+def _exp_from_config(config, experiment_name):
+    exp = SimpleExperiment(experiment_name)
     exp.set_system(config["system"]["source"], config["system"]["params"])
     exp.set_sampling(config["sampling"]["source"], config["sampling"]["params"])
     exp.set_learning(config["learning"]["source"], config["learning"]["params"])
@@ -130,12 +130,12 @@ def _exp_from_config(config):
     return exp
 
 
-def _generate_simple_experiments(parameters, experiment):
+def _generate_simple_experiments(parameters, experiment, experiment_name):
     exp_confs = _substitute_params(parameters, experiment)
 
     exps = []
     for conf in exp_confs:
-        exp = _exp_from_config(conf)
+        exp = _exp_from_config(conf, experiment_name)
         exps.append(exp)
 
     # with ThreadPoolExecutor(max_workers=threads) as executor:
@@ -184,8 +184,7 @@ class Executor:
 
         for r in range(1, self.config["repetitions"] + 1):
             self.experiments[r] = _generate_simple_experiments(
-                self.config["parametrization"],
-                self.experiment,
+                self.config["parametrization"], self.experiment, self.config["name"]
             )
 
     def _execute_system_loading(self):
