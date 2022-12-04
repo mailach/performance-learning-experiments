@@ -187,24 +187,20 @@ class Executor:
                 self.config["parametrization"], self.experiment, self.config["name"]
             )
 
-    def _execute_system_loading(self):
-        system = StepFactory(
-            self.experiment["system"]["source"],
-            self.experiment["system"]["params"],
-        )
-        system.run()
-
     def _execute_experiments(self):
         for r, exps in self.experiments.items():
-            logging.info("Start repetition %i of %i", r, self.config["repetitions"])
 
+            if r == 1:
+                exps[0].execute()
+                exps = exps[1:]
+
+            logging.info("Start repetition %i of %i", r, self.config["repetitions"])
             with ThreadPoolExecutor(max_workers=self.config["threads"]) as executor:
                 run_ids = executor.map(lambda exp: exp.execute(), exps)
 
             self.run_ids[r] = [x for x in run_ids]
 
     def execute(self):
-        self._execute_system_loading()
         self._load_experiments()
         self._execute_experiments()
 
