@@ -4,3 +4,6 @@
 [submodule "steps/learning/deepperf"]
 	path = steps/learning/deepperf
 	url = git@github.com:mailach/deepperf-mlflow.git
+[submodule "steps/SPLConqueror"]
+	path = steps/SPLConqueror
+	url = git@github.com:mailach/SPLC-mlflow.git
