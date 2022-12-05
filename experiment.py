@@ -4,6 +4,8 @@ from abc import ABC
 from concurrent.futures import ThreadPoolExecutor
 
 import mlflow
+from mlflow.tracking import MlflowClient
+
 from rich.logging import RichHandler
 
 from steps import Step, StepFactory
@@ -24,9 +26,13 @@ def _update_run_data(experiment_id, sub_run_id, sub_run_name):
     params, metrics = _load_params_and_metrics(sub_run_id)
     params = {f"{sub_run_name}.{k}": v for k, v in params.items()}
     metrics = {f"{sub_run_name}.{k}": v for k, v in metrics.items()}
-    with mlflow.start_run(run_id=experiment_id):
-        mlflow.log_metrics(metrics)
-        mlflow.log_params(params)
+
+    client = MlflowClient()
+
+    for k, v in metrics.items():
+        client.log_metric(experiment_id, k, v)
+    for k, v in params.items():
+        client.log_param(experiment_id, k, v)
 
 
 def _update_exp_params_and_metrics(ids):
@@ -75,24 +81,32 @@ class SimpleExperiment(Experiment):
         self._all_steps_set_or_exit()
         mlflow.set_experiment(experiment_name=self.experiment_name)
 
-        with mlflow.start_run() as run:
-            ids = {}
-            ids["experiment"] = run.info.run_id
+        client = MlflowClient()
 
-            ids["system"] = self.steps["system"].run()
+        experiment = client.search_experiments(
+            filter_string=f"name = '{self.experiment_name}'"
+        )
+        if len(experiment):
+            exp_id = experiment[0].experiment_id
+        else:
+            exp_id = client.create_experiment(self.experiment_name)
 
-            self.steps["sampling"].params["system_run_id"] = ids["system"]
-            ids["sampling"] = self.steps["sampling"].run()
+        run = client.create_run(exp_id)
+        ids = {}
+        ids["experiment"] = run.info.run_id
 
-            self.steps["learning"].params["sampling_run_id"] = ids["sampling"]
-            ids["learning"] = self.steps["learning"].run()
+        ids["system"] = self.steps["system"].run()
 
-            self.steps["evaluation"].params["learning_run_id"] = ids["learning"]
-            ids["evaluation"] = self.steps["evaluation"].run()
+        self.steps["sampling"].params["system_run_id"] = ids["system"]
+        ids["sampling"] = self.steps["sampling"].run()
 
-            if backend and backend_config:
-                pass
+        self.steps["learning"].params["sampling_run_id"] = ids["sampling"]
+        ids["learning"] = self.steps["learning"].run()
 
+        self.steps["evaluation"].params["learning_run_id"] = ids["learning"]
+        ids["evaluation"] = self.steps["evaluation"].run()
+
+        client.set_terminated(run.info.run_id)
         _update_exp_params_and_metrics(ids)
 
         return ids
@@ -159,25 +173,32 @@ class MultiStepExperiment(Experiment):
         self._all_steps_set_or_exit()
 
         self._warn_if_no_multistep()
+        client = MlflowClient()
 
-        with mlflow.start_run() as run:
-            ids = {}
+        experiment = client.search_experiments(
+            filter_string=f"name = '{self.experiment_name}'"
+        )
+        if len(experiment):
+            exp_id = experiment[0].experiment_id
+        else:
+            exp_id = client.create_experiment(self.experiment_name)
 
-            # run system run
-            ids["workflow"] = run.info.run_id
-            ids["system"] = self.steps["system"].run()
+        run = client.create_run(exp_id)
+        ids = {}
 
-            # run first possible multistep workflow
-            self._generate_sampling_steps(ids["system"])
-            ids["sampling"] = self._execute_multiple_steps("sampling")
+        # run system run
+        ids["workflow"] = run.info.run_id
+        ids["system"] = self.steps["system"].run()
 
-            self._generate_learning_steps(ids["sampling"])
-            ids["learning"] = self._execute_multiple_steps("learning")
+        # run first possible multistep workflow
+        self._generate_sampling_steps(ids["system"])
+        ids["sampling"] = self._execute_multiple_steps("sampling")
 
-            self._generate_evaluation_steps(ids["learning"])
-            ids["evaluation"] = self._execute_multiple_steps("evaluation")
+        self._generate_learning_steps(ids["sampling"])
+        ids["learning"] = self._execute_multiple_steps("learning")
 
-        if backend and backend_config:
-            pass
+        self._generate_evaluation_steps(ids["learning"])
+        ids["evaluation"] = self._execute_multiple_steps("evaluation")
+        client.set_terminated(run.info.run_id)
 
         return ids
