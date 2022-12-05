@@ -17,3 +17,11 @@ entry_points:
       method: method
       logs_to_artifact: { type: bool, default: False }
     command: "python sampling.py --system_run_id={system_run_id} --n={n} --method={method} --logs_to_artifact={logs_to_artifact}"
+  learning:
+    parameters:
+      sampling_run_id: sampling_run_id
+      method: method
+      nfp: nfp
+      logs_to_artifact: { type: bool, default: False }
+    command: "python learning.py --sampling_run_id={sampling_run_id} --method={method} --nfp={nfp} --logs_to_artifact={logs_to_artifact}"
+

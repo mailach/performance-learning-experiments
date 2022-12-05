@@ -112,7 +112,7 @@ class SplcLearningStep(Step):
 
 class SklearnSamplingStep(Step):
     def __init__(self, params: dict = None):
-        self.path = "steps/sampling/sk-learn"
+        self.path = "steps/scikit-learn/"
         self.entry_point = "sampling"
         self.experiment_name = "sklearn-sampling"
         self.params = params if params else {}
@@ -120,7 +120,7 @@ class SklearnSamplingStep(Step):
 
 class ScikitLearnerStep(Step):
     def __init__(self, params: dict = None):
-        self.path = "steps/learning/sk-learn"
+        self.path = "steps/scikit-learn/"
         self.entry_point = "learning"
         self.experiment_name = "sklearn-learning"
         self.params = params if params else {}
@@ -167,10 +167,10 @@ class SystemLoadingStep(Step):
 
 def StepFactory(source, params=None):
     sources = {
-        "sk-learning": ScikitLearnerStep,
+        "sklearn-learning": ScikitLearnerStep,
+        "sklearn-sampling": SklearnSamplingStep,
         "splc-sampling": SplcSamplingStep,
         "splc-learning": SplcLearningStep,
-        "sklearn-sampling": SklearnSamplingStep,
         "decart": DecartLearnerStep,
         "deepperf": DeepperfLearnerStep,
         "evaluation": DefaultEvaluationStep,
