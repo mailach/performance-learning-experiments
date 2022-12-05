@@ -138,6 +138,38 @@ learning:
       params:
         nfp: { depending_on: system_nfp }
         method: deepperf
+    - name: splc-learning
+      params:
+        nfp: { depending_on: system_nfp }
+        sampling_run_id: { type: str }
+        lossFunction: { type: str, default: RELATIVE, values = [RELATIVE, LEASTSQUARES, ABSOLUTE]} 
+        epsilon: {type: int, default: 0}
+        parallelization: {type: bool, default: True}
+        bagging: {type: bool, default: False}
+        baggingNumbers: {type: int, default: 100}
+        baggingTestDataFraction: {type: int, default: 50}
+        useBackward: {type: int, default: 50}
+        abortError: {type: float, default: 1}
+        limitFeatureSize: {type: bool, default: False}
+        featureSizeThreshold: {type: int, default: 4}
+        quadraticFunctionSupport: {type: bool, default: True}
+        crossValidation: {type: bool, default: False}
+        learn-logFunction: {type: bool, default: False}
+        learn-accumulatedLogFunction: {type: bool, default: False}
+        learn-asymFunction: {type: bool, default: False}
+        learn-ratioFunction: {type: bool, default: False}
+        learn-mirrowedFunction: {type: bool, default: False}
+        numberOfRounds: {type: int, default: 70}
+        backwardErrorDelta: {type: float, default: 1}
+        minImprovementPerRound: {type: float, default: 0.1}
+        withHierarchy: {type: bool, default: False}
+        bruteForceCandidates: {type: bool, default: False}
+        ignoreBadFeatures: {type: bool, default: False}
+        stopOnLongRound: {type: bool, default: True}
+        candidateSizePenalty: {type: bool, default: True}
+        learnTimeLimit: {type: str, default: 0}
+        scoreMeasure: {type: str, default: RELERROR, values=[RELERROR, INFLUENCE]} 
+        learn-numeric-disabled: {type: bool, default: True}  
 evaluation:
   sources:
     - name: evaluation
