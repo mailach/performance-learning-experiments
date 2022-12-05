@@ -44,6 +44,8 @@ class Step:
     entry_point: str = None
     params: dict = None
     experiment_name: str = None
+    backend: str = "local"
+    backend_config: str = None
 
     @classmethod
     def from_run_id(cls, run_id):
@@ -59,6 +61,8 @@ class Step:
                 entry_point=self.entry_point,
                 experiment_name=self.experiment_name,
                 parameters=self.params,
+                backend=self.backend,
+                backend_config=self.backend_config,
             ).run_id
         else:
             logging.warning(
@@ -73,6 +77,8 @@ class Step:
         copy.run_id = self.run_id
         copy.entry_point = self.entry_point
         copy.experiment_name = self.experiment_name
+        copy.backend = self.backend
+        copy.backend_config = self.backend_config
         copy.params = self.params.copy()
         return copy
 
@@ -85,6 +91,8 @@ class CustomStep(Step):
         params: dict = None,
         run_id=None,
         experiment_name: str = "custom",
+        backend: str = "local",
+        backend_config: str = None,
     ):
         self.path = path
         self.entry_point = entry_point
@@ -102,63 +110,97 @@ class NonExecutingStep(Step):
 
 
 class SplcSamplingStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
         self.path = "steps/SPLConqueror"
         self.entry_point = "sampling"
         self.experiment_name = "splc-sampling"
         self.params = params if params else {}
+        self.backend = backend
+        self.backend_config = backend_config
 
 
 class SplcLearningStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
         self.path = "steps/SPLConqueror"
         self.entry_point = "learning"
         self.experiment_name = "splc-learning"
         self.params = params if params else {}
+        self.backend = backend
+        self.backend_config = backend_config
 
 
 class SklearnSamplingStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
         self.path = "steps/scikit-learn/"
         self.entry_point = "sampling"
         self.experiment_name = "sklearn-sampling"
         self.params = params if params else {}
+        self.backend = backend
+        self.backend_config = backend_config
 
 
 class ScikitLearnerStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
         self.path = "steps/scikit-learn/"
         self.entry_point = "learning"
         self.experiment_name = "sklearn-learning"
         self.params = params if params else {}
+        self.backend = backend
+        self.backend_config = backend_config
 
 
 class DecartLearnerStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
         self.path = "steps/learning/decart/decart"
         self.entry_point = "learning"
         self.experiment_name = "decart"
         self.params = params if params else {}
+        self.backend = backend
+        self.backend_config = backend_config
 
 
 class DeepperfLearnerStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
         self.path = "steps/learning/deepperf"
         self.entry_point = "learning"
         self.experiment_name = "deepperf"
         self.params = params if params else {}
+        self.backend = backend
+        self.backend_config = backend_config
 
 
 class DefaultEvaluationStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
         self.path = "steps/evaluation"
         self.entry_point = "evaluation"
         self.experiment_name = "evaluation"
         self.params = params if params else {}
+        self.backend = backend
+        self.backend_config = backend_config
 
 
 class SystemLoadingStep(Step):
-    def __init__(self, params: dict = None):
+    def __init__(
+        self, params: dict = None, backend: str = "local", backend_config: str = None
+    ):
+        if backend != "local":
+            logging.warning(
+                "Backend '%s' will have no effect on system loading step.", backend
+            )
         self.run_id = get_system_if_exists(
             self._load_name(os.path.join(params["data_dir"]))
         )
@@ -172,7 +214,9 @@ class SystemLoadingStep(Step):
             return yaml.safe_load(f)["system"]
 
 
-def StepFactory(source, params=None):
+def StepFactory(
+    source, params=None, backend: str = "local", backend_config: str = None
+):
     sources = {
         "sklearn-learning": ScikitLearnerStep,
         "sklearn-sampling": SklearnSamplingStep,
@@ -185,4 +229,4 @@ def StepFactory(source, params=None):
         "existing": NonExecutingStep,
     }
 
-    return sources[source](params)
+    return sources[source](params, backend, backend_config)

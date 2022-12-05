@@ -36,7 +36,12 @@ def _update_exp_params_and_metrics(ids):
 
 
 class Experiment(ABC):
-    def __init__(self, experiment_name: str = None):
+    def __init__(
+        self,
+        experiment_name: str = None,
+        backend: str = "local",
+        backend_config: str = None,
+    ):
         self.steps = {
             "system": None,
             "sampling": None,
@@ -45,6 +50,8 @@ class Experiment(ABC):
         }
         self.experiment_name = experiment_name
         self.steps["evaluation"] = StepFactory("evaluation")
+        self.backend = backend
+        self.backend_config = backend_config
 
     def _all_steps_set_or_exit(self):
         if None in self.steps.values():
@@ -63,13 +70,21 @@ class Experiment(ABC):
 class SimpleExperiment(Experiment):
     def set_sampling(self, source=None, params: dict = None, custom: Step = None):
         """specify sampling step"""
-        self.steps["sampling"] = custom if custom else StepFactory(source, params)
+        self.steps["sampling"] = (
+            custom
+            if custom
+            else StepFactory(source, params, self.backend, self.backend_config)
+        )
 
     def set_learning(self, source=None, params: dict = None, custom: Step = None):
         """specify learning step"""
-        self.steps["learning"] = custom if custom else StepFactory(source, params)
+        self.steps["learning"] = (
+            custom
+            if custom
+            else StepFactory(source, params, self.backend, self.backend_config)
+        )
 
-    def execute(self, backend=None, backend_config=None):
+    def execute(self):
         """execute specified steps"""
 
         self._all_steps_set_or_exit()
@@ -89,9 +104,6 @@ class SimpleExperiment(Experiment):
 
             self.steps["evaluation"].params["learning_run_id"] = ids["learning"]
             ids["evaluation"] = self.steps["evaluation"].run()
-
-            if backend and backend_config:
-                pass
 
         _update_exp_params_and_metrics(ids)
 
