@@ -1,0 +1,9 @@
+system: SQLite
+domain: Database
+configurations: 3932160
+features: 39
+constraints: x
+all_measured: True
+binary_features: 39
+numeric_features: 0
+nfp: [Performance]

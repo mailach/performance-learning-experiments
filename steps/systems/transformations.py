@@ -29,9 +29,15 @@ def _extract_numeric(measurement, numerics):
 
 def _extract_binary(measurement, binaries):
     transformed = {}
-    _check_feature_existence(measurement["binaries"].strip(",").split(","), binaries)
-    for binary in binaries:
-        transformed[binary] = 1 if binary in measurement["binaries"] else 0
+    if measurement["binaries"] == "None":
+        for binary in binaries:
+            transformed[binary] = 0
+    else:
+        _check_feature_existence(
+            measurement["binaries"].strip(",").split(","), binaries
+        )
+        for binary in binaries:
+            transformed[binary] = 1 if binary in measurement["binaries"] else 0
     return transformed
 
 
