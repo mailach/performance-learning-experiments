@@ -1,0 +1,39 @@
+configuration:
+  learn_on_same_data: false
+  name: rq1_decart_ajstats
+  parametrization:
+    learning:
+      resampleMethod:
+      - bootstraping
+      - crossvalidation
+      - holdout
+    sampling:
+      n:
+      - 20
+      - 40
+      - 60
+      - 80
+      - 100
+      - 120
+      - 140
+      - 160
+      - 180
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      paraSearchMethod: gridsearch
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /u/mailach/git/master-thesis/resources/data/AJStats
+    source: systems
