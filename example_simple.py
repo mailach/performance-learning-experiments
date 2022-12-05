@@ -13,7 +13,7 @@ learning_params = {
 }
 
 
-exp = SimpleExperiment()
+exp = SimpleExperiment("simple_example")
 exp.set_system("systems", system_params)
 exp.set_sampling("sklearn-sampling", sampling_params)
 exp.set_learning("decart", learning_params)

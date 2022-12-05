@@ -78,10 +78,17 @@ class Step:
 
 
 class CustomStep(Step):
-    def __init__(self, path: str, entry_point: str, params: dict = None, run_id=None):
+    def __init__(
+        self,
+        path: str,
+        entry_point: str,
+        params: dict = None,
+        run_id=None,
+        experiment_name: str = "custom",
+    ):
         self.path = path
         self.entry_point = entry_point
-        self.experiment_name = "custom"
+        self.experiment_name = experiment_name
         self.params = params if params else {}
         self.run_id = run_id
 

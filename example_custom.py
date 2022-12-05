@@ -12,13 +12,14 @@ sampling_params = {"binary_method": "featurewise"}
 
 
 custom_learner_step = CustomStep(
-    "https://github.com/mailach/deepperf-mlflow.git",
-    "learning",
-    {"nfp": "ResponseRate"},
+    path="https://github.com/mailach/deepperf-mlflow.git",
+    entry_point="learning",
+    params={"nfp": "ResponseRate"},
+    experiment_name="deepperf",
 )
 
 
-exp = SimpleExperiment()
+exp = SimpleExperiment("custom_example")
 exp.set_system("systems", system_params)
 exp.set_sampling("splc-sampling", sampling_params)
 exp.set_learning(custom=custom_learner_step)
