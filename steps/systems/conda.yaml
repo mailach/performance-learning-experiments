@@ -1,4 +1,4 @@
-name: master-thesis-dev
+name: system-loading
 channels:
   - conda-forge
 dependencies:

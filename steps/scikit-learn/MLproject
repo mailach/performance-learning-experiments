@@ -1,7 +1,7 @@
-name: pim-pipeline
+name: pim-sklearn
 
 docker_env:
-  image: mailach/pim-pipeline
+  image: mailach/pim-sklearn
   environment:
     [
       "MLFLOW_TRACKING_URI",
