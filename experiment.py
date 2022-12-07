@@ -22,12 +22,10 @@ def _load_params_and_metrics(run_id):
     return run.data.params, run.data.metrics
 
 
-def _update_run_data(experiment_id, sub_run_id, sub_run_name):
+def _update_run_data(experiment_id, sub_run_id, sub_run_name, client):
     params, metrics = _load_params_and_metrics(sub_run_id)
     params = {f"{sub_run_name}.{k}": v for k, v in params.items()}
     metrics = {f"{sub_run_name}.{k}": v for k, v in metrics.items()}
-
-    client = MlflowClient()
 
     for k, v in metrics.items():
         client.log_metric(experiment_id, k, v)
@@ -35,10 +33,10 @@ def _update_run_data(experiment_id, sub_run_id, sub_run_name):
         client.log_param(experiment_id, k, v)
 
 
-def _update_exp_params_and_metrics(ids):
+def _update_exp_params_and_metrics(ids, client):
     steps = [step.replace("run_id", "") for step in ids if step != "experiment"]
     for step in steps:
-        _update_run_data(ids["experiment"], ids[step], step)
+        _update_run_data(ids["experiment"], ids[step], step, client)
 
 
 class Experiment(ABC):
@@ -51,6 +49,7 @@ class Experiment(ABC):
         }
         self.experiment_name = experiment_name
         self.steps["evaluation"] = StepFactory("evaluation")
+        self.client = MlflowClient()
 
     def _all_steps_set_or_exit(self):
         if None in self.steps.values():
@@ -81,17 +80,15 @@ class SimpleExperiment(Experiment):
         self._all_steps_set_or_exit()
         mlflow.set_experiment(experiment_name=self.experiment_name)
 
-        client = MlflowClient()
-
-        experiment = client.search_experiments(
+        experiment = self.client.search_experiments(
             filter_string=f"name = '{self.experiment_name}'"
         )
         if len(experiment):
             exp_id = experiment[0].experiment_id
         else:
-            exp_id = client.create_experiment(self.experiment_name)
+            exp_id = self.client.create_experiment(self.experiment_name)
 
-        run = client.create_run(exp_id)
+        run = self.client.create_run(exp_id)
         ids = {}
         ids["experiment"] = run.info.run_id
 
@@ -106,8 +103,8 @@ class SimpleExperiment(Experiment):
         self.steps["evaluation"].params["learning_run_id"] = ids["learning"]
         ids["evaluation"] = self.steps["evaluation"].run()
 
-        client.set_terminated(run.info.run_id)
-        _update_exp_params_and_metrics(ids)
+        self.client.set_terminated(run.info.run_id)
+        _update_exp_params_and_metrics(ids, self.client)
 
         return ids
 
@@ -173,17 +170,16 @@ class MultiStepExperiment(Experiment):
         self._all_steps_set_or_exit()
 
         self._warn_if_no_multistep()
-        client = MlflowClient()
 
-        experiment = client.search_experiments(
+        experiment = self.client.search_experiments(
             filter_string=f"name = '{self.experiment_name}'"
         )
         if len(experiment):
             exp_id = experiment[0].experiment_id
         else:
-            exp_id = client.create_experiment(self.experiment_name)
+            exp_id = self.client.create_experiment(self.experiment_name)
 
-        run = client.create_run(exp_id)
+        run = self.client.create_run(exp_id)
         ids = {}
 
         # run system run
@@ -199,6 +195,6 @@ class MultiStepExperiment(Experiment):
 
         self._generate_evaluation_steps(ids["learning"])
         ids["evaluation"] = self._execute_multiple_steps("evaluation")
-        client.set_terminated(run.info.run_id)
+        self.client.set_terminated(run.info.run_id)
 
         return ids

@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 import mlflow
 from experiment import SimpleExperiment, MultiStepExperiment
 from steps import StepFactory
+import pandas as pd
 
 logging.basicConfig(
     level=logging.INFO,
@@ -160,8 +161,9 @@ class Executor:
     def __init__(self, config_file):
         self.experiments = {}
         self.run_ids = {}
-        self.full_data = []
-        self.experiment_data = []
+        self.exp_data = []
+        self.sampling_data = []
+        self.learning_data = []
         self.config, self.experiment = self._load_config(config_file)
         self._log_run_information()
 
@@ -193,24 +195,37 @@ class Executor:
     def _load_experiments(self):
 
         for r in range(1, self.config["repetitions"] + 1):
-
+            logging.info("Generating experiments for repetition %i", r)
             self.experiments[r] = _generate_simple_experiments(
                 self.config["parametrization"], self.experiment, self.config["name"]
             )
 
     def _execute_experiments(self):
         for r, exps in self.experiments.items():
+            logging.info("Start repetition %i of %i", r, self.config["repetitions"])
             executed_runs = []
 
             if r == 1:
                 executed_runs.append(exps[0].execute())
                 exps = exps[1:]
 
-            logging.info("Start repetition %i of %i", r, self.config["repetitions"])
-            with ThreadPoolExecutor(max_workers=self.config["threads"]) as executor:
-                ids = executor.map(lambda exp: exp.execute(), exps)
-            executed_runs += [x for x in ids]
+            
+
+            if self.config["threads"] == 1:
+                for e in exps:
+                    executed_runs.append(e.execute())
+            else:
+                with ThreadPoolExecutor(max_workers=self.config["threads"]) as executor:
+                    ids = executor.map(lambda exp: exp.execute(), exps)
+                    executed_runs += [x for x in ids]
+
             self.run_ids[r] = executed_runs
+
+            # save temporary data:
+            self._load_experiment_data()
+            pd.DataFrame(self.exp_data).to_csv(f"tmp_experiment.csv", index=False)
+            pd.DataFrame(self.sampling_data).to_csv(f"tmp_sampling.csv", index=False)
+            pd.DataFrame(self.learning_data).to_csv(f"tmp_learning.csv", index=False)
 
     def execute(self):
         self._load_experiments()
@@ -218,8 +233,9 @@ class Executor:
         self._load_experiment_data()
 
     def _load_experiment_data(self):
-        for repetition, runs in self.run_ids.items():
+        for _, runs in self.run_ids.items():
             for run in runs:
-                full, aggr = _load_data(run, repetition)
-                self.full_data.append(full)
-                self.experiment_data.append(aggr)
+                self.exp_data.append(_load_run_infos(run["experiment"]))
+                self.sampling_data.append(_load_run_infos(run["sampling"]))
+                self.learning_data.append(_load_run_infos(run["learning"]))
+    

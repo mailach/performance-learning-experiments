@@ -1,23 +1,23 @@
 configuration:
   learn_on_same_data: false
-  name: rq1_decart_x264
+  name: rq2_decart_sqlite
   parametrization:
     learning:
-      resampleMethod:
-      - bootstraping
-      - crossvalidation
-      - holdout
+      paraSearchMethod: 
+      - gridsearch
+      - bayesian
+      - randomsearch
     sampling:
       n:
-      - 16
-      - 32
-      - 48
-      - 64
-      - 80
-      - 96
-      - 112
-      - 128
-      - 144
+      - 39
+      - 78
+      - 117
+      - 156
+      - 195
+      - 234
+      - 273
+      - 312
+      - 351
   repetitions: 30
   threads: 1
 experiment:
@@ -27,7 +27,7 @@ experiment:
   learning:
     params:
       nfp: Performance
-      paraSearchMethod: gridsearch
+      resampleMethod: crossvalidation
     source: decart
   sampling:
     params:
@@ -35,5 +35,5 @@ experiment:
     source: sklearn-sampling
   system:
     params:
-      data_dir: /home/mailach/git/master-thesis/resources/data/x264
+      data_dir: /home/mailach/git/master-thesis/resources/data/SQLite
     source: systems

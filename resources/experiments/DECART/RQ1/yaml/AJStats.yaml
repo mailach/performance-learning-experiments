@@ -26,7 +26,7 @@ experiment:
     source: evaluation
   learning:
     params:
-      nfp: Performance
+      nfp: AnalysisTime
       paraSearchMethod: gridsearch
     source: decart
   sampling:

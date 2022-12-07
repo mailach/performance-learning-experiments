@@ -1,23 +1,19 @@
 configuration:
   learn_on_same_data: false
-  name: rq1_decart_x264
+  name: rq2_decart_berkeleydbj
   parametrization:
     learning:
-      resampleMethod:
-      - bootstraping
-      - crossvalidation
-      - holdout
+      paraSearchMethod: 
+      - gridsearch
+      - bayesian
+      - randomsearch
     sampling:
       n:
-      - 16
-      - 32
-      - 48
-      - 64
-      - 80
-      - 96
-      - 112
-      - 128
-      - 144
+      - 26
+      - 52
+      - 78
+      - 104
+      - 130
   repetitions: 30
   threads: 1
 experiment:
@@ -27,7 +23,7 @@ experiment:
   learning:
     params:
       nfp: Performance
-      paraSearchMethod: gridsearch
+      resampleMethod: crossvalidation
     source: decart
   sampling:
     params:
@@ -35,5 +31,5 @@ experiment:
     source: sklearn-sampling
   system:
     params:
-      data_dir: /home/mailach/git/master-thesis/resources/data/x264
+      data_dir: /home/mailach/git/master-thesis/resources/data/BerkeleyDBJ
     source: systems

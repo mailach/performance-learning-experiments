@@ -1,12 +1,12 @@
 configuration:
   learn_on_same_data: false
-  name: rq1_decart_x264
+  name: rq2_decart_x264
   parametrization:
     learning:
-      resampleMethod:
-      - bootstraping
-      - crossvalidation
-      - holdout
+      paraSearchMethod: 
+      - gridsearch
+      - bayesian
+      - randomsearch
     sampling:
       n:
       - 16
@@ -27,7 +27,7 @@ experiment:
   learning:
     params:
       nfp: Performance
-      paraSearchMethod: gridsearch
+      resampleMethod: crossvalidation
     source: decart
   sampling:
     params:
