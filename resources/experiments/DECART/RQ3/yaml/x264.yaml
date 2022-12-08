@@ -1,0 +1,36 @@
+configuration:
+  learn_on_same_data: false
+  name: rq3_decart_x264
+  parametrization:
+    sampling:
+      n:
+      - 16
+      - 32
+      - 48
+      - 64
+      - 80
+      - 96
+      - 112
+      - 128
+      - 144
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      resampleMethod: holdout
+      paraSearchMethod: randomsearch
+      pureCart: True
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /home/mailach/git/master-thesis/resources/data/x264
+    source: systems

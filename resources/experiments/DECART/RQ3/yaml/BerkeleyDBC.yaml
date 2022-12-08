@@ -1,0 +1,36 @@
+configuration:
+  learn_on_same_data: false
+  name: rq3_decart_berkeleydbc
+  parametrization:
+    sampling:
+      n:
+      - 18
+      - 36
+      - 54
+      - 72
+      - 90
+      - 108
+      - 126
+      - 144
+      - 162
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      resampleMethod: holdout
+      paraSearchMethod: randomsearch
+      pureCart: True
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /home/mailach/git/master-thesis/resources/data/BerkeleyDBC
+    source: systems

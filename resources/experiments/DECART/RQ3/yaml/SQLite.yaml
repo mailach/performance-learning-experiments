@@ -1,0 +1,36 @@
+configuration:
+  learn_on_same_data: false
+  name: rq3_decart_sqlite
+  parametrization:
+    sampling:
+      n:
+      - 39
+      - 78
+      - 117
+      - 156
+      - 195
+      - 234
+      - 273
+      - 312
+      - 351
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      resampleMethod: holdout
+      paraSearchMethod: randomsearch
+      pureCart: True
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /home/mailach/git/master-thesis/resources/data/SQLite
+    source: systems
