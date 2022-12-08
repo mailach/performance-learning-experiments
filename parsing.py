@@ -223,9 +223,9 @@ class Executor:
 
             # save temporary data:
             self._load_experiment_data()
-            pd.DataFrame(self.exp_data).to_csv(f"tmp_experiment_rep{r}.csv", index=False)
-            pd.DataFrame(self.sampling_data).to_csv(f"tmp_sampling_rep{r}.csv", index=False)
-            pd.DataFrame(self.learning_data).to_csv(f"tmp_learning_rep{r}.csv", index=False)
+            pd.DataFrame(self.exp_data).to_csv(f"tmp_{self.config['name']}_experiment_rep{r}.csv", index=False)
+            pd.DataFrame(self.sampling_data).to_csv(f"tmp_sampling_{self.config['name']}_rep{r}.csv", index=False)
+            pd.DataFrame(self.learning_data).to_csv(f"tmp_learning_{self.config['name']}_rep{r}.csv", index=False)
 
     def execute(self):
         self._load_experiments()
