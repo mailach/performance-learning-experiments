@@ -223,9 +223,9 @@ class Executor:
 
             # save temporary data:
             self._load_experiment_data()
-            pd.DataFrame(self.exp_data).to_csv(f"tmp_experiment.csv", index=False)
-            pd.DataFrame(self.sampling_data).to_csv(f"tmp_sampling.csv", index=False)
-            pd.DataFrame(self.learning_data).to_csv(f"tmp_learning.csv", index=False)
+            pd.DataFrame(self.exp_data).to_csv(f"tmp_experiment_rep{r}.csv", index=False)
+            pd.DataFrame(self.sampling_data).to_csv(f"tmp_sampling_rep{r}.csv", index=False)
+            pd.DataFrame(self.learning_data).to_csv(f"tmp_learning_rep{r}.csv", index=False)
 
     def execute(self):
         self._load_experiments()
@@ -233,9 +233,13 @@ class Executor:
         self._load_experiment_data()
 
     def _load_experiment_data(self):
+        self.exp_data = []
+        self.sampling_data = []
+        self.learning_data = []
         for _, runs in self.run_ids.items():
             for run in runs:
-                self.exp_data.append(_load_run_infos(run["experiment"]))
-                self.sampling_data.append(_load_run_infos(run["sampling"]))
-                self.learning_data.append(_load_run_infos(run["learning"]))
+                if "experiment" in run and "sampling" in run and "learning" in run:
+                    self.exp_data.append(_load_run_infos(run["experiment"]))
+                    self.sampling_data.append(_load_run_infos(run["sampling"]))
+                    self.learning_data.append(_load_run_infos(run["learning"]))
     

@@ -1,5 +1,6 @@
 import logging
 import sys
+import json
 from abc import ABC
 from concurrent.futures import ThreadPoolExecutor
 
@@ -92,19 +93,32 @@ class SimpleExperiment(Experiment):
         ids = {}
         ids["experiment"] = run.info.run_id
 
-        ids["system"] = self.steps["system"].run()
+        try:
+            ids["system"] = self.steps["system"].run()
 
-        self.steps["sampling"].params["system_run_id"] = ids["system"]
-        ids["sampling"] = self.steps["sampling"].run()
+            self.steps["sampling"].params["system_run_id"] = ids["system"]
+            ids["sampling"] = self.steps["sampling"].run()
 
-        self.steps["learning"].params["sampling_run_id"] = ids["sampling"]
-        ids["learning"] = self.steps["learning"].run()
+            self.steps["learning"].params["sampling_run_id"] = ids["sampling"]
+            ids["learning"] = self.steps["learning"].run()
 
-        self.steps["evaluation"].params["learning_run_id"] = ids["learning"]
-        ids["evaluation"] = self.steps["evaluation"].run()
+            self.steps["evaluation"].params["learning_run_id"] = ids["learning"]
+            ids["evaluation"] = self.steps["evaluation"].run()
+            self.client.set_terminated(run.info.run_id)
+            _update_exp_params_and_metrics(ids, self.client)
 
-        self.client.set_terminated(run.info.run_id)
-        _update_exp_params_and_metrics(ids, self.client)
+        except Exception as excpt:
+            with open(f"failed_{ids['experiment']}.json", "w", encoding="utf-8") as f:
+                json.dump(
+                    {
+                        "exp_run_id": ids["experiment"],
+                        "sampling_params": self.steps["sampling"].params,
+                        "learning_params": self.steps["learning"].params,
+                        "exception": str(excpt),
+                    },
+                    f,
+                )
+            self.client.set_terminated(run.info.run_id, status="FAILED")
 
         return ids
 
