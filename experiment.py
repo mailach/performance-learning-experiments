@@ -108,6 +108,7 @@ class SimpleExperiment(Experiment):
             _update_exp_params_and_metrics(ids, self.client)
 
         except Exception as excpt:
+            self.client.set_terminated(run.info.run_id, status="FAILED")
             with open(f"failed_{ids['experiment']}.json", "w", encoding="utf-8") as f:
                 json.dump(
                     {
@@ -118,8 +119,6 @@ class SimpleExperiment(Experiment):
                     },
                     f,
                 )
-            self.client.set_terminated(run.info.run_id, status="FAILED")
-
         return ids
 
 

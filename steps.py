@@ -52,20 +52,26 @@ class Step:
 
     def run(self):
         """either runs specified project or returns existing run"""
-
-        if not self.run_id:
-            self.run_id = mlflow.projects.run(
-                self.path,
-                entry_point=self.entry_point,
-                experiment_name=self.experiment_name,
-                parameters=self.params,
-            ).run_id
-        else:
-            logging.warning(
-                "Use existing run %s in entrypoint %s", self.run_id, self.entry_point
-            )
-
-        return self.run_id
+        retries = 0
+        while retries < 3:
+            try:
+                if not self.run_id:
+                    self.run_id = mlflow.projects.run(
+                        self.path,
+                        entry_point=self.entry_point,
+                        experiment_name=self.experiment_name,
+                        parameters=self.params,
+                    ).run_id
+                else:
+                    logging.warning(
+                        "Use existing run %s in entrypoint %s",
+                        self.run_id,
+                        self.entry_point,
+                    )
+                return self.run_id
+            except:
+                retries += 1
+                return self.run_id
 
     def deepcopy(self):
         copy = Step()
