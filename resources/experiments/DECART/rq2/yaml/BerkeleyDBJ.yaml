@@ -14,7 +14,8 @@ configuration:
       - 78
       - 104
       - 130
-  repetitions: 30
+      - 156
+  repetitions: 6
   threads: 1
 experiment:
   evaluation:
@@ -31,5 +32,5 @@ experiment:
     source: sklearn-sampling
   system:
     params:
-      data_dir: /home/mailach/git/master-thesis/resources/data/BerkeleyDBJ
+      data_dir: /u/mailach/git/master-thesis/resources/data/BerkeleyDBJ
     source: systems

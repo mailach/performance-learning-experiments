@@ -1,16 +1,14 @@
 configuration:
   learn_on_same_data: false
-  name: rq3_decart_berkeleydbj
+  name: rq2_decart_hipacc
   parametrization:
+    learning:
+      paraSearchMethod: 
+      - randomsearch
     sampling:
       n:
-      - 26
-      - 52
-      - 78
-      - 104
-      - 130
-      - 156
-  repetitions: 6
+      - 363
+  repetitions: 1
   threads: 1
 experiment:
   evaluation:
@@ -19,9 +17,7 @@ experiment:
   learning:
     params:
       nfp: Performance
-      resampleMethod: holdout
-      paraSearchMethod: randomsearch
-      pureCart: True
+      resampleMethod: crossvalidation
     source: decart
   sampling:
     params:
@@ -29,5 +25,5 @@ experiment:
     source: sklearn-sampling
   system:
     params:
-      data_dir: /u/mailach/git/master-thesis/resources/data/BerkeleyDBJ
+      data_dir: /u/mailach/git/master-thesis/resources/data/HIPAcc
     source: systems

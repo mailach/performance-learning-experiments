@@ -1,12 +1,10 @@
 configuration:
   learn_on_same_data: false
-  name: rq2_decart_hipacc
+  name: rq3_decart_hipacc
   parametrization:
     learning:
-      paraSearchMethod: 
-      - gridsearch
-      - bayesian
-      - randomsearch
+      pureCART:
+      - True
     sampling:
       n:
       - 33
@@ -38,7 +36,8 @@ experiment:
   learning:
     params:
       nfp: Performance
-      resampleMethod: crossvalidation
+      resampleMethod: holdout
+      paraSearchMethod: randomsearch
     source: decart
   sampling:
     params:
