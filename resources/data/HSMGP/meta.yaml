@@ -1,0 +1,12 @@
+system: HIPAcc
+domain: Stencil-Grid Solver
+year: 2015
+authors: Siegmund et al.
+paper: https://dl.acm.org/doi/pdf/10.1145/2786805.2786845
+configurations: 3456
+features: 14
+constraints: 45
+all_measured: True
+binary_features: 11
+numeric_features: 3
+nfp: [AverageTimePerIteration, NumIterations, TimeToSolution]
