@@ -1,4 +1,6 @@
 from typing import Sequence
+import logging
+
 import pandas as pd
 from parsing import SplcMeasurementParser
 
@@ -44,7 +46,13 @@ def _extract_binary(measurement, binaries):
 def _extract_nfp(measurement):
     transformed = {}
     for name, value in measurement["nfp"].items():
-        transformed[name] = float(value)
+        try:
+            transformed[name] = float(value)
+        except:
+            logging.warning(
+                "Could not transform %s with value %s to float.", name, value
+            )
+            transformed[name] = value
 
     return transformed
 
