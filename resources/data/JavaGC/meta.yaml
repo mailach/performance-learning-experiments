@@ -1,0 +1,9 @@
+system: JavaGC
+domain: Runtime Environment
+configurations: 10e31
+features: 35
+constraints: x
+all_measured: True
+binary_features: 12
+numeric_features: 23
+nfp: [Time]
