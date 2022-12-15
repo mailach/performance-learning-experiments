@@ -1,0 +1,675 @@
+<vm name="sac">
+<binaryOptions>
+<configurationOption>
+<name>extrema</name>
+<outputString>-extrema</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>enabledOptimizations</name>
+<outputString>noOutput</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>False</optional>
+</configurationOption>
+<configurationOption>
+<name>disabledOptimizations</name>
+<outputString>noOutput</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>False</optional>
+</configurationOption>
+<configurationOption>
+<name>ls</name>
+<outputString>-no ls</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>dcr</name>
+<outputString>-no dcr</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>cf</name>
+<outputString>-no cf</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>lir</name>
+<outputString>-no lir</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>inl</name>
+<outputString>-no inl</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>lur</name>
+<outputString>-no lur</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlur</name>
+<outputString>-no wlur</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>prfunr</name>
+<outputString>-no prfunr</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>lus</name>
+<outputString>-do lus</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>cse</name>
+<outputString>-no cse</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>dfr</name>
+<outputString>-no dfr</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlt</name>
+<outputString>-do wlt</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlf</name>
+<outputString>-no wlf</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>awlf</name>
+<outputString>-do awlf</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>ivecyc</name>
+<outputString>-no ivecyc</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>ive</name>
+<outputString>-no ive</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>ivesli</name>
+<outputString>-no ivesli</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlflt</name>
+<outputString>-do wlflt</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>ae</name>
+<outputString>-do ae</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>dl</name>
+<outputString>-no dl</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>rco</name>
+<outputString>-no rco</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>uip</name>
+<outputString>-no uip</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>dr</name>
+<outputString>-no dr</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>ipc</name>
+<outputString>-no ipc</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlpg</name>
+<outputString>-no wlpg</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>cp</name>
+<outputString>-no cp</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>vp</name>
+<outputString>-no vp</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>srf</name>
+<outputString>-no srf</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>phm</name>
+<outputString>-no phm</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions>
+<option>dpa</option>
+<option>msca</option>
+</impliedOptions>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>dpa</name>
+<outputString>-do dpa</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>msca</name>
+<outputString>-no msca</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wls</name>
+<outputString>-no wls</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>as</name>
+<outputString>-no as</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlsimp</name>
+<outputString>-no wlsimp</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>cwle</name>
+<outputString>-no cwle</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>lro</name>
+<outputString>-no lro</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>lao</name>
+<outputString>-do lao</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>pra</name>
+<outputString>-do pra</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>rnb</name>
+<outputString>-no rnb</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>disabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>rip</name>
+<outputString>-no rip</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>sde</name>
+<outputString>-no sde</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlprop</name>
+<outputString>-no wlprop</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>saa</name>
+<outputString>-no saa</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>cyc</name>
+<outputString>-no cyc</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>scyc</name>
+<outputString>-no scyc</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>saacyc</name>
+<outputString>-no saacyc</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>wlsd</name>
+<outputString>-no wlsd</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>cts</name>
+<outputString>-no cts</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+<configurationOption>
+<name>ucts</name>
+<outputString>-no ucts</outputString>
+<prefix> </prefix>
+<postfix> </postfix>
+<parent>enabledOptimizations</parent>
+<impliedOptions/>
+<excludedOptions/>
+<defaultValue>Selected</defaultValue>
+<optional>True</optional>
+</configurationOption>
+</binaryOptions>
+<numericOptions>
+<configurationOption>
+<name>maxoptcyc</name>
+<outputString> </outputString>
+<prefix>-maxoptcyc </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<minValue>1</minValue>
+<maxValue>20</maxValue>
+<stepFunction>maxoptcyc + 1</stepFunction>
+<defaultValue>10</defaultValue>
+</configurationOption>
+<configurationOption>
+<name>maxlur</name>
+<outputString> </outputString>
+<prefix>-maxlur </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<minValue>1</minValue>
+<maxValue>10</maxValue>
+<stepFunction>maxlur + 1</stepFunction>
+<defaultValue>2</defaultValue>
+</configurationOption>
+<configurationOption>
+<name>maxwlur</name>
+<outputString> </outputString>
+<prefix>-maxwlur </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<minValue>1</minValue>
+<maxValue>20</maxValue>
+<stepFunction>maxwlur + 1</stepFunction>
+<defaultValue>9</defaultValue>
+</configurationOption>
+<configurationOption>
+<name>maxprfur</name>
+<outputString> </outputString>
+<prefix>-maxprfur </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<minValue>1</minValue>
+<maxValue>20</maxValue>
+<stepFunction>maxprfur + 1</stepFunction>
+<defaultValue>6</defaultValue>
+</configurationOption>
+<configurationOption>
+<name>maxae</name>
+<outputString> </outputString>
+<prefix>-maxae </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<minValue>1</minValue>
+<maxValue>10</maxValue>
+<stepFunction>maxae + 1</stepFunction>
+<defaultValue>4</defaultValue>
+</configurationOption>
+<configurationOption>
+<name>initmheap</name>
+<outputString> </outputString>
+<prefix>-initmheap </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<minValue>1024</minValue>
+<maxValue>10240</maxValue>
+<stepFunction>initmheap + 1024</stepFunction>
+<defaultValue>1024</defaultValue>
+</configurationOption>
+<configurationOption>
+<name>initwheap</name>
+<outputString> </outputString>
+<prefix>-initwheap </prefix>
+<postfix> </postfix>
+<parent> </parent>
+<impliedOptions/>
+<excludedOptions/>
+<minValue>32</minValue>
+<maxValue>1024</maxValue>
+<stepFunction>initwheap + 32</stepFunction>
+<defaultValue>64</defaultValue>
+</configurationOption>
+</numericOptions>
+<booleanConstraints/>
+<nonBooleanConstraints/>
+<mixedConstraints/>
+</vm>
