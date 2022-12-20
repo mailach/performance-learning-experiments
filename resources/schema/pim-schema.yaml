@@ -41,6 +41,25 @@ system:
                 all_measured: True
                 binary_features: 16
                 numeric_features: 0
+            - JavaGC:
+                nfp: [Time]
+                configurations: 10e31
+                all_measured: False
+                binary_features: 12
+                numeric_features: 23
+            - HSMGP:
+                nfp: [AverageTimePerIteration, NumIterations, TimeToSolution]
+                configurations: 3456
+                all_measured: False
+                binary_features: 11
+                numeric_features: 3
+            - SAC:
+                nfp: [compile-real, compile-user, compile-sys, compile-ioin, compile-ioout,compile-maxmem, compile-avgmem, compile-cpu, compile-power, compile-size, run-exit, run-real, run-user, run-sys, run-ioin, run-ioout, run-maxmem, run-avgmem, run-cpu, run-power]
+                configurations: 10e23
+                all_measured: False
+                binary_features: 53
+                numeric_features: 7             
+            
 sampling:
   sources:
     - name: splc-sampling

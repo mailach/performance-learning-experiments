@@ -87,9 +87,10 @@ def _expand_params(params):
     return subs
 
 
-def _substitute_params(parameters, experiment):
+def _substitute_crossprod_params(parameters, experiment):
     substitutions = _expand_params(parameters) if parameters else []
     experiments = []
+    print(substitutions)
     for exp_params in substitutions:
         tmp_exp = copy.deepcopy(experiment)
         for sub in exp_params:
@@ -98,6 +99,18 @@ def _substitute_params(parameters, experiment):
 
     return experiments
 
+
+def _substitute_stepwise_params(parameters, experiment):
+    stepname = parameters["stepname"]
+
+    experiments = []
+    for parameters in parameters["params"]:
+        tmp_exp = copy.deepcopy(experiment)
+        for p, v in parameters.items():
+            tmp_exp[stepname]["params"][p] = v
+        experiments.append(tmp_exp)
+
+    return experiments
 
 def _load_run_infos(run_id, entrypoint=None):
     run = mlflow.get_run(run_id)
@@ -136,11 +149,13 @@ def _exp_from_config(config, experiment_name):
     return exp
 
 
-def _generate_simple_experiments(parameters, experiment, experiment_name):
-    if parameters != "None":
-        exp_confs = _substitute_params(parameters, experiment)
+def _parameterize_experiments(parameters, experiment, experiment_name):
+    if parameters["type"] == "crossproduct":
+        exp_confs = _substitute_crossprod_params({k:v for k,v in parameters.items() if k!="type"}, experiment)
+    elif parameters["type"] == "stepwise":
+        exp_confs = _substitute_stepwise_params({k:v for k,v in parameters.items() if k!="type"}, experiment)
     else:
-        exp_confs = [experiment]
+        raise NotImplementedError("Substitution type not implemented yet")
 
     exps = []
     for conf in exp_confs:
@@ -165,21 +180,12 @@ class Executor:
         self.sampling_data = []
         self.learning_data = []
         self.config, self.experiment = self._load_config(config_file)
-        self._log_run_information()
+        
 
     def _log_run_information(self):
-        if self.config["parametrization"] != "None":
-            n_runs = self.config["repetitions"]
-            for step in self.config["parametrization"]:
-                for param in self.config["parametrization"][step]:
-                    n_runs = n_runs * len(self.config["parametrization"][step][param])
-
-        else:
-            n_runs = self.config["repetitions"]
-
         logging.info(
             "Execution will lead to %i runs in %i threads.",
-            n_runs,
+            len(self.experiment),
             self.config["threads"],
         )
 
@@ -196,9 +202,13 @@ class Executor:
 
         for r in range(1, self.config["repetitions"] + 1):
             logging.info("Generating experiments for repetition %i", r)
-            self.experiments[r] = _generate_simple_experiments(
-                self.config["parametrization"], self.experiment, self.config["name"]
-            )
+            if self.config["parametrization"]:
+                self.experiments[r] = _parameterize_experiments(
+                    self.config["parametrization"], self.experiment, self.config["name"]
+                )
+            else: 
+                logging.error("No parametrization not yet implemented")
+                raise NotImplementedError
 
     def _execute_experiments(self):
         for r, exps in self.experiments.items():
@@ -229,6 +239,7 @@ class Executor:
 
     def execute(self):
         self._load_experiments()
+        self._log_run_information()
         self._execute_experiments()
         self._load_experiment_data()
 
