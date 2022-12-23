@@ -185,7 +185,7 @@ class Executor:
     def _log_run_information(self):
         logging.info(
             "Execution will lead to %i runs in %i threads.",
-            len(self.experiment),
+            len(self.experiments[1]) * len(self.experiments),
             self.config["threads"],
         )
 
