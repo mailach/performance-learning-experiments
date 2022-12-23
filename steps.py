@@ -52,6 +52,7 @@ class Step:
 
     def run(self):
         """either runs specified project or returns existing run"""
+
         retries = 0
         while retries < 3:
             try:
@@ -69,9 +70,14 @@ class Step:
                         self.entry_point,
                     )
                 return self.run_id
-            except:
+            except Exception as e:
+                logging.error(
+                    "An exception occured during %i. retry of execution: %s",
+                    retries + 1,
+                    e,
+                )
                 retries += 1
-                return self.run_id
+        raise Exception("Could not execute step %s", self.entry_point)
 
     def deepcopy(self):
         copy = Step()
