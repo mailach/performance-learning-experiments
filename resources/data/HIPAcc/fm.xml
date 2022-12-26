@@ -911,21 +911,6 @@
 	</numericOptions>
   <booleanConstraints />
   <nonBooleanConstraints />
-  <mixedConstraints>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_1024x1 * pixelPerThread = 2</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_32x32 * pixelPerThread = 3</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_64x16 * pixelPerThread = 3</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_1024x1 * pixelPerThread = 3</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_32x32 * pixelPerThread = 4</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_64x16 * pixelPerThread = 4</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_128x8 * pixelPerThread = 3</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_256x4 * pixelPerThread = 3</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_512x2 * pixelPerThread = 3</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_128x8 * pixelPerThread = 4</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_256x4 * pixelPerThread = 4</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_512x2 * pixelPerThread = 4</constraint>
-  <constraint req="all" exprKind="neg">LocalMemory * bs_1024x1 * pixelPerThread = 4</constraint>
-  <constraint req="all" exprKind="neg">Array2D * padding > 0</constraint>
-  </mixedConstraints>
-  
+  <mixedConstraints/>
+
 </vm>
