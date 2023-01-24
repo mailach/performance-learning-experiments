@@ -1,4 +1,4 @@
-system: HIPAcc
+system: HSMGP
 domain: Stencil-Grid Solver
 year: 2015
 authors: Siegmund et al.

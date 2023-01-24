@@ -2,6 +2,7 @@ configuration:
   learn_on_same_data: false
   name: rq1_decart_berkeleydbj
   parametrization:
+    type: crossproduct
     learning:
       resampleMethod:
       - bootstraping
@@ -14,6 +15,7 @@ configuration:
       - 78
       - 104
       - 130
+      - 156
   repetitions: 30
   threads: 1
 experiment:

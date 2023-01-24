@@ -1,23 +1,27 @@
 configuration:
-  repetitions: 1
-  threads: 1
+  repetitions: 30
+  threads: 10
   name: decart_apache
   learn_on_same_data: False
   parametrization:
-    None
+    sampling:
+      n: [9]
+    learning:
+      resampleMethod: ["bootstraping", "crossvalidation", "holdout"]
 experiment:
   system:
     source: systems
     params:
       data_dir: /u/mailach/git/master-thesis/resources/data/Apache/
   sampling:
-    source: splc-sampling
+    source: sklearn-sampling
     params:
-      binary_method: featurewise
+      method: featurewise
   learning:
-    source: splc-learning
+    source: decart
     params:
       nfp: ResponseRate
+      paraSearchMethod: "gridsearch"
   evaluation:
     source: evaluation
     params: {}
