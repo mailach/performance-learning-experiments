@@ -90,7 +90,6 @@ def _expand_params(params):
 def _substitute_crossprod_params(parameters, experiment):
     substitutions = _expand_params(parameters) if parameters else []
     experiments = []
-    print(substitutions)
     for exp_params in substitutions:
         tmp_exp = copy.deepcopy(experiment)
         for sub in exp_params:
