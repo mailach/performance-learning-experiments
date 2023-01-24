@@ -65,8 +65,31 @@ tuning_params = {
             "gamma": [0.001, 0.01, 0.1, 0.005, 0.05, 0.5, 0.25, 0.025, 0.075, 1.0],
             "epsilon": [0.001, 0.01, 0.1, 0.5, 1.0],
         },
+        "cart": {
+            "min_samples_split": [],
+            "min_samples_leaf": [],
+            "ccp_alpha": [0.000001, 0.00001, 0.0001, 0.001, 0.01],
+        },
+        "rf": {
+            "max_features": [],
+            "n_estimators": list(range(2, 30)),
+        },
     }
 }
+
+
+def create_param_grid(tuning_strategy, method, n_features):
+    param_space = tuning_params[tuning_strategy][method]
+
+    if method == "cart":
+        param_space["min_samples_split"] = list(range(2, n_features))
+        param_space["min_samples_leaf"] = [
+            round(1 / 3 * minsplit) for minsplit in param_space["min_samples_split"]
+        ]
+    elif method == "rf":
+        param_space["max_features"] = list(range(2, n_features))
+
+    return param_space
 
 
 model_selection = {"grid_search": GridSearchCV}
@@ -120,14 +143,21 @@ def learning(
     activate_logging(logs_to_artifact)
     logging.info("Start learning from sampled configurations.")
 
+    # load data
     sampling_cache = CacheHandler(sampling_run_id, new_run=False)
     train_x, train_y = _load_data("train.tsv", sampling_cache, nfp)
     test_x, test_y = _load_data("test.tsv", sampling_cache, nfp)
 
+    # get model
     model = estimators[method]()
+
+    # get parameter space
+    param_space = create_param_grid(tuning_strategy, method, len(train_x.columns))
+
+    # check if 10 features are available, elsewise use 9-fold cross validation
     k = 10 if len(train_x) > 10 else 9
 
-    param_space = tuning_params[tuning_strategy][method]
+    # generate experiment
     selection = model_selection[tuning_strategy](
         model,
         param_space,
