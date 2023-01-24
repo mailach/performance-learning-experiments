@@ -1,13 +1,6 @@
 name: pim-sklearn
 
-docker_env:
-  image: mailach/pim-sklearn
-  environment:
-    [
-      "MLFLOW_TRACKING_URI",
-      "MLFLOW_TRACKING_USERNAME",
-      "MLFLOW_TRACKING_PASSWORD",
-    ]
+conda_env: conda.yaml
 
 entry_points:
   sampling:
@@ -22,6 +15,6 @@ entry_points:
       sampling_run_id: sampling_run_id
       method: method
       nfp: nfp
+      tuning_strategy: { type: str, default: grid_search }
       logs_to_artifact: { type: bool, default: False }
-    command: "python learning.py --sampling_run_id={sampling_run_id} --method={method} --nfp={nfp} --logs_to_artifact={logs_to_artifact}"
-
+    command: "python learning.py --sampling_run_id={sampling_run_id} --method={method} --nfp={nfp} --tuning_strategy={tuning_strategy} --logs_to_artifact={logs_to_artifact}"
