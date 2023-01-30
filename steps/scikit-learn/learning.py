@@ -1,4 +1,3 @@
-from models import LearnerFactory, Learner
 from caching import CacheHandler
 from rich.logging import RichHandler
 import pandas as pd
@@ -12,13 +11,13 @@ import time
 import os
 
 
-from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import BaggingRegressor
+
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.kernel_ridge import KernelRidge
-from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_absolute_percentage_error, make_scorer
 
@@ -74,6 +73,24 @@ tuning_params = {
             "max_features": [],
             "n_estimators": list(range(2, 30)),
         },
+        "knn": {
+            "n_neighbors": list(range(2, 21)),
+            "weights": ["distance", "uniform"],
+            "algorithm": ["auto", "ball_tree", "kd_tree", "brute"],
+            "p": list(range(1, 6)),
+        },
+        "kr": {
+            "kernel": ["poly", "rbf", "linear"],
+            "alpha": [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1, 0.5, 0.05],
+            "degree": list(range(1, 6)),
+            "gamma": [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1, 0.5, 0.05],
+        },
+        "bagging": {
+            "base_estimator": [
+                DecisionTreeRegressor(min_samples_leaf=i) for i in range(1, 11)
+            ],
+            "n_estimators": list(range(2, 21)),
+        },
     }
 }
 
@@ -101,6 +118,7 @@ estimators = {
     "rf": RandomForestRegressor,
     "knn": KNeighborsRegressor,
     "kr": KernelRidge,
+    "bagging": BaggingRegressor,
 }
 
 
