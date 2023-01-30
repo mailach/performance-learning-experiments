@@ -1,0 +1,10 @@
+name: deepperf-replication
+
+conda_env: conda.yaml
+entry_points:
+  learning:
+    parameters:
+      sampling_run_id: sampling_run_id
+      nfp: nfp
+      logs_to_artifact: { type: bool, default: False }
+    command: "python learning.py --sampling_run_id={sampling_run_id} --nfp={nfp} --logs_to_artifact={logs_to_artifact}"
