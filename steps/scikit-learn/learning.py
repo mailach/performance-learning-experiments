@@ -68,6 +68,7 @@ tuning_params = {
             "min_samples_split": [],
             "min_samples_leaf": [],
             "ccp_alpha": [0.000001, 0.00001, 0.0001, 0.001, 0.01],
+            "random_state": [1],
         },
         "rf": {
             "max_features": [],
