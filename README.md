@@ -24,6 +24,10 @@ export $(grep -v '^#' .env | xargs)
 
 You can use the provided examples to learn about how to use the executor. If you want to use the provided YAML files, you need to edit them so the data dir points to the absolute path of the executor. 
 
+```sh
+python example_simple.py
+python example_yaml.py
+```
 
 ## Related repositories
 
