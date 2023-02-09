@@ -1,13 +1,24 @@
-# Master's Thesis
+# Performance Learning Experimentation
 
-Load .env file
+# Setting up the project locally
+You need a Docker, Git, and conda installation (at least if you want to load systems).   
+Clone the project with all submodules:
+
+
+```sh
+git clone git@github.com:mailach/performance-learning-experiments.git
+git submodule init
+git submodule update
+```
+
+Generate a conda environment from `conda.yml`.
+You need to create an environment file, corresponding to the `.env.example`. If you want to try the project on a remote server, you can use my mlflow test server, ask me for credentials. 
+Load your `.env` file:
 
 ```sh
 export $(grep -v '^#' .env | xargs)
 ```
 
-Run multistep workflow in root dir
+## Example experiments
 
-```sh
-mlflow run . -P test=x
-```
+You can use the provided examples to learn about how to use the executor. If you want to use the provided YAML files, you need to edit them so the data dir points to the absolute path of the executor. 
