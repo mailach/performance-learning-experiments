@@ -9,7 +9,7 @@ from mlflow.tracking import MlflowClient
 
 from rich.logging import RichHandler
 
-from steps import Step, StepFactory
+from executor.steps import Step, StepFactory
 
 logging.basicConfig(
     level=logging.INFO,

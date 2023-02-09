@@ -164,6 +164,12 @@ def _parameterize_experiments(parameters, experiment, experiment_name):
     return exps
 
 
+def _simple_experiment(experiment, experiment_name):
+    return _exp_from_config(experiment, experiment_name)
+
+     
+
+
 def _set_logging_to_file(config):
     for step in config:
         config[step]["params"]["logs_to_artifact"] = True
@@ -201,13 +207,14 @@ class Executor:
 
         for r in range(1, self.config["repetitions"] + 1):
             logging.info("Generating experiments for repetition %i", r)
-            if self.config["parametrization"]:
+            if self.config["parametrization"] != "None":
                 self.experiments[r] = _parameterize_experiments(
                     self.config["parametrization"], self.experiment, self.config["name"]
                 )
-            else: 
-                logging.error("No parametrization not yet implemented")
-                raise NotImplementedError
+            else:
+                self.experiments[r] = [_simple_experiment(self.experiment, self.config["name"])]
+                #logging.error("No parametrization not yet implemented")
+                #raise NotImplementedError
 
     def _execute_experiments(self):
         for r, exps in self.experiments.items():

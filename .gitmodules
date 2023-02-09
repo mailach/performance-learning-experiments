@@ -1,9 +1,9 @@
 [submodule "steps/learning/decart"]
-	path = steps/learning/decart
+	path = executor/steps/learning/decart
 	url = git@github.com:mailach/decart-mlflow.git
 [submodule "steps/learning/deepperf"]
-	path = steps/learning/deepperf
+	path = executor/steps/learning/deepperf
 	url = git@github.com:mailach/deepperf-mlflow.git
 [submodule "steps/SPLConqueror"]
-	path = steps/SPLConqueror
+	path = executor/steps/SPLConqueror
 	url = git@github.com:mailach/SPLC-mlflow.git

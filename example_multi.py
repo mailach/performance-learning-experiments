@@ -1,10 +1,10 @@
 import os
 
-from experiment import MultiStepExperiment
+from executor.experiment import MultiStepExperiment
 
 CWD = os.getcwd()
 
-system_params = {"data_dir": os.path.join(CWD, "resources/data/Apache")}
+system_params = {"data_dir": os.path.join(CWD, "executor/resources/data/Apache")}
 learning_params = {"method": "rf", "nfp": "ResponseRate"}
 
 

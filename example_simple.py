@@ -1,10 +1,10 @@
 import os
 
-from experiment import SimpleExperiment
+from executor.experiment import SimpleExperiment
 
 CWD = os.getcwd()
 
-system_params = {"data_dir": os.path.join(CWD, "resources/data/Apache")}
+system_params = {"data_dir": os.path.join(CWD, "executor/resources/data/Apache")}
 sampling_params = {"method": "random", "n": 10}
 learning_params = {
     "resampleMethod": "crossvalidation",
