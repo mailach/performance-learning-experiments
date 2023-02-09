@@ -1,0 +1,29 @@
+configuration:
+  name: recomp_comparison_svr_x264
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+      - 12
+      - 65
+      - 212
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      method: svr
+      tuning_strategy: grid_search
+    source: sklearn-learning
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /u/mailach/git/master-thesis/resources/data/x264
+    source: systems

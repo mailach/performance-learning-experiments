@@ -1,0 +1,27 @@
+configuration:
+  name: recomp_comparison_svr_apache
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+      - 50
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: ResponseRate
+      method: svr
+      tuning_strategy: grid_search
+    source: sklearn-learning
+  sampling:
+    params: 
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /u/mailach/git/master-thesis/resources/data/Apache
+    source: systems

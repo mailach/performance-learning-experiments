@@ -1,0 +1,28 @@
+configuration:
+  name: recomb_rq1_deepperf_x264
+  parametrization:
+    type: stepwise
+    stepname: sampling
+    params:
+      - binary_method: featurewise
+      - binary_method: pairwise
+      - binary_method: negfw
+      - binary_method: twise
+        t: 3
+  repetitions: 1
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+    source: deepperf
+  sampling:
+    params: {}
+    source: splc-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/x264
+    source: systems

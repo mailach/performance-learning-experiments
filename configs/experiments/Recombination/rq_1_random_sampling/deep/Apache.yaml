@@ -1,0 +1,25 @@
+configuration:
+  name: recomp_comparison_deep_apache
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+      - 50
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: ResponseRate
+    source: deepperf
+  sampling:
+    params: 
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /u/mailach/git/master-thesis/resources/data/Apache
+    source: systems

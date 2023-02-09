@@ -1,0 +1,25 @@
+configuration:
+  name: recomp_comparison_deep_berkeleydbc
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+      - 343
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+    source: deepperf
+  sampling:
+    params: 
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /u/mailach/git/master-thesis/resources/data/BerkeleyDBC
+    source: systems

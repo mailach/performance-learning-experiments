@@ -1,0 +1,31 @@
+configuration:
+  learn_on_same_data: false
+  name: recomp_rq3_decart__berkeleydbc
+  parametrization:
+    type: stepwise
+    stepname: sampling
+    params:
+      - binary_method: featurewise
+      - binary_method: pairwise
+      - binary_method: negfw
+      - binary_method: twise
+        t: 3
+  repetitions: 30
+  threads: 4
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      resampleMethod: crossvalidation
+      paraSearchMethod: gridsearch
+    source: decart
+  sampling:
+    params: {}
+    source: splc-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/BerkeleyDBC
+    source: systems

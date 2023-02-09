@@ -1,0 +1,32 @@
+configuration:
+  name: recomp_comparison_decart_berkeleydbc
+  parametrization:
+    type: crossproduct
+    learning:
+      resampleMethod:
+      - crossvalidation
+    sampling:
+      n:
+      - 15
+      - 14
+      - 97
+      - 343
+  repetitions: 30
+  threads: 4
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      paraSearchMethod: gridsearch
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /u/mailach/git/master-thesis/resources/data/BerkeleyDBC
+    source: systems
