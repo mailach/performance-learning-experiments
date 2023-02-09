@@ -22,3 +22,17 @@ export $(grep -v '^#' .env | xargs)
 ## Example experiments
 
 You can use the provided examples to learn about how to use the executor. If you want to use the provided YAML files, you need to edit them so the data dir points to the absolute path of the executor. 
+
+
+## Related repositories
+
+### Server setup
+* <https://github.com/mailach/mlflow-with-proxied-artifact-storage>
+
+### Integrations
+* SPLConqueror <https://github.com/mailach/SPLC-mlflow>
+* DeepPerf <https://github.com/mailach/deepperf-mlflow>
+* DECART <https://github.com/mailach/decart-mlflow>
+
+### SPLC2py
+* <https://github.com/mailach/SPLC2py>
