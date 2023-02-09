@@ -1,0 +1,8 @@
+name: pim
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mlflow=1.28.0=py310ha13cd29_0
+  - pandas=1.5.1=py310h769672d_1
+  - rich=12.5.1=pyhd8ed1ab_0
