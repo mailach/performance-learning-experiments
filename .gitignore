@@ -2,6 +2,9 @@
 *secret.yaml
 # Specific ignores for vscode
 .vscode
+executor/resources/data/JavaGC/measurements.xml
+executor/resources/data/SAC/measurements.xml
+
 
 # Specific ignores for mlflow
 mlruns/
