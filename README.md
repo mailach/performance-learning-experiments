@@ -1,4 +1,5 @@
 # Performance Learning Experimentation
+This is a prototype and WIP
 
 # Setting up the project locally
 You need a Docker, Git, and conda installation (at least if you want to load systems).   
