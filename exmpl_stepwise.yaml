@@ -1,0 +1,32 @@
+configuration:
+  name: test_stepwise
+  parametrization:
+    type: stepwise
+    stepname: sampling
+    params:
+      - binary_method: featurewise
+        numeric_method: plackettburman
+        measurements: 49
+        level: 7
+      - binary_method: featurewise
+        numeric_method: plackettburman
+        measurements: 125
+        level: 5
+  repetitions: 1
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      method: rf
+    source: sklearn-learning
+  sampling:
+    params: {}
+    source: splc-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/HIPAcc
+    source: systems

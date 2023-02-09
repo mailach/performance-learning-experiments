@@ -7,8 +7,8 @@ import sys
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 import mlflow
-from experiment import SimpleExperiment, MultiStepExperiment
-from steps import StepFactory
+from executor.experiment import SimpleExperiment, MultiStepExperiment
+from executor.steps import StepFactory
 import pandas as pd
 
 logging.basicConfig(
@@ -239,10 +239,7 @@ class Executor:
 
             # save temporary data:
             self._load_experiment_data()
-            pd.DataFrame(self.exp_data).to_csv(f"tmp_{self.config['name']}_experiment_rep{r}.csv", index=False)
-            pd.DataFrame(self.sampling_data).to_csv(f"tmp_sampling_{self.config['name']}_rep{r}.csv", index=False)
-            pd.DataFrame(self.learning_data).to_csv(f"tmp_learning_{self.config['name']}_rep{r}.csv", index=False)
-
+            
     def execute(self):
         self._load_experiments()
         self._log_run_information()

@@ -1,0 +1,24 @@
+configuration:
+  name: test_simple
+  repetitions: 1
+  threads: 1
+  parametrization: None
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: ResponseRate
+      method: kr
+      tuning_strategy: grid_search
+    source: sklearn-learning
+  sampling:
+    params:
+      method: random
+      n: 27
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/Apache
+    source: systems

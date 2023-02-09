@@ -1,0 +1,28 @@
+configuration:
+  learn_on_same_data: false
+  name: test_crossproduct
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+        - 10
+        - 15
+  repetitions: 1
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      method: svr
+    source: sklearn-learning
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/LLVM
+    source: systems
