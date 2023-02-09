@@ -1,0 +1,28 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_deepperf_dune
+  parametrization:
+    sampling:
+      n:
+        - 49
+        - 78
+        - 240
+        - 375
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+    source: deepperf
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/Dune
+    source: systems

@@ -1,0 +1,28 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_deepperf_sac
+  parametrization:
+    sampling:
+      n:
+        - 2060
+        - 2295
+        - 2499
+        - 3261
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: run-user
+    source: deepperf
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/SAC
+    source: systems

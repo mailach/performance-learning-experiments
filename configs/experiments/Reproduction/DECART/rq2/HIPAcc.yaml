@@ -1,0 +1,29 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_decart_hipacc
+  parametrization:
+    learning:
+      paraSearchMethod:
+        - randomsearch
+    sampling:
+      n:
+        - 363
+  repetitions: 1
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      resampleMethod: crossvalidation
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/HIPAcc
+    source: systems

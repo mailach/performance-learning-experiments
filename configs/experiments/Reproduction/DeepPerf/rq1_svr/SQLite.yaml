@@ -1,0 +1,32 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_deepperf_svr_sqlite_cv10
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+        - 39
+        - 78
+        - 117
+        - 156
+        - 195
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      method: svr
+      tuning_strategy: grid_search
+    source: sklearn-learning
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/SQLite
+    source: systems

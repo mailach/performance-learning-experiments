@@ -1,0 +1,28 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_deepperf_javagc
+  parametrization:
+    sampling:
+      n:
+        - 423
+        - 534
+        - 855
+        - 2571
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Time
+    source: deepperf
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/JavaGC
+    source: systems

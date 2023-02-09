@@ -1,0 +1,32 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_deepperf_svr_apache_cv10
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+        - 9
+        - 18
+        - 27
+        - 36
+        - 45
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: ResponseRate
+      method: svr
+      tuning_strategy: grid_search
+    source: sklearn-learning
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/Apache
+    source: systems

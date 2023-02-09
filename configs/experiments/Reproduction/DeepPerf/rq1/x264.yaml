@@ -1,0 +1,29 @@
+configuration:
+  learn_on_same_data: false
+  name: rq1_deepperf_x264
+  parametrization:
+    sampling:
+      n:
+        - 16
+        - 32
+        - 48
+        - 64
+        - 80
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+    source: deepperf
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/x264
+    source: systems

@@ -1,0 +1,39 @@
+configuration:
+  learn_on_same_data: false
+  name: rq1_decart_berkeleydbc
+  parametrization:
+    learning:
+      resampleMethod:
+        - bootstraping
+        - crossvalidation
+        - holdout
+    sampling:
+      n:
+        - 18
+        - 36
+        - 54
+        - 72
+        - 90
+        - 108
+        - 126
+        - 144
+        - 162
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+      paraSearchMethod: gridsearch
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/BerkeleyDBC
+    source: systems

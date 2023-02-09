@@ -1,0 +1,28 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_deepperf_hsmgp
+  parametrization:
+    sampling:
+      n:
+        - 77
+        - 173
+        - 384
+        - 480
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: AverageTimePerIteration
+    source: deepperf
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/HSMGP
+    source: systems

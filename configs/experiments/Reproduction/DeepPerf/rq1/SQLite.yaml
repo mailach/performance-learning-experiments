@@ -1,0 +1,26 @@
+configuration:
+  learn_on_same_data: false
+  name: rq1_deepperf_sqlite
+  parametrization:
+    type: crossproduct
+    sampling:
+      n:
+        - 117
+  repetitions: 1
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Performance
+    source: deepperf
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/SQLite
+    source: systems

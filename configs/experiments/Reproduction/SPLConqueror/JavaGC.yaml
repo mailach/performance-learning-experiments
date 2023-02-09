@@ -1,0 +1,45 @@
+configuration:
+  learn_on_same_data: false
+  name: rq2_deepperf_splc_javagc
+  parametrization:
+    type: stepwise
+    stepname: sampling
+    params:
+      - binary_method: featurewise
+        numeric_method: plackettburman
+        measurements: 49
+        level: 7
+      - binary_method: featurewise
+        numeric_method: random
+        sampleSize: 9
+        seed: 1
+      - binary_method: featurewise
+        numeric_method: plackettburman
+        measurements: 125
+        level: 5
+      - binary_method: pairwise
+        numeric_method: plackettburman
+        measurements: 49
+        level: 7
+  repetitions: 1
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: Time
+      learn-logFunction: True
+      learn-accumulatedLogFunction: True
+      learn-asymFunction: True
+      learn-ratioFunction: True
+      learn-numeric-disabled: False
+    source: splc-learning
+  sampling:
+    params: {}
+    source: splc-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/JavaGC
+    source: systems

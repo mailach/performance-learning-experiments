@@ -1,0 +1,36 @@
+configuration:
+  learn_on_same_data: false
+  name: rq3_decart_ajstats
+  parametrization:
+    sampling:
+      n:
+        - 20
+        - 40
+        - 60
+        - 80
+        - 100
+        - 120
+        - 140
+        - 160
+        - 180
+  repetitions: 30
+  threads: 1
+experiment:
+  evaluation:
+    params: {}
+    source: evaluation
+  learning:
+    params:
+      nfp: AnalysisTime
+      resampleMethod: holdout
+      paraSearchMethod: randomsearch
+      pureCart: True
+    source: decart
+  sampling:
+    params:
+      method: random
+    source: sklearn-sampling
+  system:
+    params:
+      data_dir: /absolute/path/to/executor/resources/data/AJStats
+    source: systems
