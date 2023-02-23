@@ -5,10 +5,20 @@ import mlflow
 from sklearn.metrics import mean_absolute_percentage_error, mean_absolute_error
 from caching import CacheHandler
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="EVALUATION    %(message)s",
-)
+
+def activate_logging(logs_to_artifact):
+    with open("logs.txt", "w", encoding="utf-8"):
+        pass
+    if logs_to_artifact:
+        return logging.basicConfig(
+            filename="logs.txt",
+            level=logging.INFO,
+            format="EVALUATION    %(message)s",
+        )
+    return logging.basicConfig(
+        level=logging.INFO,
+        format="EVALUATION    %(message)s",
+    )
 
 
 def update_metrics(run_id: str, metric: dict[str, any]):
@@ -34,7 +44,11 @@ def update_metrics(run_id: str, metric: dict[str, any]):
     ),
 )
 @click.option("--learning_run_id")
-def evaluate(learning_run_id: str = ""):
+@click.option("--logs_to_artifacts", type=bool, default=False)
+def evaluate(
+    learning_run_id: str = "",
+    logs_to_artifacts: bool = False,
+):
     """
     Evaluation of learning runs
 
@@ -43,6 +57,7 @@ def evaluate(learning_run_id: str = ""):
     learning_run_id : str
         run that corresponds to learning run that should be evaluated
     """
+    activate_logging(logs_to_artifacts)
     logging.info("Start evaluation...")
     cache = CacheHandler(learning_run_id, new_run=False)
     pred = cache.retrieve("predicted.tsv")
@@ -51,7 +66,8 @@ def evaluate(learning_run_id: str = ""):
 
     logging.info("Update learning runs...")
     update_metrics(learning_run_id, {"mape": mape, "mre": mape / 100, "mae": mae})
-    # mlflow.log_artifact("logs.txt", "")
+    if logs_to_artifacts:
+        mlflow.log_artifact("logs.txt", "")
 
 
 if __name__ == "__main__":
