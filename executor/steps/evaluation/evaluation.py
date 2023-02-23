@@ -44,7 +44,7 @@ def update_metrics(run_id: str, metric: dict[str, any]):
     ),
 )
 @click.option("--learning_run_id")
-@click.option("--logs_to_artifacts", type=bool, default=False)
+@click.option("--logs_to_artifacts", type=bool, default=True)
 def evaluate(
     learning_run_id: str = "",
     logs_to_artifacts: bool = False,
