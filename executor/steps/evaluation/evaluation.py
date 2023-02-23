@@ -1,17 +1,29 @@
-from runs import update_metrics
-from caching import CacheHandler
 import logging
-from sklearn.metrics import mean_absolute_percentage_error, mean_absolute_error
 import click
-import pandas as pd
-import mlflow
 
+import mlflow
+from sklearn.metrics import mean_absolute_percentage_error, mean_absolute_error
+from caching import CacheHandler
 
 logging.basicConfig(
-    filename="logs.txt",
     level=logging.INFO,
     format="EVALUATION    %(message)s",
 )
+
+
+def update_metrics(run_id: str, metric: dict[str, any]):
+    """
+    Updates the metrics of an already existing run.
+
+    Parameters
+    ----------
+    run_id : str
+        run to update
+    metric : dict[str, any]
+        metrics to update
+    """
+    with mlflow.start_run(run_id):
+        mlflow.log_metrics(metric)
 
 
 @click.command(
@@ -31,10 +43,13 @@ def evaluate(learning_run_id: str = ""):
     learning_run_id : str
         run that corresponds to learning run that should be evaluated
     """
+    logging.info("Start evaluation...")
     cache = CacheHandler(learning_run_id, new_run=False)
     pred = cache.retrieve("predicted.tsv")
     mae = mean_absolute_error(pred["measured"], pred["predicted"])
     mape = mean_absolute_percentage_error(pred["measured"], pred["predicted"])
+
+    logging.info("Update learning runs...")
     update_metrics(learning_run_id, {"mape": mape, "mre": mape / 100, "mae": mae})
     # mlflow.log_artifact("logs.txt", "")
 
