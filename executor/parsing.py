@@ -10,7 +10,6 @@ from concurrent.futures import ThreadPoolExecutor
 import mlflow
 from executor.experiment import SimpleExperiment, MultiStepExperiment
 from executor.steps import StepFactory
-import pandas as pd
 
 logging.basicConfig(
     level=logging.INFO,
