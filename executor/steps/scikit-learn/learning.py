@@ -1,7 +1,6 @@
 from caching import CacheHandler
 from rich.logging import RichHandler
 import pandas as pd
-import numpy as np
 import mlflow.sklearn
 import mlflow
 import click
