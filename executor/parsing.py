@@ -1,3 +1,4 @@
+from distutils.util import execute
 import yaml
 import copy
 import logging
@@ -234,17 +235,18 @@ class Executor:
                 with ThreadPoolExecutor(max_workers=self.config["threads"]) as executor:
                     ids = executor.map(lambda exp: exp.execute(), exps)
                     executed_runs += [x for x in ids]
+            
 
-            self.run_ids[r] = executed_runs
+            self.run_ids[r] = [ids["experiment"] for ids in executed_runs]
 
             # save temporary data:
-            self._load_experiment_data()
+            #self._load_experiment_data()
             
     def execute(self):
         self._load_experiments()
         self._log_run_information()
         self._execute_experiments()
-        self._load_experiment_data()
+        #self._load_experiment_data()
 
     def _load_experiment_data(self):
         self.exp_data = []
