@@ -62,10 +62,10 @@ def evaluate(
     cache = CacheHandler(learning_run_id, new_run=False)
     pred = cache.retrieve("predicted.tsv")
     mae = mean_absolute_error(pred["measured"], pred["predicted"])
-    mape = mean_absolute_percentage_error(pred["measured"], pred["predicted"])
+    mre = mean_absolute_percentage_error(pred["measured"], pred["predicted"])
 
     logging.info("Update learning runs...")
-    update_metrics(learning_run_id, {"mape": mape, "mre": mape / 100, "mae": mae})
+    update_metrics(learning_run_id, {"mape": mre * 100, "mre": mre, "mae": mae})
     if logs_to_artifacts:
         mlflow.log_artifact("logs.txt", "")
 
