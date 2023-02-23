@@ -4,12 +4,9 @@ import copy
 import logging
 import itertools
 from rich.logging import RichHandler
-import sys
-from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 import mlflow
-from executor.experiment import SimpleExperiment, MultiStepExperiment
-from executor.steps import StepFactory
+from executor.experiment import SimpleExperiment
 
 logging.basicConfig(
     level=logging.INFO,
@@ -20,45 +17,7 @@ logging.basicConfig(
 STEPS = ["system", "sampling", "learning", "evaluation"]
 
 
-def _extract_steps(content):
-    return (content[step] for step in STEPS)
 
-
-def parse_workflow(filename):
-
-    with open(filename, "r", encoding="utf-8") as f:
-        content = yaml.safe_load(f)
-
-    _validate(content)
-
-    system, sampling, learning, evaluation = _extract_steps(content)
-
-    exp = MultiStepExperiment()
-    exp.set_system(system["source"], system["params"])
-    exp.set_multistep("sampling", [tuple(s.values()) for s in sampling])
-    exp.set_multistep("learning", [tuple(s.values()) for s in learning])
-    exp.set_evaluation(**evaluation)
-
-
-def _validate_system(system):
-    if not isinstance(system, dict):
-        logging.error("Your yamlfile has no object for step system. Exiting...")
-        sys.exit(1)
-
-
-def _validate_steps(steps):
-    if Counter(steps) != Counter(STEPS):
-        logging.error("Your yamlfile needs to contain %s. Exiting...", ", ".join(STEPS))
-        sys.exit(1)
-
-
-def _validate(content: dict):
-
-    _validate_steps(content.keys())
-    _validate_system(content["system"])
-
-
-#########################################################
 def _params_to_list(params):
     param_list = []
     param_names = []
@@ -213,8 +172,7 @@ class Executor:
                 )
             else:
                 self.experiments[r] = [_simple_experiment(self.experiment, self.config["name"])]
-                #logging.error("No parametrization not yet implemented")
-                #raise NotImplementedError
+ 
 
     def _execute_experiments(self):
         for r, exps in self.experiments.items():
@@ -238,23 +196,10 @@ class Executor:
 
             self.run_ids[r] = [ids["experiment"] for ids in executed_runs]
 
-            # save temporary data:
-            #self._load_experiment_data()
             
     def execute(self):
         self._load_experiments()
         self._log_run_information()
         self._execute_experiments()
-        #self._load_experiment_data()
 
-    def _load_experiment_data(self):
-        self.exp_data = []
-        self.sampling_data = []
-        self.learning_data = []
-        for _, runs in self.run_ids.items():
-            for run in runs:
-                if "experiment" in run and "sampling" in run and "learning" in run:
-                    self.exp_data.append(_load_run_infos(run["experiment"]))
-                    self.sampling_data.append(_load_run_infos(run["sampling"]))
-                    self.learning_data.append(_load_run_infos(run["learning"]))
     

@@ -6,7 +6,8 @@ from itertools import product
 from executor.parsing import Executor
 
 
-def _generate_iv_combinations(ivs):
+def _generate_iv_combinations(iv_steps):
+    ivs = _extract_ivs(iv_steps)
     for combination in product(*ivs.values()):
         yield dict(zip(ivs.keys(), combination))
 
@@ -31,9 +32,47 @@ def _load_data_from_mlflow(run_ids):
     return rows
 
 
-def analyze(executor: Executor):
+def _analyze_data(iv_steps, run_ids, metrics):
+    all_data = pd.DataFrame(_load_data_from_mlflow(run_ids))
+    iv_combinations = _generate_iv_combinations(iv_steps)
+
+    return _aggregated_data(all_data, iv_combinations, metrics)
+
+
+def _generate_query_string(combi):
+    return " & ".join([f"`{iv}` == '{level}'" for iv, level in combi.items()])
+
+
+def _calculate_stats(data, ivs, metrics):
+    stats = {}
+    for iv in ivs:
+        stats[iv] = data[iv].iloc[0]
+
+    for metric in metrics:
+        tmp_stats = data[metric].describe()
+        stats.update({f"{metric}.{k}": v for k, v in tmp_stats.items()})
+
+    return stats
+
+
+def _aggregated_data(all_data, iv_combinations, metrics):
+    aggregated = []
+    for combi in iv_combinations:
+        ivs = list(combi.keys())
+        query_string = _generate_query_string(combi)
+        tmp = all_data.query(query_string)
+        # return _generate_query_string(combi)
+        aggregated.append(_calculate_stats(tmp, ivs, metrics))
+    return aggregated
+
+
+def analyze(executor: Executor, metrics=[]):
     iv_steps = {
         k: v for k, v in executor.config["parametrization"].items() if k != "type"
     }
-    ivs = _extract_ivs(iv_steps)
-    return [c for c in _generate_iv_combinations(ivs)]
+
+    run_ids = []
+    for _, ids in executor.run_ids.items():
+        run_ids += ids
+
+    return _analyze_data(iv_steps, run_ids, metrics)
