@@ -1,41 +1,16 @@
 from runs import update_metrics
 from caching import CacheHandler
-from rich.logging import RichHandler
 import logging
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_percentage_error, mean_absolute_error
 import click
 import pandas as pd
 import mlflow
-
-
-def prediction_fault_rate(y: pd.Series, y_hat: pd.Series):
-    """
-    Calculates prediction fault rate.
-
-    Parameters
-    ----------
-    y : pd.DataFrame
-        measured value
-    y_hat: pd.DataFrame
-        predicted value
-    """
-    if any(y == 0):
-        raise Exception("True value can not be zero.")
-
-    fault_rate = abs(y - y_hat) / y
-
-    return {
-        "mean_fault_rate": fault_rate.mean(),
-        "median_fault_rate": fault_rate.median(),
-        "sd_fault_rate": fault_rate.std(),
-    }
 
 
 logging.basicConfig(
     filename="logs.txt",
     level=logging.INFO,
     format="EVALUATION    %(message)s",
-    # handlers=[RichHandler()],
 )
 
 
@@ -58,10 +33,9 @@ def evaluate(learning_run_id: str = ""):
     """
     cache = CacheHandler(learning_run_id, new_run=False)
     pred = cache.retrieve("predicted.tsv")
-    fault_rate = prediction_fault_rate(pred["measured"], pred["predicted"])
-    mse = mean_squared_error(pred["measured"], pred["predicted"])
-    update_metrics(learning_run_id, fault_rate)
-    update_metrics(learning_run_id, {"test_mse": mse})
+    mae = mean_absolute_error(pred["measured"], pred["predicted"])
+    mape = mean_absolute_percentage_error(pred["measured"], pred["predicted"])
+    update_metrics(learning_run_id, {"mape": mape, "mre": mape / 100, "mae": mae})
     # mlflow.log_artifact("logs.txt", "")
 
 
