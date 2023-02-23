@@ -2,6 +2,7 @@ configuration:
   learn_on_same_data: false
   name: rq3_decart_ajstats
   parametrization:
+    type: crossproduct
     sampling:
       n:
         - 20

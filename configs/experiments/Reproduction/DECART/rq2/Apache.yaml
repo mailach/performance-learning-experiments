@@ -2,6 +2,7 @@ configuration:
   learn_on_same_data: false
   name: rq2_decart_apache
   parametrization:
+    type: crossproduct
     learning:
       paraSearchMethod:
         - gridsearch

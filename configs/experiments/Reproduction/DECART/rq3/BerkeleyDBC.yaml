@@ -2,6 +2,7 @@ configuration:
   learn_on_same_data: false
   name: rq3_decart_berkeleydbc
   parametrization:
+    type: crossproduct
     sampling:
       n:
         - 18

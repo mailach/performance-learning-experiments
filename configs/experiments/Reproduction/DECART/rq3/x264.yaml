@@ -2,6 +2,10 @@ configuration:
   learn_on_same_data: false
   name: rq3_decart_x264
   parametrization:
+    type: crossproduct
+    learning:
+      pureCART:
+        - True
     sampling:
       n:
         - 16

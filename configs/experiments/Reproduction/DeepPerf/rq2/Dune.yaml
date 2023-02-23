@@ -2,6 +2,7 @@ configuration:
   learn_on_same_data: false
   name: rq2_deepperf_dune
   parametrization:
+    type: crossproduct
     sampling:
       n:
         - 49

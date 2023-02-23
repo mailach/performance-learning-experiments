@@ -2,6 +2,7 @@ configuration:
   learn_on_same_data: false
   name: rq1_decart_sqlite
   parametrization:
+    type: crossproduct
     learning:
       resampleMethod:
         - bootstraping
